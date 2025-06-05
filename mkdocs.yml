@@ -19,7 +19,7 @@ nav:
       - Lab 1. Create agents with ACP: introduction_acp_beeai/lab-1/README.md
       - Lab 2. A multi-agent workflow: introduction_acp_beeai/lab-2/README.md
       - Lab 3. Use the BeeAI Platform: introduction_acp_beeai/lab-3/README.md
-      - Uninstall: introduction_acp_beeai/lab-4/README.md
+      - Uninstall & Troubleshooting: introduction_acp_beeai/uninstall_troubleshooting/README.md
   - References:
     - BeeAI Community: https://github.com/i-am-bee
 
