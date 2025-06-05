@@ -21,29 +21,6 @@ def flatten_messages(messages: List[Message]) -> str:
         if part.content_type == "text/plain" and part.content is not None
     ).strip()
 
-# assume `msgs` is the full List[Message] that comes into your agent
-#  Only the very first message (index 0)
-#user_prompt = flatten_messages(msgs[:1])
-#  Only the most-recent message
-#user_prompt = flatten_messages(msgs[-1:])   # same as msgs[len(msgs)-1:]
-#  The last three messages (good for short-context agents)
-#user_prompt = flatten_messages(msgs[-3:])
-
-#OLD VERSION STRING OUTPUT ONLY
-# def package_response(text: str) -> Dict[str, List[Message]]:
-#     """
-#     Wrap a plain-text model output into the structure expected by the ACP runner:
-
-#         {"messages": [Message(parts=[MessagePart(content=<text>)])]}
-#     """
-#     assistant_message = Message(
-#         parts=[MessagePart(content=text)],
-#         created_at=datetime.now(timezone.utc),
-#         completed_at=datetime.now(timezone.utc),
-#     )
-#     return {"messages": [assistant_message]}
-
-
 def package_response(data: str | dict) -> Dict[str, List[Message]]:
     if isinstance(data, dict):          # auto-convert
         data = json.dumps(data, separators=(",", ":"))
