@@ -14,12 +14,12 @@ nav:
     - About BeeAI: README.md
   - Workshops:
     - Introduction to ACP and BeeAI Workshop:
-      - Overview: introduction_acp_beeai/overview/README.md
-      - Lab 0. Pre-work: introduction_acp_beeai/pre-work/README.md
-      - Lab 1. Create agents with ACP: introduction_acp_beeai/lab-1/README.md
-      - Lab 2. A multi-agent workflow: introduction_acp_beeai/lab-2/README.md
-      - Lab 3. Use the BeeAI Platform: introduction_acp_beeai/lab-3/README.md
-      - Uninstall & Troubleshooting: introduction_acp_beeai/uninstall_troubleshooting/README.md
+      - Overview: Introduction_acp_beeai/overview/README.md
+      - Lab 0. Pre-work: Introduction_acp_beeai/pre-work/README.md
+      - Lab 1. Create agents with ACP: Introduction_acp_beeai/lab-1/README.md
+      - Lab 2. A multi-agent workflow: Introduction_acp_beeai/lab-2/README.md
+      - Lab 3. Use the BeeAI Platform: Introduction_acp_beeai/lab-3/README.md
+      - Uninstall & Troubleshooting: Introduction_acp_beeai/uninstall_troubleshooting/README.md
   - References:
     - BeeAI Community: https://github.com/i-am-bee
 
