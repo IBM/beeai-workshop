@@ -112,6 +112,9 @@ async def run_agent(agent: str, input: str) -> list[Message]:
 
 @server.agent(name="TicketWorkflow", metadata=Metadata(ui={"type": "hands-off"}))
 async def main_agent(input: list[Message], context: Context) -> AsyncGenerator:
+    """
+    Main agent that orchestrates the ticket triage and response workflow.
+    """
     ticket_triage_response = await run_agent("ticket_triage_agent", str(input))
     ticket_response_to_user = await run_agent("ticket_response_agent", str(ticket_triage_response))
 

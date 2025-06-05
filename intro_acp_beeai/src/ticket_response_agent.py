@@ -48,7 +48,7 @@ async def ticket_response_agent(input: list[Message]) -> AsyncGenerator[RunYield
 
 #Run these agents on different ports
 def run():
-    server.run(port=int(os.getenv("PORT", 8000)))
+    server.run(port=int(os.getenv("PORT", 8001)))
 
 
 if __name__ == "__main__":
