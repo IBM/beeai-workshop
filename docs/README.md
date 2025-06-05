@@ -12,7 +12,7 @@ Explore BeeAI through hands-on workshops that demonstrate how BeeAI's integrated
 
 |                                                  |                                                      |
 |:-------------------------------------------------|:-----------------------------------------------------|
-| [Introduction to ACP and BeeAI](introduction_acp_beeai/pre-work.md)            | Walk through a practical ticket triage scenario to get started with the BeeAI ecosystem.                            |
+| [Introduction to ACP and BeeAI](Introduction_acp_beeai/pre-work/README.md)            | Walk through a practical ticket triage scenario to get started with the BeeAI ecosystem.                            |
 
 
 
