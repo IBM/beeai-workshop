@@ -82,3 +82,7 @@ curl -N -X POST http://localhost:8000/runs \
 **Expected Results:**
 
 You should see both the triage output (structured data about the ticket) and the response output (a human-like customer service response) in the server response.
+
+### 6. Clean Up
+
+Stop the ACP agent servers using `Ctrl + C` or exiting the terminal where it is running.

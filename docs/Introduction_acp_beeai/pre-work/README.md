@@ -61,7 +61,7 @@ logo: images/ibm-blue-background.png
     brew install i-am-bee/beeai/beeai
     ```
 
-### Workshop Specific Requirements
+## Workshop Specific Requirements
 
 1. Start the BeeAI background service:
 
@@ -77,8 +77,12 @@ logo: images/ibm-blue-background.png
     ```shell
     beeai env setup
     ```
+3. Verify that installation is working properly
+    ```shell
+        beeai list
+    ```
 
-3. In a separate terminal, get the workshop code:
+4. In a separate terminal, get the workshop code:
 
     Option A: Clone with Git (Recommended):
 
@@ -89,7 +93,7 @@ logo: images/ibm-blue-background.png
     Option B: Download ZIP:
     If you're not comfortable with Git, [download the ZIP file](https://github.com/IBM/beeai-workshop/archive/refs/heads/main.zip) and extract it to your desired location.
 
-4. Navigate to the workshop folder and open in VS Code:
+5. Navigate to the workshop folder and open in VS Code:
 
     ```shell
     cd beeai-workshop/intro_acp_beeai
@@ -101,7 +105,7 @@ logo: images/ibm-blue-background.png
 
     **Alternative:** You can also open VS Code first, then use "File > Open Folder" to navigate to and select the `beeai-workshop/intro_acp_beeai` folder.
 
-5. Create a .env file based on the env.template file at the intro_acp_beeai directory level. Uncomment out either the OpenAI API Key or the Groq API key and add your own api.
+6. Create a .env file based on the env.template file at the intro_acp_beeai directory level. Uncomment out either the OpenAI API Key or the Groq API key and add your own api.
 
     ```shell
     cp env.template .env
