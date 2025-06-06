@@ -6,126 +6,97 @@ logo: images/ibm-blue-background.png
 
 # Create and invoke ACP agents
 
-In this lab, you will create 2 agents using the ACP SDK (the Python code is provided).
-One agent is written using the BeeAI Framework.  The other agent is written using PydanticAI.
-We are using 2 frameworks to illustrate how easy it is to make any agent ACP-compatible.
+In this lab, you will invoke 2 agents using the ACP SDK (the Python code is provided). One agent is written using the BeeAI Framework and the other agent is written using PydanticAI. We are using 2 different frameworks to illustrate how easy it is to make any agent ACP-compatible.
 
-* Agent 1 (BeeAI Framework): "Triage Agent" – categorizes the ticket (e.g. billing, tech, complaint) and extracts key facts in a structured way (e.g. using tags, severity, sentiment).
-* Agent 2 (PydanticAI): "Response Agent" – takes the structured summary and crafts a tone-specific response (e.g. empathetic for complaints, efficient for billing).
+**Agent Overview:**
+
+- **Agent 1 (BeeAI Framework)**: "Triage Agent" – categorizes the ticket (e.g., billing, tech, complaint) and extracts key facts in a structured way (e.g., using tags, severity, sentiment).
+- **Agent 2 (PydanticAI)**: "Response Agent" – takes the structured summary and crafts a tone-specific response (e.g., empathetic for complaints, efficient for billing).
+
+!!! prerequisite
+    The following steps assume that you have already completed the pre-work section. If not, please return to the previous section before moving forward.
 
 ## Steps
 
-1. Prerequisites
+### 1. Open the Project Directory
 
-    The described commands assume you are running from the beeai-workshop directory
-    of your cloned repo. This was already done if you did the pre-work.
+If you don't already have the `intro_acp_beeai` folder open in VS Code, navigate there. Your working directory should look something like this: `~/beeai-workshop/intro_acp_beeai`.
 
-    ```shell
-    git clone https://github.com/IBM/beeai-workshop.git
-    cd beeai-workshop
-    ```
+### 2. Install Dependencies
 
-2. Install the dependencies
+Open your terminal (either in VS Code or using your preferred terminal) and install the dependencies:
 
-    ```shell
-    uv sync
-    ```
+```shell
+uv sync
+```
 
-3. Set up your .env file with your OpenAI API Key
+### 3. Run the Ticket Triage Agent
 
-    * Copy the `env.template` file to `.env`.
+In your terminal, run the ticket triage agent (defaults to run on port 8000):
 
-      ```shell
-      cp env.template .env
-      ```
+```shell
+uv run src/ticket_triage_agent.py
+```
 
-    * Edit the `.env` file to add your OpenAI API key.  The file should look like below
-   (the API key in example is fake and shorter than a real one). The OPENAI_BASE_URL shown is for groq.
+!!! insight
+    If you take a look at the code you will notice that the agent is wrapped in an `@server.agent` decorator. The decorator makes it an ACP agent and the metadata provides agent details for discoverability.
 
-      ```shell
-      # Example for groq:
-      OPENAI_API_KEY=<your-groq-api-key>
-      OPENAI_BASE_URL=https://api.groq.com/openai/v1
-      MODEL_NAME=meta-llama/llama-4-scout-17b-16e-instruct
-      ```
+### 4. Test the Agent via Browser Interface
 
-4. Run the ticket triage agent (defaults to run on port 8000)
+Use your browser to invoke the `ticket_triage_agent` using the FastAPI interface:
 
-    ```shell
-    uv run src/ticket_triage_agent.py
-    ```
+1. In your preferred browser navigate to [http://localhost:8000/docs](http://localhost:8000/docs)
+2. Pull down **GET** `/agents` *List Agents*
+3. Hit the `Try it out` button and then click `Execute`
 
-5. Run the ticket response agent using port 8001
+**Expected Results:**
 
-    ```shell
-    PORT=8001 uv run src/ticket_response_agent.py
-    ```
+Under `Responses`:
 
-6. Use your browser to try the FastAPI interface
+- Under `Response body`, the result shows just one agent named `ticket_triage_agent` (the second agent is not running on port 8000).
+- Under `Curl`, you get the curl command that you can run in a terminal (instead of using the UI)
 
-    * Browse to [http://localhost:8000/docs](http://localhost:8000/docs)
-    * Pull down `GET` **/agents** *List Agents*
-    * Hit the `Try it out` button and then click `Execute`
+**Try the curl command:** In a new terminal window, run:
 
-    > --- Expected results ---
-    >
-    > Under `Responses`:
-    >
-    > * Under `Response body`, the result shows just one agent named `ticket_triage_agent` (the second agent is not running on port 8000).
-    > * Under `Curl`, you get the curl command that you can run in a terminal (instead of using the UI)
-    > * Try running the curl command (in a new terminal window)
-    >
-    >   ```shell
-    >   curl -X 'GET' 'http://localhost:8000/agents' -H 'accept: application/json'
-    >   ```
+```shell
+curl -X 'GET' 'http://localhost:8000/agents' -H 'accept: application/json'
+```
 
-7. Invoke the triage agent
+!!! insight
+    This shows you that your ACP agent is discoverable on port 8000 and if you had more than one agent running on this server you could use the `GET /agents` command to list them.
 
-    * Go back to the main FastAPI page
-    * Pull down `POST` **/runs** *Create Run*
-    * Hit the `Try it out` button
-    * In the `Request body`:
+!!! note
+    To terminate the ACP agent server press `Ctrl + C` in the terminal where the server is running or close the terminal.
 
-      * Find **"agent_name"** and change the value from "string" to **"ticket_triage_agent"**
-      * Find **"content"** and change the value from "string" to:
+### 5. Run the Ticket Response Agent
 
-        ```text
-        "Hi there, this is Jane Doe. Ever since yesterday your ProPlan won't let me export reports. This is blocking my quarter-end close—please fix ASAP or refund the month.AccountNumber: 872-55"
-        ```
+In a separate terminal, run the ticket response agent (defaults to run on port 8001):
 
-      * Remove the **"content_url"** line
-      * Find **"mode"** and change the value from "sync" to **"stream"**
+```shell
+uv run src/ticket_response_agent.py
+```
 
-    * Click `Execute`
+!!! insight
+    Notice how the `ticket_triage_agent` and `ticket_response_agent` are running on separate ports. Agents can either have their own server and be discoverable on multiple ports or be on the same server (as you'll see in lab 2).
 
-    > --- Expected results ---
-    >
-    > Under `Responses`:
-    > * Under `Response body`, the result shows just one agent named `ticket_triage_agent` (the second agent is not running on port 8000).
-    > * Under `Curl`, you get the curl command that you can run in a terminal (instead of using the UI)
-    > * Try running the curl command (in a new terminal window)
+### 6. Invoke the Response Agent
 
-8. Invoke the response agent
+Invoke the response agent using a curl command. Remember that the `ticket_response_agent` expects a formatted output from the `ticket_triage_agent` as its input. You'll put these together in a sequential workflow in lab 2.
 
-    * Try this curl command (notice the port is **8001**)
+In a separate terminal, run this curl command:
 
-      ```shell
-      curl -N -X POST http://localhost:8001/runs \
-      -H "Content-Type: application/json" \
-      -H "Accept: text/event-stream" \
-      -d '{"agent_name":"ticket_response_agent","input":[{"parts":[{"content":"{\"category\":[\"Technical\"],\"customer_name\":\"Jane Doe\",\"account_id\":\"872-55\",\"product\":\"ProPlan\",\"issue_summary\":\"ProPlan product is throwing \\\"Error 500\\\" when exporting reports since yesterday, blocking quarter-end close.\",\"severity\":\"high\",\"sentiment\":\"negative\",\"incident_date\":\"2024-06-11\"}","content_encoding":"plain","content_url":null}]}],"mode":"stream"}'
-      ```
+```shell
+curl -N -X POST http://localhost:8001/runs \
+  -H "Content-Type: application/json" \
+  -H "Accept: text/event-stream" \
+  -d '{"agent_name":"ticket_response_agent","input":[{"parts":[{"content":"{\"category\":[\"Technical\"],\"customer_name\":\"Jane Doe\",\"account_id\":\"872-55\",\"product\":\"ProPlan\",\"issue_summary\":\"ProPlan product is throwing \\\"Error 500\\\" when exporting reports since yesterday, blocking quarter-end close.\",\"severity\":\"high\",\"sentiment\":\"negative\",\"incident_date\":\"2024-06-11\"}","content_encoding":"plain","content_url":null}]}],"mode":"stream"}'
+```
 
-      > --- Expected results ---
-      >
-      > In the response body, you should see an appropriate human-like ticket agent response
+**Expected Results:**
 
-9. (OPTIONAL) Try repeating the FastAPI steps but this time use port 8001 to see the API for the response agent API
+In the response body, you should see an appropriate human-like ticket agent response.
 
-    > Note: The input format is tricky so maybe just compare the schema with the above curl. We'll make this much easier in the next lab.
-    >
-    > Hint:
-    >
-    > ```json
-    > "content": "{\"category\":[\"Technical\"],\"customer_name\":\"Jane Doe\",\"account_id\":\"872-55\",\"product\":\"ProPlan\",\"issue_summary\":\"ProPlan product is throwing \\\"Error 500\\\" when exporting reports since yesterday, blocking quarter-end close.\",\"severity\":\"high\",\"sentiment\":\"negative\",\"incident_date\":\"2024-06-11\"}",
-    > ```
+
+### 7. Clean Up
+
+If you have not already, remember to stop the ACP agent servers using `Ctrl + C` or exiting the terminal where they are running.

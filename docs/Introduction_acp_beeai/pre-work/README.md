@@ -80,13 +80,13 @@ logo: images/ibm-blue-background.png
 
 3. In a separate terminal, get the workshop code:
 
-    **Option A: Clone with Git (Recommended)**
+    Option A: Clone with Git (Recommended):
 
     ```shell
     git clone https://github.com/IBM/beeai-workshop.git
     ```
 
-    **Option B: Download ZIP**
+    Option B: Download ZIP: 
     If you're not comfortable with Git, [download the ZIP file](https://github.com/IBM/beeai-workshop/archive/refs/heads/main.zip) and extract it to your desired location.
 
 4. Navigate to the workshop folder and open in VS Code:
@@ -103,6 +103,10 @@ logo: images/ibm-blue-background.png
 
 5. Create a .env file based on the env.template file at the intro_acp_beeai directory level. Uncomment out either the OpenAI API Key or the Groq API key and add your own api.
 
+    ```shell
+    cp env.template .env
+    ```
+
     !!! note
         For OpenAI you just need the API Key, for Groq you need to uncomment all 3 environment variables but only need to modify the API Key.
 
@@ -113,3 +117,4 @@ brew services stop
 brew uninstall arize-phoenix
 brew upgrade beeai
 beeai platform start --set phoenix.enabled=true
+```
