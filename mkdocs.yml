@@ -16,7 +16,7 @@ nav:
     - Introduction to ACP and BeeAI Workshop:
       - Overview: Introduction_acp_beeai/overview/README.md
       - Pre-work: Introduction_acp_beeai/pre-work/README.md
-      - Lab 1. Create agents with ACP: Introduction_acp_beeai/lab-1/README.md
+      - Lab 1. Invoke ACP Agents: Introduction_acp_beeai/lab-1/README.md
       - Lab 2. A multi-agent workflow: Introduction_acp_beeai/lab-2/README.md
       - Lab 3. Use the BeeAI Platform: Introduction_acp_beeai/lab-3/README.md
       - Uninstall & Troubleshooting: Introduction_acp_beeai/uninstall_troubleshooting/README.md
