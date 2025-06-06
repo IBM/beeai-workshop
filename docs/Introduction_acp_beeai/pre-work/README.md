@@ -69,7 +69,8 @@ logo: images/ibm-blue-background.png
     beeai platform start
     ```
 
-2. Configure your LLM provider for the BeeAI Platfrom
+2. Configure your LLM provider for the BeeAI Platform
+
     !!! note
         You will need your OpenAI or Groq API key available
 
@@ -80,6 +81,7 @@ logo: images/ibm-blue-background.png
 3. In a separate terminal, get the workshop code:
 
     **Option A: Clone with Git (Recommended)**
+
     ```shell
     git clone https://github.com/IBM/beeai-workshop.git
     ```
@@ -99,10 +101,10 @@ logo: images/ibm-blue-background.png
 
     **Alternative:** You can also open VS Code first, then use "File > Open Folder" to navigate to and select the `beeai-workshop/intro_acp_beeai` folder.
 
-5. Create a .env file based on the env.template file at the intro_acp_beeai directory level. Uncomment out either the OpenAI API Key or the Groq API key and add your own api. 
-    !!! note
-        For OpenAI you just need the API Key, for Groq you need to uncomment all 3 enviorment variables but only need to modify the API Key.
+5. Create a .env file based on the env.template file at the intro_acp_beeai directory level. Uncomment out either the OpenAI API Key or the Groq API key and add your own api.
 
+    !!! note
+        For OpenAI you just need the API Key, for Groq you need to uncomment all 3 environment variables but only need to modify the API Key.
 
 ### Already have BeeAI installed? Update and restart it
 
@@ -111,4 +113,3 @@ brew services stop
 brew uninstall arize-phoenix
 brew upgrade beeai
 beeai platform start --set phoenix.enabled=true
-
