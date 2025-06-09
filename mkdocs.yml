@@ -5,7 +5,7 @@ site_author: IBM Research
 
 # Repository
 repo_name: beeai-workshop
-repo_url: https://github.com/IBM/beeai-workshop
+repo_url: https://github.com/JanPokorny/beeai-workshop
 edit_uri: edit/main/docs
 
 # Navigation
@@ -69,7 +69,7 @@ extra:
       link: https://www.youtube.com/user/developerworks
     - icon: fontawesome/brands/dev
       link: https://dev.to/ibmdeveloper
-  colab_url: https://colab.research.google.com/github/IBM/beeai-workshop
+  colab_url: https://colab.research.google.com/github/JanPokorny/beeai-workshop
 
 # Extensions
 markdown_extensions:

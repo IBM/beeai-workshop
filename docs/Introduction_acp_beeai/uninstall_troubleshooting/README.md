@@ -134,7 +134,7 @@ You can access comprehensive CLI documentation directly from your terminal:
 1. Ensure you cloned the correct repository:
 
     ```shell
-    git clone https://github.com/IBM/beeai-workshop.git
+    git clone https://github.com/JanPokorny/beeai-workshop.git
     ```
 
 2. Navigate to the correct directory:
@@ -158,7 +158,7 @@ If you're experiencing persistent issues, try a clean reinstall -- follow the "U
 If you continue to experience issues:
 
 1. Check the [BeeAI documentation](https://docs.beeai.dev)
-2. Review the [GitHub repository](https://github.com/IBM/beeai-workshop) for known issues
+2. Review the [GitHub repository](https://github.com/JanPokorny/beeai-workshop) for known issues
 3. Ensure all prerequisites from the pre-work section are met
 
 !!! tip

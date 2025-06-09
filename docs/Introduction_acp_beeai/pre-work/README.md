@@ -31,11 +31,11 @@ logo: images/ibm-blue-background.png
     Option A: Clone with Git (Recommended):
 
     ```shell
-    git clone https://github.com/IBM/beeai-workshop.git
+    git clone https://github.com/JanPokorny/beeai-workshop.git
     ```
 
     Option B: Download ZIP:
-    If you're not comfortable with Git, [download the ZIP file](https://github.com/IBM/beeai-workshop/archive/refs/heads/main.zip) and extract it to your desired location.
+    If you're not comfortable with Git, [download the ZIP file](https://github.com/JanPokorny/beeai-workshop/archive/refs/heads/main.zip) and extract it to your desired location.
 
 2. Navigate to the workshop folder and open in VS Code:
 
