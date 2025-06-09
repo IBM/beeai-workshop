@@ -1,7 +1,8 @@
-from typing import List, Dict
+from typing import List
 from datetime import datetime, timezone
 from acp_sdk.models import Message, MessagePart
 import json
+
 
 def flatten_messages(messages: List[Message]) -> str:
     """
@@ -21,12 +22,13 @@ def flatten_messages(messages: List[Message]) -> str:
         if part.content_type == "text/plain" and part.content is not None
     ).strip()
 
-def package_response(data: str | dict) -> Dict[str, List[Message]]:
-    if isinstance(data, dict):          # auto-convert
+
+def package_response(data: str | dict) -> Message:
+    if isinstance(data, dict):  # auto-convert
         data = json.dumps(data, separators=(",", ":"))
     assistant_message = Message(
         parts=[MessagePart(content=data)],
         created_at=datetime.now(timezone.utc),
         completed_at=datetime.now(timezone.utc),
     )
-    return {"messages": [assistant_message]}
+    return assistant_message
