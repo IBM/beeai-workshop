@@ -37,7 +37,7 @@ uv run src/ticket_workflow_agent.py
 ```
 
 !!! insight
-    If you take a look at the code you will notice that there are 3 ACP agents in this `ticket_workflow_agent.py` file. The main agent, named "TicketWorkflow", orchestrates the run of the `ticket_triage_agent` and `ticket_response_agent` sequentially. Pay special attention to the metadata in the `@server.agent` decorator. The UI type informs the platform how the end user should interact with the agent. If the agent doesn't have UI metadata defined, it will not be visible in the platform.
+    If you take a look at the code you will notice that there are 3 ACP agents in this `ticket_workflow_agent.py` file. The main agent, named "TicketWorkflow", orchestrates the run of the `ticket_triage_agent` and `ticket_response_agent` sequentially. Pay special attention to the metadata in the `@server.agent` decorator. The UI type informs the platform how the end user should interact with the agent. If the agent doesn't have UI metadata defined, it will not be visible in the platform. Additionally, you might have noticed that in Lab 1 and 2 we passed a `self_registration=False` parameter to the server. Without this parameter the server will autoregister to the BeeAI platfrom.
 
 ### 5. Launch the BeeAI UI
 

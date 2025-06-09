@@ -1,5 +1,3 @@
-import textwrap
-
 #Framework imports
 from beeai_framework.adapters.openai import OpenAIChatModel
 from beeai_framework.backend import UserMessage, SystemMessage
@@ -64,17 +62,18 @@ async def ticket_triage_agent(input: list[Message]) -> AsyncGenerator[RunYield, 
     user_prompt = flatten_messages(input[-1:])
     model_name = os.getenv("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
     llm = OpenAIChatModel(model_name)
-    system_msg = SystemMessage(textwrap.dedent("""
+    system_msg = SystemMessage(
+            """
         You are “Support-Sensei,” an AI assistant that must:
         1. Choose the single best ticket category.
         2. Extract the required fields.
-        """)
+        """
     )
     response = await llm.create_structure(
         schema=TicketClassifierOutput,
         messages=[system_msg, UserMessage(user_prompt)],
     )
-    yield str(response.object)
+    yield MessagePart(content=str(response.object))
 
 
 @server.agent(name="ticket_response_agent", metadata=Metadata(ui={"type": "hands-off"}))
@@ -87,7 +86,7 @@ async def ticket_response_agent(input: list[Message]) -> AsyncGenerator[RunYield
     model = os.getenv("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
     model = OpenAIModel(model, provider=OpenAIProvider(api_key=os.getenv('OPENAI_API_KEY')))
     TicketResponseAgent = Agent( model=model,
-                            system_prompt=(textwrap.dedent("""
+                            system_prompt=("""
                                            You are a helpful customer support agent that creates clear, helpful, human-sounding replies to a customer.
                                            Tone & Style Matrix:
                                             Category   | Primary Tone        | Secondary Goals
@@ -97,10 +96,10 @@ async def ticket_response_agent(input: list[Message]) -> AsyncGenerator[RunYield
                                             Account    | Professional, supportive | Clarify account status or changes, confirm security measures
                                             Feedback   | Appreciative, receptive | Thank the customer, highlight how feedback is used
                                             Other      | Warm, helpful        | Clarify intent, offer assistance
-                                           """)))
+                                           """))
     response = await TicketResponseAgent.run(user_prompt)
     
-    yield str(response.output)
+    yield MessagePart(content=str(response.output))
 
 
 #Main ACP Agent that orchestrates the workflow
@@ -119,8 +118,8 @@ async def main_agent(input: list[Message], context: Context) -> AsyncGenerator:
     ticket_triage_response = await run_agent("ticket_triage_agent", str(input))
     ticket_response_to_user = await run_agent("ticket_response_agent", str(ticket_triage_response))
 
-    yield str(ticket_triage_response[0])
-    yield str(ticket_response_to_user[0])
+    #yield MessagePart(content=str(ticket_triage_response[0]))
+    yield MessagePart(content=str(ticket_response_to_user[0]))
 
 #Run these agents
 def run():
