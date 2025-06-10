@@ -22,27 +22,36 @@ If you already did this in Lab 1, you can skip this step. If not, open your term
 uv sync
 ```
 
-### 3. Run the Ticket Workflow Agent
+### 3. Run the agents
 
-In your terminal, run the ticket workflow agent (defaults to run on port 8000):
+In your terminal, run all the agents (open 3 windows/tabs):
+
+```shell
+uv run src/ticket_triage_agent.py
+```
+
+```shell
+uv run src/ticket_response_agent.py
+```
 
 ```shell
 uv run src/ticket_workflow_agent.py
 ```
 
-!!! insight
-    If you take a look at the code you will notice that there are 3 ACP agents in this `ticket_workflow_agent.py` file. The main agent, named "TicketWorkflow", orchestrates the run of the `ticket_triage_agent` and `ticket_response_agent` sequentially and returns both of their outputs. The `ticket_triage_agent` runs first and then its output is used as the input for the `ticket_response_agent`.
-
 ### 4. Verify All Agents Are Running
 
-In your browser navigate to [http://localhost:8000/docs](http://localhost:8000/docs)
+In your browser navigate to:
+
+- [http://localhost:8000/docs](http://localhost:8000/docs)
+- [http://localhost:8001/docs](http://localhost:8001/docs)
+- [http://localhost:8002/docs](http://localhost:8002/docs)
 
 1. Pull down **GET** `/agents` *List Agents*
 2. Hit the `Try it out` button and then click `Execute`
 
 **Expected Results:**
 
-Under `Responses` you should see all 3 agents listed! This is because all 3 agents are running on the same port.
+Under `Responses` you should see the corresponding agent listed.
 
 **Try the curl command:** In a new terminal window, run:
 
@@ -57,7 +66,7 @@ curl -X 'GET' 'http://localhost:8000/agents' -H 'accept: application/json'
 In a separate terminal, run this curl command:
 
 ```shell
-curl -N -X POST http://localhost:8000/runs \
+curl -N -X POST http://localhost:8002/runs \
   -H "Content-Type: application/json" \
   -H "Accept: text/event-stream" \
   -d '{"agent_name":"TicketWorkflow","input":[{"parts":[{"content":"Hi there, this is Jane Doe. Ever since yesterday your ProPlan keeps throwing \"Error 500\" whenever I try to export reports. This is blocking my quarter-end close—please fix ASAP or refund the month.AccountNumber: 872-55","content_encoding":"plain","content_url":null}]}],"mode":"stream"}'
@@ -65,7 +74,7 @@ curl -N -X POST http://localhost:8000/runs \
 
 #### Option B: Use your browser to use the FastAPI interface
 
-1. In your browser navigate to [http://localhost:8000/docs](http://localhost:8000/docs)
+1. In your browser navigate to [http://localhost:8002/docs](http://localhost:8002/docs)
 2. Pull down **POST** `/runs` *Create Run*
 3. Hit the `Try it out` button
 4. In the `Request body`:

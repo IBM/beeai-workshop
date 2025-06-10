@@ -24,6 +24,12 @@ logo: images/ibm-blue-background.png
 
 - [OpenAI](https://platform.openai.com/api-keys) API key (paid) or [Groq](https://console.groq.com/keys) API key (free)
 
+#### BeeAI Platform
+
+Install BeeAI platform using the [installation instructions in the documentation](https://docs.beeai.dev/introduction/installation). Don't forget to run `beeai platform start` to start the platform prior to running the examples.
+
+Already installed BeeAI in the past? Be sure to update it to the latest version according to the instructions in the documentation.
+
 ## Workshop Specific Requirements
 
 1. Get the workshop code:
@@ -48,12 +54,3 @@ logo: images/ibm-blue-background.png
         Make sure to open the specific `intro_acp_beeai` folder in VS Code, not the entire `beeai-workshop` directory. This ensures proper project structure and dependencies.
 
     **Alternative:** You can also open VS Code first, then use "File > Open Folder" to navigate to and select the `beeai-workshop/intro_acp_beeai` folder.
-
-3. Create a .env file based on the env.template file at the intro_acp_beeai directory level. Uncomment either the OpenAI or Groq provider config and add your own api key.
-
-    ```shell
-    cp env.template .env
-    ```
-
-    !!! note
-        For OpenAI you just need the API Key, for Groq you need to uncomment all 3 environment variables but only need to modify the API Key.

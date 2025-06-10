@@ -1,6 +1,7 @@
 import textwrap
 
 # Framework imports
+from acp_sdk import Metadata
 from beeai_framework.adapters.openai import OpenAIChatModel
 from beeai_framework.backend import UserMessage, SystemMessage
 
@@ -14,10 +15,6 @@ from helpers import package_response, flatten_messages
 from typing import List, Optional
 import os
 from pydantic import BaseModel, Field
-from dotenv import load_dotenv
-
-# load environment variables
-load_dotenv()
 
 # Set up the ACP server
 server = Server()
@@ -49,20 +46,23 @@ class TicketClassifierOutput(BaseModel):
     )
 
 
-@server.agent()
+@server.agent(metadata=Metadata(ui={"type": "hands-off"}))
 async def ticket_triage_agent(
     input: list[Message],
 ) -> AsyncGenerator[RunYield, RunYieldResume]:
     """An agent that classifies customer support tickets."""
     user_prompt = flatten_messages(input[-1:])
-    model_name = os.getenv("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
-    llm = OpenAIChatModel(model_name)
+    llm = OpenAIChatModel(
+        "dummy", api_key="dummy", base_url="http://localhost:8333/api/v1/llm"
+    )
     system_msg = SystemMessage(
-        textwrap.dedent("""
+        textwrap.dedent(
+            """
             You are “Support-Sensei,” an AI assistant that must:
             1. Choose the single best ticket category.
             2. Extract the required fields.
-            """)
+            """
+        )
     )
     response = await llm.create(
         messages=[system_msg, UserMessage(user_prompt)],
@@ -71,7 +71,7 @@ async def ticket_triage_agent(
 
 
 def run():
-    server.run(port=int(os.getenv("PORT", 8000)), self_registration=False)
+    server.run(port=int(os.getenv("PORT", 8000)))
 
 
 if __name__ == "__main__":
