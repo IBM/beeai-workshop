@@ -41,7 +41,13 @@ uv run src/ticket_triage_agent.py
 !!! insight
     If you take a look at the code you will notice that the agent is wrapped in an `@server.agent` decorator. The decorator makes it an ACP agent and the metadata provides agent details for discoverability.
 
-### 4. Test the Agent via Browser Interface
+### 4. Test the Agent via BeeAI
+
+Run `beeai list` to see a list of agents. Verify that `ticket_triage_agent` is there. By default, ACP servers auto-register to the running BeeAI platform instance.
+
+You can then try `beeai run ticket_triage_agent "My hovercraft is full of eels"` to see the agent in action.
+
+### 5. Test the Agent via Browser Interface
 
 Use your browser to invoke the `ticket_triage_agent` using the FastAPI interface:
 
@@ -68,7 +74,7 @@ curl -X 'GET' 'http://localhost:8000/agents' -H 'accept: application/json'
 !!! note
     To terminate the ACP agent server press `Ctrl + C` in the terminal where the server is running or close the terminal.
 
-### 5. Run the Ticket Response Agent
+### 6. Run the Ticket Response Agent
 
 In a separate terminal, run the ticket response agent (defaults to run on port 8001):
 
@@ -79,7 +85,7 @@ uv run src/ticket_response_agent.py
 !!! insight
     Notice how the `ticket_triage_agent` and `ticket_response_agent` are running on separate ports. Agents can either have their own server and be discoverable on multiple ports or be on the same server (as you'll see in lab 2).
 
-### 6. Invoke the Response Agent
+### 7. Invoke the Response Agent
 
 Invoke the response agent using a curl command. Remember that the `ticket_response_agent` expects a formatted output from the `ticket_triage_agent` as its input. You'll put these together in a sequential workflow in lab 2.
 
@@ -96,6 +102,6 @@ curl -N -X POST http://localhost:8001/runs \
 
 In the response body, you should see an appropriate human-like ticket agent response.
 
-### 7. Clean Up
+### 8. Clean Up
 
 If you have not already, remember to stop the ACP agent servers using `Ctrl + C` or exiting the terminal where they are running.
