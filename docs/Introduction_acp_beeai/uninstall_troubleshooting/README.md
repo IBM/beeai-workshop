@@ -140,7 +140,7 @@ You can access comprehensive CLI documentation directly from your terminal:
 2. Navigate to the correct directory:
 
     ```shell
-    cd beeai-workshop/intro_acp_beeai
+    cd beeai-workshop
     ```
 
 3. Verify the files exist:

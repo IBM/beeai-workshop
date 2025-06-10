@@ -9,8 +9,3 @@ dependencies = [
     "beeai-framework==0.1.23",
     "pydantic-ai==0.2.14",
 ]
-
-[tool.uv.workspace]
-members = [
-    "src/intro_acp_beeai",
-]

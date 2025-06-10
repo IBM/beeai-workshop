@@ -43,14 +43,4 @@ Already installed BeeAI in the past? Be sure to update it to the latest version 
     Option B: Download ZIP:
     If you're not comfortable with Git, [download the ZIP file](https://github.com/JanPokorny/beeai-workshop/archive/refs/heads/main.zip) and extract it to your desired location.
 
-2. Navigate to the workshop folder and open in VS Code:
-
-    ```shell
-    cd beeai-workshop/intro_acp_beeai
-    code .
-    ```
-
-    !!! important
-        Make sure to open the specific `intro_acp_beeai` folder in VS Code, not the entire `beeai-workshop` directory. This ensures proper project structure and dependencies.
-
-    **Alternative:** You can also open VS Code first, then use "File > Open Folder" to navigate to and select the `beeai-workshop/intro_acp_beeai` folder.
+2. Open the folder in VS Code (use "File > Open Folder" to navigate to and select the `beeai-workshop` folder.)
