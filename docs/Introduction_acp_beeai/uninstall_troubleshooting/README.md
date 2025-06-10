@@ -82,9 +82,7 @@ You can access comprehensive CLI documentation directly from your terminal:
     ```shell
     beeai env setup
     ```
-
-2. Verify your API key is correctly set in the environment
-3. Check that your API key has sufficient credits/quota
+2. Check that your API key has sufficient credits/quota
 
 ### Python/UV Issues
 

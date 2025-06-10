@@ -20,15 +20,17 @@ logo: images/ibm-blue-background.png
 - `uv` is the recommended Python package and environment manager for this workshop
 - If you're unfamiliar with `uv`, check out [this uv primer](https://agentcommunicationprotocol.dev/introduction/uv-primer) for installation instructions
 
-#### API Key
-
-- [OpenAI](https://platform.openai.com/api-keys) API key (paid) or [Groq](https://console.groq.com/keys) API key (free)
-
 #### BeeAI Platform
 
 Install BeeAI platform using the [installation instructions in the documentation](https://docs.beeai.dev/introduction/installation). Don't forget to run `beeai platform start` to start the platform prior to running the examples.
 
 Already installed BeeAI in the past? Be sure to update it to the latest version according to the instructions in the documentation.
+
+#### API Key
+
+BeeAI platform needs an API key for a LLM provider to run agents. If you do not have one, we recommend getting a free one on [Groq](https://console.groq.com/keys) by logging in with Google / GitHub. (If you already use an LLM provider, BeeAI probably supports it too -- OpenAI, Ollama, Anthropic, etc.)
+
+Run `beeai env setup` and go through the setup wizard to enter your API key there.
 
 ## Workshop Specific Requirements
 
