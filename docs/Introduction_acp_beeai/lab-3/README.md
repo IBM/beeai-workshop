@@ -12,7 +12,7 @@ In this lab, we'll run our TicketWorkflow that we created in Lab 2 in the BeeAI 
 
 ### 1. Open the Project Directory
 
-If you don't already have the `intro_acp_beeai` folder open in VS Code, navigate there. Your working directory should look something like this: `~/beeai-workshop/intro_acp_beeai`.
+If you don't already have the `intro_acp_beeai` folder open in VS Code, navigate there. Your working directory should look something like this: `~/beeai-workshop`.
 
 ### 2. Install Dependencies
 

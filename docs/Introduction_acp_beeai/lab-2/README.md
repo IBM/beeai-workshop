@@ -12,7 +12,7 @@ In this lab, we'll create a ticket agent that uses the triage agent and the resp
 
 ### 1. Open the Project Directory
 
-If you don't already have the `intro_acp_beeai` folder open in VS Code, navigate there. Your working directory should look something like this: `~/beeai-workshop/intro_acp_beeai`.
+If you don't already have the `intro_acp_beeai` folder open in VS Code, navigate there. Your working directory should look something like this: `~/beeai-workshop`.
 
 ### 2. Install Dependencies
 
