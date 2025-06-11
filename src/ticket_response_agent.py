@@ -13,12 +13,7 @@ from acp_sdk.server import RunYield, RunYieldResume, Server
 from collections.abc import AsyncGenerator
 
 # Helpers
-from helpers import package_response, flatten_messages
-
-# load environment variables
-from dotenv import load_dotenv
-
-load_dotenv()
+from helpers import package_response
 
 # Set up the ACP server
 server = Server()
@@ -31,7 +26,6 @@ async def ticket_response_agent(
     """
     An agent that responds to customer support tickets .
     """
-    user_prompt = flatten_messages(input)
     model = OpenAIModel(
         "dummy", provider=OpenAIProvider(base_url="http://localhost:8333/api/v1/llm")
     )
@@ -39,7 +33,7 @@ async def ticket_response_agent(
         model=model,
         system_prompt=(
             textwrap.dedent(
-                """
+                """\
                 You are a helpful customer support agent that creates clear, helpful, human-sounding replies to a customer.
                 Tone & Style Matrix:
                 Category   | Primary Tone             | Secondary Goals
@@ -53,7 +47,7 @@ async def ticket_response_agent(
             )
         ),
     )
-    response = await TicketResponseAgent.run(user_prompt)
+    response = await TicketResponseAgent.run(str(input[-1]))
 
     yield package_response(response.output)
 

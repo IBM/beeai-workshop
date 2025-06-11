@@ -11,7 +11,7 @@ from acp_sdk.server import RunYield, RunYieldResume, Server
 from collections.abc import AsyncGenerator
 
 # Helper imports
-from helpers import package_response, flatten_messages
+from helpers import package_response
 from typing import List, Optional
 import os
 from pydantic import BaseModel, Field
@@ -51,21 +51,22 @@ async def ticket_triage_agent(
     input: list[Message],
 ) -> AsyncGenerator[RunYield, RunYieldResume]:
     """An agent that classifies customer support tickets."""
-    user_prompt = flatten_messages(input[-1:])
     llm = OpenAIChatModel(
         "dummy", api_key="dummy", base_url="http://localhost:8333/api/v1/llm"
     )
-    system_msg = SystemMessage(
-        textwrap.dedent(
-            """
-            You are “Support-Sensei,” an AI assistant that must:
-            1. Choose the single best ticket category.
-            2. Extract the required fields.
-            """
-        )
-    )
     response = await llm.create(
-        messages=[system_msg, UserMessage(user_prompt)],
+        messages=[
+            SystemMessage(
+                textwrap.dedent(
+                    """\
+                    You are “Support-Sensei,” an AI assistant that must:
+                    1. Choose the single best ticket category.
+                    2. Extract the required fields.
+                    """
+                )
+            ),
+            UserMessage(str(input[-1])),
+        ],
     )
     yield package_response(response.get_text_content())
 

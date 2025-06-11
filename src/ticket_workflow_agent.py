@@ -39,7 +39,6 @@ async def ticket_workflow_agent(
     yield str(ticket_response_to_user[0])
 
 
-# Run these agents
 def run():
     server.run(port=int(os.getenv("PORT", 8002)))
 
