@@ -69,7 +69,7 @@ In a separate terminal, run this curl command:
 curl -N -X POST http://localhost:8002/runs \
   -H "Content-Type: application/json" \
   -H "Accept: text/event-stream" \
-  -d '{"agent_name":"TicketWorkflow","input":[{"parts":[{"content":"Hi there, this is Jane Doe. Ever since yesterday your ProPlan keeps throwing \"Error 500\" whenever I try to export reports. This is blocking my quarter-end close—please fix ASAP or refund the month.AccountNumber: 872-55","content_encoding":"plain","content_url":null}]}],"mode":"stream"}'
+  -d '{"agent_name":"ticket_workflow_agent","input":[{"parts":[{"content":"Hi there, this is Jane Doe. Ever since yesterday your ProPlan keeps throwing \"Error 500\" whenever I try to export reports. This is blocking my quarter-end close—please fix ASAP or refund the month.AccountNumber: 872-55","content_encoding":"plain","content_url":null}]}],"mode":"stream"}'
 ```
 
 #### Option B: Use your browser to use the FastAPI interface
@@ -79,7 +79,7 @@ curl -N -X POST http://localhost:8002/runs \
 3. Hit the `Try it out` button
 4. In the `Request body`:
 
-   - Find **"agent_name"** and change the value from "string" to **"TicketWorkflow"**
+   - Find **"agent_name"** and change the value from "string" to **"ticket_workflow_agent"**
    - Find **"content"** and change the value from "string" to:
 
      ```text

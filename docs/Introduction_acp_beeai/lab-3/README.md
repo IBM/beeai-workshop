@@ -6,7 +6,7 @@ logo: images/ibm-blue-background.png
 
 # Interact with Your Agents in the BeeAI Platform
 
-In this lab, we'll run our TicketWorkflow that we created in Lab 2 in the BeeAI platform. The BeeAI platform creates a simple and elegant UI so that we can test, run, and share our agents easily.
+In this lab, we'll run our ticket_workflow_agent that we created in Lab 2 in the BeeAI platform. The BeeAI platform creates a simple and elegant UI so that we can test, run, and share our agents easily.
 
 ## Steps
 
