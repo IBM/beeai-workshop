@@ -12,9 +12,10 @@ Explore BeeAI through hands-on workshops that demonstrate how BeeAI's integrated
 
 | Workshop                                                                   | Description                                                                              |
 |:---------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|
-| [Introduction to ACP and BeeAI](Introduction_acp_beeai/pre-work/README.md) (UPDATE COMING SOON) | Walk through a practical ticket triage scenario to get started with the BeeAI ecosystem. |
-| Company Analysis Agent with the BeeAI Framework | [View Presentation]()(Coming Soon) |
-| *Additional workshops coming soon!* | |
+| [Introduction to ACP and BeeAI](Introduction_acp_beeai/pre-work/README.md) — *Update coming soon* | Walk through a practical ticket triage scenario to get started with the BeeAI ecosystem. |
+| Company Analysis Agent with the BeeAI Framework                            | Coming soon                                                                             |
+| *Additional workshops coming soon!*                                        | -                                                                                       |
+
 
 ## The BeeAI Ecosystem
 
