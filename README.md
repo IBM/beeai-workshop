@@ -14,7 +14,8 @@ Each workshop comes with its own presentation materials to guide you through the
 
 | Workshop | Presentation Link |
 |----------|------------------|
-| Introduction to ACP and BeeAI | [View Presentation](https://ibm.box.com/v/acp-beeai-workshop-deck) |
+| Introduction to ACP and BeeAI (UPDATE COMING SOON) | [View Presentation](https://ibm.box.com/v/acp-beeai-workshop-deck) |
+| Company Analysis Agent with the BeeAI Framework | [View Presentation]()(Coming Soon) |
 | *Additional workshops coming soon!* | |
 
 ## Need Help? 🆘

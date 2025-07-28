@@ -7,7 +7,7 @@ logo: images/BeeAI-Logo-White.png
 
 # Workshop Overview: Company Analysis Agent with the BeeAI Framework
 
-In this workshop, you’ll be using the **BeeAI Framework** in partnership with **Tavily** and **Redis** to build a company analysis agent that demonstrates modern AI techniques in an enterprise context.
+In this workshop, you’ll be using the **BeeAI Framework** in partnership with **Tavily** and **Redis** to build a company analysis agent that demonstrates modern AI techniques in an enterprise context. Each section **includes interactive coding activities** where you’ll fill in missing code and run the files to test your progress.
 
 ---
 
@@ -35,8 +35,7 @@ To ensure a smooth experience, follow the steps in this order:
 3. 🛠️ [Create Tools](../tools/README.md) – Build the Tavily and Redis RAG tools
 4. 🤖 [Create the Agent](../agent/README.md) – Assemble and run your company analysis assistant
 
-Each section includes interactive coding activities where you’ll fill in missing code and run the files to test your progress.
-
+If you get stuck at any point, solutions are available in the `src/solutions` folder.
 ---
 
 ## Learn More About BeeAI
