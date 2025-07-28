@@ -9,7 +9,7 @@ logo: images/BeeAI-Logo-White.png
 
 In this workshop, you’ll be using the **BeeAI Framework** in partnership with **Tavily** and **Redis** to build a company analysis agent that demonstrates modern AI techniques in an enterprise context. Each section **includes interactive coding activities** where you’ll fill in missing code and run the files to test your progress.
 
----
+<hr>
 
 ## What You’ll Build
 
@@ -24,7 +24,7 @@ You’ll create a company analysis agent with access to three key tools:
 > This is a demo application. **McDonald’s** is used purely as a real-world example for showcasing search-based functionality.  
 > This project is **not affiliated with or endorsed by McDonald’s Corporation.**
 
----
+<hr>
 
 ## Workshop Structure
 
@@ -36,7 +36,8 @@ To ensure a smooth experience, follow the steps in this order:
 4. 🤖 [Create the Agent](../agent/README.md) – Assemble and run your company analysis assistant
 
 If you get stuck at any point, solutions are available in the `src/solutions` folder.
----
+
+<hr>
 
 ## Learn More About BeeAI
 
