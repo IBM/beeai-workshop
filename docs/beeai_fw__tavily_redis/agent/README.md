@@ -69,8 +69,7 @@ It defines how the assistant should behave and respond to users.
 3. Explore the `conditional_requirements` section — this allows you to control **how and when** the agent should use a specific tool.
 
 > 💡 To learn more about how the BeeAI **Requirement Agent** works:  [Requirement Agent Documentation](https://framework.beeai.dev/experimental/requirement-agent)
-
-
+>
 > 👉 To View the complete argument reference for conditional requirements: [Conditional Requirements Reference](https://framework.beeai.dev/experimental/requirement-agent#complete-parameter-reference)
 
 ---
@@ -93,4 +92,4 @@ You’ll be prompted to enter a question in your terminal! You can ask your own 
 - Who do I call if there is an event in my store and I think it might turn into a PR emergency?
 
 > 💡 If asking your own questions, remember:  
-> The agent only knows what’s in its vector store documents and what the prompt instructs it to do. If you'd like to expand the agent scope, use this worksop as a starting point and go wild!
+> The agent only knows what’s in its vector store documents and what the prompt instructs it to do. If you'd like to expand the agent scope to include more documents in the RAG search or more custom tools, use this workshop as a starting point and go wild!
