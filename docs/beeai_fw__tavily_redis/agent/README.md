@@ -7,7 +7,7 @@ logo: images/BeeAI-Logo-White.png
 
 > ⚠️ **Before you begin:**  
 > Make sure you’ve completed the [Prework](../pre-work/README.md) and [Setup](../setup/README.md) sections.  
-> Your `.env` must include either an **OpenAI API key** or your **local Ollama model** must be running.
+> Your `.env` must include a Tavily API key, your redis stack must be running, and you either need an **OpenAI API key** or your **local Ollama model** must be running.
 
 ---
 
@@ -41,7 +41,7 @@ logo: images/BeeAI-Logo-White.png
         - Use `OpenAI` if your API key is in `.env`
         - Use `Ollama` if you're running `granite3.3:8b` locally
 
-    If you are using **Ollama**:
+    If you are using **Ollama**, run this command in a new terminal:
 
     ```bash
     ollama run granite3.3:8b
@@ -59,18 +59,19 @@ logo: images/BeeAI-Logo-White.png
 
 ---
 
-## Step 3: Understand the Agent
+## Step 3: Build the Agent
 
-Read the `system_prompt` variable in the file.  
+1. Read the `system_prompt` variable in the file.  
 It defines how the assistant should behave and respond to users.
 
-To learn more about how the BeeAI **Requirement Agent** works:  
-👉 [Requirement Agent Documentation](https://framework.beeai.dev/experimental/requirement-agent)
+2. Add the custom `tools` that we built int he previous sections to the agent to enable it with internet search and RAG capabilities.
 
-Also, explore the `conditional_requirements` section — this allows you to control **how and when** specific tools should be used.
+3. Explore the `conditional_requirements` section — this allows you to control **how and when** the agent should use a specific tool.
 
-👉 View the complete argument reference here:  
-[Conditional Requirements Reference](https://framework.beeai.dev/experimental/requirement-agent#complete-parameter-reference)
+> 💡 To learn more about how the BeeAI **Requirement Agent** works:  [Requirement Agent Documentation](https://framework.beeai.dev/experimental/requirement-agent)
+
+
+> 👉 To View the complete argument reference for conditional requirements: [Conditional Requirements Reference](https://framework.beeai.dev/experimental/requirement-agent#complete-parameter-reference)
 
 ---
 
@@ -82,7 +83,7 @@ Execute or debug the agent script:
 uv run src/agent.py
 ```
 
-You’ll be prompted to enter a question in your terminal. You can ask your own or try one of these examples:
+You’ll be prompted to enter a question in your terminal! You can ask your own or try one of these examples:
 
 ### Sample Questions
 
@@ -92,4 +93,4 @@ You’ll be prompted to enter a question in your terminal. You can ask your own 
 - Who do I call if there is an event in my store and I think it might turn into a PR emergency?
 
 > 💡 If asking your own questions, remember:  
-> The agent only knows what’s in its vector store documents and what the prompt instructs it to do.
+> The agent only knows what’s in its vector store documents and what the prompt instructs it to do. If you'd like to expand the agent scope, use this worksop as a starting point and go wild!

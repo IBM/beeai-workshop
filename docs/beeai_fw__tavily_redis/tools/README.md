@@ -44,7 +44,7 @@ Each tool is implemented interactively. You’ll fill in missing logic and test 
     src/tavily_mcp_tool.py
     ```
 
-2. Some parts of the implementation are left incomplete. Follow the in-line comments to fill them in. If you need help, check the solution:
+2. Some parts of the implementation are left incomplete for you to **fill-in-the-blank** and complete the tool. Follow the in-line comments to complete the logic. If you need help, check the solution:
 
     ```text
     src/solutions/tavily_mcp_tool.py
@@ -79,7 +79,7 @@ Each tool is implemented interactively. You’ll fill in missing logic and test 
     src/redis_retriever.py
     ```
 
-2. Some sections of the code are incomplete. Fill in the missing parts as instructed by comments in the file. You can check your work using the solution file:
+2. Some parts of the implementation are left incomplete for you to **fill-in-the-blank** and complete the tool. Follow the in-line comments to complete the logic. If you need help, check the solution:
 
     ```text
     src/solutions/redis_retriever.py
