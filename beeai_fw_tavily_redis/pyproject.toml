@@ -13,4 +13,11 @@ dependencies = [
     "pip==25.1.1",
     "pydantic==2.11.7",
     "sentence-transformers==5.0.0",
+    # ARM64 (Apple Silicon) Macs
+    "torch>=2.3; platform_system == 'Darwin' and platform_machine == 'arm64'",
+    # Intel Macs
+    "torch<=2.2.2; platform_system == 'Darwin' and platform_machine == 'x86_64'",
+    # Other platforms (Linux/Windows etc.)
+    "torch>=2.3; platform_system != 'Darwin'",
+    "numpy<2"
 ]
