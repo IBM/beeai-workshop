@@ -13,6 +13,9 @@ Please complete the following setup steps **before** the workshop.
 
 ## Development Environment
 
+### Device Memory Requirement (Recommended)
+
+
 ### Visual Studio Code (Recommended)
 
 You may use any IDE, but this workshop assumes you're using **Visual Studio Code (VS Code)**.
@@ -53,6 +56,9 @@ We recommend using [`uv`](https://github.com/astral-sh/uv) as your Python packag
 
 ### Install Ollama
 
+!!! note
+    To run the Granite model locally, we recommend having at least **16GB of RAM** for optimal performance.
+
 To run models locally on your machine:
 
 1. Download and install Ollama: [https://ollama.com/download](https://ollama.com/download)
@@ -78,14 +84,8 @@ We'll be using Redis Stack for local vector storage.
 
 ### Install Redis Stack
 
-- Follow the [official installation instructions](https://redis.io/docs/latest/operate/oss_and_stack/install/install-stack/homebrew/)
-- Or install with Homebrew (macOS):
+- Follow the [official installation instructions](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-stack/)
 
-   ```bash
-   brew tap redis-stack/redis-stack
-   brew install redis-stack
-   redis-stack-server
-   ```
 
 ---
 
