@@ -57,7 +57,7 @@ Each tool is implemented interactively. You’ll fill in missing logic and test 
     ```bash
     uv run src/tavily_mcp_tool.py
     ```
-    
+
 > Remember to save the file with your changes before running it!
 
 ---
