@@ -82,6 +82,8 @@ Execute or debug the agent script:
 uv run src/agent.py
 ```
 
+> Remember to save the file with your changes before running it!
+
 You’ll be prompted to enter a question in your terminal! You can ask your own or try one of these examples:
 
 ### Sample Questions
