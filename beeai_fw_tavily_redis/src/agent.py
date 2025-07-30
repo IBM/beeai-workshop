@@ -43,7 +43,7 @@ async def main():
 
     company_analysis_agent = RequirementAgent(
         role=role,
-        # [UNCOMMENT OUT THE LLM PROVIDEaR YOU PLAN TO USE]
+        # [UNCOMMENT OUT THE LLM PROVIDER YOU PLAN TO USE]
         # llm=ChatModel.from_name("ollama:granite3.3:8b"),
         # llm=ChatModel.from_name("openai:o4-mini-2025-04-16"),
         

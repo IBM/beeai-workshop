@@ -61,12 +61,11 @@ logo: images/BeeAI-Logo-White.png
 
 ## Step 3: Build the Agent
 
-1. Read the `system_prompt` variable in the file.  
-It defines how the assistant should behave and respond to users.
+1. Read the `instructions`, `role` and `notes` variables in the file. They all fit into the system prompt to guide the agent's behavior. It defines how the assistant should behave and respond to users.
 
 2. Add the custom `tools` that we built in the previous sections to the agent to enable it with internet search and RAG capabilities.
 
-3. Explore the `conditional_requirements` section — this allows you to control **how and when** the agent should use a specific tool.
+3. Explore the `conditional_requirements` section — this allows you to control **how and when** the agent should use a specific tool giving you more reliability.
 
 > 💡 To learn more about how the BeeAI **Requirement Agent** works:  [Requirement Agent Documentation](https://framework.beeai.dev/experimental/requirement-agent)
 >
