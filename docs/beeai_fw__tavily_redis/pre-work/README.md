@@ -13,9 +13,6 @@ Please complete the following setup steps **before** the workshop.
 
 ## Development Environment
 
-### Device Memory Requirement (Recommended)
-
-
 ### Visual Studio Code (Recommended)
 
 You may use any IDE, but this workshop assumes you're using **Visual Studio Code (VS Code)**.
@@ -55,7 +52,6 @@ We recommend using [`uv`](https://github.com/astral-sh/uv) as your Python packag
 ## Local Model (Optional if using OpenAI)
 
 ### Install Ollama
-
 !!! note
     To run the Granite model locally, we recommend having at least **16GB of RAM** for optimal performance.
 
@@ -67,13 +63,11 @@ To run models locally on your machine:
    ```bash
    ollama run granite3.3:8b
    ```
-
    or
 
    ```bash
    ollama pull granite3.3:8b
    ```
-
 > Model link: [Granite 3.3:8b](https://ollama.com/library/granite3.3:8b)
 
 ---
