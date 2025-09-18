@@ -13,7 +13,9 @@ nav:
   - Welcome:
     - About BeeAI: README.md
   - Workshops:
-    - Overview of BeeAI (COMING SOON):
+    - Introduction to BeeAI Framework:
+      - Get Started: introduction_beeai_framework/overview/README.md
+    - Overview of BeeAI (UPDATE COMING SOON):
       - Overview: overview_of_beeai/overview/README.md
       - Pre-work: overview_of_beeai/pre-work/README.md
       - Workshop Setup: overview_of_beeai/setup/README.md

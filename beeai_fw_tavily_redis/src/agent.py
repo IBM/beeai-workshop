@@ -56,14 +56,14 @@ async def main():
     company_analysis_agent = RequirementAgent(
         role=role,
         # [UNCOMMENT OUT THE LLM PROVIDER YOU PLAN TO USE]
-        # llm=ChatModel.from_name("ollama:granite3.3:8b"),
+        llm=ChatModel.from_name("ollama:granite3.3:8b"),
         # llm=ChatModel.from_name("openai:gpt-5-mini-2025-08-07", ChatModelParameters(temperature=1)),
 
         
         # Add the missing Tavily search and redis RAG tool. HINT: The tools are called differently since Tavily is a class and the rag tool is a function. Check the imports for an extra hint on the names to add.
-        tools=[ThinkTool()  # ,
-               # [INSERT YOUR CODE HERE],
-               # [INSERT YOUR CODE HERE]
+        tools=[ThinkTool(),
+               Tavily(),
+               internal_document_search
                ],
              
         instructions=instructions,
@@ -72,8 +72,8 @@ async def main():
         requirements=[
             # [INSERT YOUR CODE HERE]
             ConditionalRequirement(ThinkTool, force_at_step=1),
-            # ConditionalRequirement(internal_document_search, min_invocations=1),
-            # ConditionalRequirement(Tavily, min_invocations=1)
+            ConditionalRequirement(internal_document_search, min_invocations=1),
+            ConditionalRequirement(Tavily, min_invocations=1)
             ],
         memory=memory,
         # [UNCOMMENT MIDDLEWARES TO SEE DETAILED OUTPUT. USE EXCLUDED TO TARGET THE DESIRED OUTPUT]
