@@ -41,18 +41,16 @@ Through interactive coding exercises, you'll gain hands-on experience with:
 
 <hr>
 
-## 🚀 Workshop Structure
+## 🚀 Let's Get Started
 
-This workshop is designed for immediate hands-on learning:
+This workshop is designed for immediate hands-on learning through interactive exercises:
 
 1. **Quick Setup**
-
    - Google Account – Required for accessing Google Colab
    - Workshop Notebook – Copy the notebook from [LINK]
    - Personal Copy – Make your own copy as the shared version is view-only
 
 2. **Interactive Exercises**
-
    - Build your Conference Prep Agent step-by-step
    - Complete fill-in-the-blank coding challenges
    - Test your agent with real conference scenarios
