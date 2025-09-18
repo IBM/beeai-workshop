@@ -14,7 +14,7 @@ Each workshop comes with its own presentation materials to guide you through the
 
 | Workshop                                                             |
 |----------------------------------------------------------------------|
-| Introduction to the BeeAi Framework                                  |
+| Introduction to the BeeAI Framework                                  |
 | Introduction to ACP and BeeAI — *Update coming soon*                 |
 | Company Analysis Agent with the BeeAI Framework + Tavily + Redis     |
 | *Additional workshops coming soon!*                                  |
