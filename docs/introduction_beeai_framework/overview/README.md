@@ -37,7 +37,7 @@ Through interactive coding exercises, you'll gain hands-on experience with:
 - **Memory Systems** – Implement conversation context to maintain coherent, contextual interactions across sessions
 - **Tools Integration** – Extend agent capabilities by integrating external APIs and data sources
 - **Conditional Requirements** – Enforce business logic and rules to ensure compliance and consistency
-- **Observability** – Monitor and debug agents with built-in logging and tracing capabilities
+- **Monitoring** – Monitor and debug agents with built-in logging and tracing capabilities
 
 <hr>
 
@@ -46,15 +46,16 @@ Through interactive coding exercises, you'll gain hands-on experience with:
 This workshop is designed for immediate hands-on learning:
 
 1. **Quick Setup**
-- Google Account – Required for accessing Google Colab
-- Workshop Notebook – Copy the notebook from [LINK]
-- Personal Copy – Make your own copy as the shared version is view-only
+
+   - Google Account – Required for accessing Google Colab
+   - Workshop Notebook – Copy the notebook from [LINK]
+   - Personal Copy – Make your own copy as the shared version is view-only
 
 2. **Interactive Exercises**
+
    - Build your Conference Prep Agent step-by-step
    - Complete fill-in-the-blank coding challenges
    - Test your agent with real conference scenarios
-
 
 <hr>
 
