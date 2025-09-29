@@ -31,12 +31,14 @@
 # System
 import asyncio
 from datetime import date
+import logging
 import os
 import sys
 from typing import Annotated
 
 # Third party
 from a2a.types import AgentCapabilities
+from a2a.utils.message import get_message_text
 from dotenv import load_dotenv
 from openinference.instrumentation.beeai import BeeAIInstrumentor
 from opentelemetry import trace as trace_api
@@ -44,6 +46,7 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk import trace as trace_sdk
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+from openinference.semconv.resource import ResourceAttributes
 
 # BeeAI Framework imports
 from beeai_framework.agents.experimental import RequirementAgent
@@ -53,6 +56,7 @@ from beeai_framework.backend.document_loader import DocumentLoader
 from beeai_framework.backend.embedding import EmbeddingModel
 from beeai_framework.backend.text_splitter import TextSplitter
 from beeai_framework.backend.vector_store import VectorStore
+from beeai_framework.emitter import EventMeta
 from beeai_framework.memory import SummarizeMemory
 from beeai_framework.middleware.trajectory import GlobalTrajectoryMiddleware
 from beeai_framework.tools import Tool, tool
@@ -63,16 +67,29 @@ from beeai_framework.tools.think import ThinkTool
 
 # BeeAI SDK imports
 from beeai_sdk.a2a.extensions import AgentDetail, AgentDetailExtensionSpec
-from beeai_sdk.a2a.extensions.ui import form
+from beeai_sdk.a2a.extensions import ui
 from beeai_sdk.a2a.types import Message, AgentMessage
-from beeai_sdk.platform.configuration import SystemConfiguration
 from beeai_sdk.server import Server
+from beeai_sdk.server.context import RunContext
+from beeai_sdk.server.store.platform_context_store import PlatformContextStore
 
 # Constants
 AGENT_NAME = "Conference planner"
 
 # Read .env and set environment variables
 load_dotenv()
+
+# Logging
+
+## Hide some noise
+logging.getLogger("opentelemetry.exporter.otlp.proto.http").setLevel(logging.CRITICAL)
+logging.getLogger("opentelemetry.exporter.otlp.proto.http._log_exporter").setLevel(
+    logging.CRITICAL
+)
+logging.getLogger("opentelemetry.exporter.otlp.proto.http.metric_exporter").setLevel(
+    logging.CRITICAL
+)
+logger = logging.getLogger(__name__)
 
 #  ## 1️⃣ LLM Providers: Choose Your AI Engine
 
@@ -96,61 +113,61 @@ embedding_model = EmbeddingModel.from_name("ollama:nomic-embed-text")
 server = Server()
 
 # Set up the input form
-query = form.TextField(type="text", id="query", label="query", required=True, col_span=2)
-customer_name = form.TextField(type="text", id="customer_name", label="Customer name", col_span=1)
-account_id = form.TextField(type="text", id="account_id", label="Account ID", col_span=1)
-product = form.TextField(type="text", id="product", label="Product", col_span=2)
-incident_date = form.DateField(type="date", id="incident_date", label="Incident date", col_span=1)
+query = ui.form.TextField(type="text", id="query", label="query", required=True, col_span=2)
+customer_name = ui.form.TextField(type="text", id="customer_name", label="Customer name", col_span=1)
+account_id = ui.form.TextField(type="text", id="account_id", label="Account ID", col_span=1)
+product = ui.form.TextField(type="text", id="product", label="Product", col_span=2)
+incident_date = ui.form.DateField(type="date", id="incident_date", label="Incident date", col_span=1)
 
-severity = form.MultiSelectField(
+severity = ui.form.MultiSelectField(
     type="multiselect",
     id="severity",
     label="Severity",
     required=False,
     col_span=1,
     options=[
-        form.OptionItem(id="critical", label="critical"),
-        form.OptionItem(id="high", label="high"),
-        form.OptionItem(id="medium", label="medium"),
-        form.OptionItem(id="low", label="low"),
+        ui.form.OptionItem(id="critical", label="critical"),
+        ui.form.OptionItem(id="high", label="high"),
+        ui.form.OptionItem(id="medium", label="medium"),
+        ui.form.OptionItem(id="low", label="low"),
     ],
     default_value=["medium"],
 )
 
-sentiment = form.MultiSelectField(
+sentiment = ui.form.MultiSelectField(
     type="multiselect",
     id="sentiment",
     label="Sentiment",
     required=False,
     col_span=1,
     options=[
-        form.OptionItem(id="negative", label="negative"),
-        form.OptionItem(id="neutral", label="neutral"),
-        form.OptionItem(id="positive", label="positive"),
+        ui.form.OptionItem(id="negative", label="negative"),
+        ui.form.OptionItem(id="neutral", label="neutral"),
+        ui.form.OptionItem(id="positive", label="positive"),
     ],
     default_value=["neutral"],
 )
 
-category = form.MultiSelectField(
+category = ui.form.MultiSelectField(
     type="multiselect",
     id="category",
     label="Category",
     required=False,
     col_span=2,
     options=[
-        form.OptionItem(id="billing", label="billing"),
-        form.OptionItem(id="technical", label="technical"),
-        form.OptionItem(id="complaint", label="complaint"),
-        form.OptionItem(id="account", label="account"),
-        form.OptionItem(id="feedback", label="feedback"),
-        form.OptionItem(id="other", label="other"),
+        ui.form.OptionItem(id="billing", label="billing"),
+        ui.form.OptionItem(id="technical", label="technical"),
+        ui.form.OptionItem(id="complaint", label="complaint"),
+        ui.form.OptionItem(id="account", label="account"),
+        ui.form.OptionItem(id="feedback", label="feedback"),
+        ui.form.OptionItem(id="other", label="other"),
     ],
 )
-notes = form.FileField(type="file", id="notes", label="Upload notes", accept=["text/*"], required=False, col_span=2)
+notes = ui.form.FileField(type="file", id="notes", label="Upload notes", accept=["text/*"], required=False, col_span=2)
 
-form_render = form.FormRender(
+form_render = ui.form.FormRender(
     id="ticket_form",
-    title="Ticket Details",
+    title="Question",
     columns=2,
     fields=[
         query,
@@ -160,7 +177,7 @@ form_render = form.FormRender(
         product, incident_date
     ],
 )
-form_extension_spec = form.FormExtensionSpec(form_render)
+form_extension_spec = ui.form.FormExtensionSpec(form_render)
 
 
 # ## 2️⃣ Understanding System Prompts: The Agent's Foundation
@@ -305,10 +322,14 @@ def setup_observability(endpoint: str = "http://localhost:6006/v1/traces") -> No
     """
     Sets up OpenTelemetry with OTLP HTTP exporter and instruments the beeai framework.
     """
-    resource = Resource(attributes={})
-    tracer_provider = trace_sdk.TracerProvider(resource=resource)
-    tracer_provider.add_span_processor(SimpleSpanProcessor(OTLPSpanExporter(endpoint)))
-    trace_api.set_tracer_provider(tracer_provider)
+    # Temporary instrument fix
+    EventMeta.model_fields["context"].exclude = True
+
+
+    # resource = Resource(attributes={})
+    resource = Resource(attributes={
+        ResourceAttributes.PROJECT_NAME: 'Intro to BeeAI workshop'
+    })
 
     BeeAIInstrumentor().instrument()
 
@@ -327,6 +348,9 @@ agent_detail_extension_spec = AgentDetailExtensionSpec(
         interaction_mode="multi-turn",
     )
 )
+
+from typing import Annotated
+from beeai_sdk.a2a.extensions import TrajectoryExtensionServer, TrajectoryExtensionSpec
 
 
 @server.agent(
@@ -349,10 +373,17 @@ agent_detail_extension_spec = AgentDetailExtensionSpec(
     ),
 )
 # Create the function for the BeeAI Agent
-async def agent(question: Message,
-                form: Annotated[form.FormExtensionServer, form_extension_spec]) -> str:
+async def agent(
+        input: Message,
+        trajectory: Annotated[TrajectoryExtensionServer, TrajectoryExtensionSpec()],
+        form: Annotated[ui.form.FormExtensionServer, form_extension_spec]
+):
+
+    yield trajectory.trajectory_metadata(title="Setup", content="memory...")
 
     memory = SummarizeMemory(llm)
+
+    yield trajectory.trajectory_metadata(title="Setup", content="Loading internal documents...")
 
     # Create the `internal_document_search` tool! Because the `VectorStoreSearchTool` is a built in tool wrapper, we don't need to use the `@tool` decorator or extend the custom `Tool class`.
     # Create the vector store search tool
@@ -396,18 +427,19 @@ async def agent(question: Message,
 
     try:
         # Form
-        parsed_form = form.parse_form_response(message=question)
-        query = parsed_form.model_dump_json()
-    except ValueError:
+        parsed_form = form.parse_form_response(message=input)
+        query = str(parsed_form.dict()["values"])  # TODO: Turn form values into query
+    except ValueError as ve:
         # Message from CLI
-        query = question.text
+        query = get_message_text(input)
 
     response = await requirement_agent.run(query, max_retries_per_step=3, total_max_retries=15)
+    print("FULL RESPONSE: ", response)
     answer = response.last_message.text
 
     print("QUESTION: ", query)
     print("ANSWER: ", answer)
-    return answer
+    yield answer
 
 
 # ### *❗* Exercise: Test Your Agent
@@ -429,27 +461,37 @@ async def agent(question: Message,
 async def cli_agent(question: str):
     """Run an async agent with a question, await and return the result"""
 
-    return await agent(AgentMessage(text=question), form=form.FormExtensionServer(form_extension_spec))
+    async for x in agent(AgentMessage(text=question),
+                         trajectory=TrajectoryExtensionServer(TrajectoryExtensionSpec()),
+                         form=ui.form.FormExtensionServer(form_extension_spec)):
+        print("AGENT RESPONSE: ", x)
+    # return await agent(AgentMessage(text=question),
+                       # trajectory=TrajectoryExtensionServer(TrajectoryExtensionSpec()),
+                       # form=ui.form.FormExtensionServer(form_extension_spec))
 
 
 def serve():
     """Start a server that runs the agent"""
     PORT = os.environ.get("PORT")
     if PORT is None:
-        server.run()  # Default port is 10000
+        server.run(
+            configure_telemetry=True,
+            context_store=PlatformContextStore(),
+        )  # Default port is 10000
     else:
         # Assign configured port
         # Note: 0=auto-assign but that is not supported for BeeAI Platform registration
-        server.run(port=int(PORT))
+        server.run(
+            port=int(PORT),
+            configure_telemetry=True,
+            context_store=PlatformContextStore(),
+        )
 
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         print(f"RUNNING '{AGENT_NAME}' CLI:")
-        # print(f"INPUT TO '{AGENT_NAME}': {sys.argv[1]}")
-        agent_response = asyncio.run(cli_agent(sys.argv[1]))
-        # print(f"OUTPUT FROM '{AGENT_NAME}':")
-        # print(agent_response)
+        asyncio.run(cli_agent(sys.argv[1]))
     else:
         print(f"SERVING '{AGENT_NAME}'")
         serve()
