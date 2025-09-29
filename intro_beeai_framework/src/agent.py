@@ -32,6 +32,7 @@
 import asyncio
 from datetime import date
 import logging
+import json
 import os
 import sys
 from typing import Annotated
@@ -50,6 +51,7 @@ from openinference.semconv.resource import ResourceAttributes
 
 # BeeAI Framework imports
 from beeai_framework.agents.experimental import RequirementAgent
+from beeai_framework.agents.experimental.events import RequirementAgentSuccessEvent
 from beeai_framework.agents.experimental.requirements.conditional import ConditionalRequirement
 from beeai_framework.backend import ChatModel, ChatModelParameters
 from beeai_framework.backend.document_loader import DocumentLoader
@@ -433,13 +435,34 @@ async def agent(
         # Message from CLI
         query = get_message_text(input)
 
-    response = await requirement_agent.run(query, max_retries_per_step=3, total_max_retries=15)
-    print("FULL RESPONSE: ", response)
-    answer = response.last_message.text
+    final_answer = None
 
-    print("QUESTION: ", query)
-    print("ANSWER: ", answer)
-    yield answer
+    async for event, meta in requirement_agent.run(query, max_retries_per_step=3, total_max_retries=15):
+        if not isinstance(event, RequirementAgentSuccessEvent):
+            continue
+
+        last_step = event.state.steps[-1] if event.state.steps else None
+        if last_step and last_step.tool is not None:
+            yield trajectory.trajectory_metadata(
+                title=last_step.tool.name,
+                content=json.dumps(
+                    {
+                        "input": last_step.input,
+                        "output": last_step.output.get_text_content(),
+                        "error": last_step.error,
+                    }
+                )
+            )
+
+        if event.state.answer is not None:
+            # Taking a final answer from the state directly instead of RequirementAgentRunOutput to be able to use the final answer provided by the clarification tool
+            final_answer = event.state.answer
+
+    if final_answer:
+        answer = final_answer.text
+        print("QUESTION: ", query)
+        print("ANSWER: ", answer)
+        yield final_answer.text
 
 
 # ### *❗* Exercise: Test Your Agent
