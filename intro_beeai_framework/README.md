@@ -21,17 +21,27 @@ Put links to docs here.
     * TODO: jupyter install notes
 
 * BeeAI Platform install, setup, start
+  * `beeai platform start --set phoenix.enabled=true`
+  * `beeai ui`
 
 * Run the agent locally with BeeAI Platform (todo can make sure it also works w/o platform?)
-    * Open a terminal to run the following commands
     * Install uv
+    * Navigate to the repo/project directory (beeai_workshop/intro_beeai_framework)
     * Use uv to install the required version of python:
-        * $ uv python install 3.13
-    * uv sync
+        * `uv python install 3.13`
+    * `uv sync`
     * Set your IDE python interpreter to the one in .venv/bin/python (relative to this project directory)
     * Create a .env file from the template
         * `cp env.template .env`
     * Edit the .env file (defaults using local ollama should just work)
     * Run the agent:
        * `uv run src/agent.py` -- serves the agent self-registering with BeeAI platform
-       * `uv run src/agent.py "quoted question string here"` -- runs the agent with a simple question, prints output, quits.
+
+Example input:
+    * TBD
+
+phoenix notes:
+    - `http://localhost:6006/`
+    - open project "default"
+    - Select "All" (not Root Spans)
+    - Most details show up after the run
