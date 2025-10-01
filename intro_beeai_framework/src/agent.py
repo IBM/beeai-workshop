@@ -26,12 +26,6 @@ from a2a.types import AgentCapabilities
 from a2a.utils.message import get_message_text
 from dotenv import load_dotenv
 from openinference.instrumentation.beeai import BeeAIInstrumentor
-from opentelemetry import trace as trace_api
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk import trace as trace_sdk
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace.export import SimpleSpanProcessor, ConsoleSpanExporter
-from openinference.semconv.resource import ResourceAttributes
 
 # BeeAI Framework imports
 from beeai_framework.utils.strings import to_json_serializable
@@ -90,10 +84,6 @@ llm = ChatModel.from_name(MODEL_NAME, ChatModelParameters(temperature=1))
 # TODO: this should be configurable in the .env too
 embedding_model = EmbeddingModel.from_name("ollama:nomic-embed-text")
 
-# Temporary instrument fix
-EventMeta.model_fields["context"].exclude = True
-
-# BeeAIInstrumentor().instrument()
 logging.getLogger("opentelemetry.exporter.otlp.proto.http._log_exporter").setLevel(
     logging.CRITICAL
 )
@@ -101,7 +91,12 @@ logging.getLogger("opentelemetry.exporter.otlp.proto.http.metric_exporter").setL
     logging.CRITICAL
 )
 
-# logger = logging.getLogger(__name__)
+# ## Setup Observability: See what is happening under the hood
+# To run beeai platform with phoenex enabled (review the license and) start it like this:
+#     beeai platform start --set phoenix.enabled=true
+EventMeta.model_fields["context"].exclude = True  # Temp fix?
+BeeAIInstrumentor().instrument()
+
 
 # Create the A2A Server
 server = Server()
@@ -236,23 +231,6 @@ async def get_vector_store():
 
 # ## 6️⃣ Conditional Requirements: Guiding Agent Behavior
 # 
-
-# ## Explore Observability: See what is happening under the hood
-# Sets up OpenTelemetry with OTLP HTTP exporter and instruments the beeai framework.
-
-# Temporary instrument fix
-EventMeta.model_fields["context"].exclude = True
-
-endpoint = "http://localhost:6006/v1/traces"
-resource = Resource(attributes={
-    ResourceAttributes.PROJECT_NAME: 'Intro to BeeAI workshop'
-})
-tracer_provider = trace_sdk.TracerProvider(resource=resource)
-tracer_provider.add_span_processor(SimpleSpanProcessor(OTLPSpanExporter(endpoint)))
-# tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
-trace_api.set_tracer_provider(tracer_provider)
-BeeAIInstrumentor().instrument()
-
 
 def extract_citations(text: str) -> tuple[list[Citation], str]:
     """Extract citations from markdown-style links and return cleaned text."""
