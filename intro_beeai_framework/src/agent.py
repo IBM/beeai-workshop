@@ -59,6 +59,7 @@ from beeai_sdk.a2a.extensions import AgentDetail, AgentDetailExtensionSpec
 from beeai_sdk.a2a.extensions import ui
 from beeai_sdk.a2a.types import Message, AgentMessage
 from beeai_sdk.server import Server
+from beeai_sdk.server.context import RunContext
 from beeai_sdk.server.store.platform_context_store import PlatformContextStore
 from beeai_sdk.a2a.extensions.services.platform import (
     PlatformApiExtensionServer,
@@ -92,7 +93,7 @@ embedding_model = EmbeddingModel.from_name("ollama:nomic-embed-text")
 # Temporary instrument fix
 EventMeta.model_fields["context"].exclude = True
 
-BeeAIInstrumentor().instrument()
+# BeeAIInstrumentor().instrument()
 logging.getLogger("opentelemetry.exporter.otlp.proto.http._log_exporter").setLevel(
     logging.CRITICAL
 )
@@ -100,7 +101,7 @@ logging.getLogger("opentelemetry.exporter.otlp.proto.http.metric_exporter").setL
     logging.CRITICAL
 )
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 # Create the A2A Server
 server = Server()
@@ -237,29 +238,20 @@ async def get_vector_store():
 # 
 
 # ## Explore Observability: See what is happening under the hood
+# Sets up OpenTelemetry with OTLP HTTP exporter and instruments the beeai framework.
 
-# Create the function that sets up observability using `OpenTelemetry` and [Arize's Phoenix Platform](https://arize.com/docs/phoenix/inferences/how-to-inferences/manage-the-app). There a several ways to view what is happening under the hood of your agent. View the observability documentation [here](https://framework.beeai.dev/modules/observability).
+# Temporary instrument fix
+EventMeta.model_fields["context"].exclude = True
 
-def xxx_setup_observability(endpoint: str = "http://localhost:6006/v1/traces") -> None:
-    """
-    Sets up OpenTelemetry with OTLP HTTP exporter and instruments the beeai framework.
-    """
-    # Temporary instrument fix
-    EventMeta.model_fields["context"].exclude = True
-
-    resource = Resource(attributes={
-        ResourceAttributes.PROJECT_NAME: 'Intro to BeeAI workshop'
-    })
-    tracer_provider = trace_sdk.TracerProvider(resource=resource)
-    tracer_provider.add_span_processor(SimpleSpanProcessor(OTLPSpanExporter(endpoint)))
-    tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
-    trace_api.set_tracer_provider(tracer_provider)
-
-    BeeAIInstrumentor().instrument()
-
-
-# Enable OpenTelemetry integration
-# setup_observability("http://localhost:6006/v1/traces")
+endpoint = "http://localhost:6006/v1/traces"
+resource = Resource(attributes={
+    ResourceAttributes.PROJECT_NAME: 'Intro to BeeAI workshop'
+})
+tracer_provider = trace_sdk.TracerProvider(resource=resource)
+tracer_provider.add_span_processor(SimpleSpanProcessor(OTLPSpanExporter(endpoint)))
+# tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+trace_api.set_tracer_provider(tracer_provider)
+BeeAIInstrumentor().instrument()
 
 
 def extract_citations(text: str) -> tuple[list[Citation], str]:
@@ -303,8 +295,8 @@ agent_detail_extension_spec = AgentDetailExtensionSpec(
                 description="Retrieves real-time search results from the web.",
             ),
             AgentDetailTool(
-                name="VectorStoreSearchTool",
-                description="Searches internal documents.",
+                name="Custom Internal Document Search",
+                description="Searches internal documents leveraging BeeAI VectorStoreSearchTool.",
             ),
         ],
         framework="BeeAI",
@@ -330,36 +322,44 @@ agent_detail_extension_spec = AgentDetailExtensionSpec(
 # Create the function for the BeeAI Agent
 async def agent(
         input: Message,
+        context: RunContext,
         trajectory: Annotated[TrajectoryExtensionServer, TrajectoryExtensionSpec()],
         citation: Annotated[CitationExtensionServer, CitationExtensionSpec()],
         form: Annotated[ui.form.FormExtensionServer, form_extension_spec],
-        _: Annotated[PlatformApiExtensionServer, PlatformApiExtensionSpec()],
+        # _: Annotated[PlatformApiExtensionServer, PlatformApiExtensionSpec()],
 ):
     """Agent with tool usage requirements and access to web search, Wikipedia, and internal documents."""
 
-    yield trajectory.trajectory_metadata(title="Setup", content="Using SummarizeMemory()")
+    # yield trajectory.trajectory_metadata(title="Setup", content="Using SummarizeMemory()")
+    # memory = SummarizeMemory(llm)
+    from beeai_framework.memory import SlidingMemory, SlidingMemoryConfig
 
-    memory = SummarizeMemory(llm)
+    yield trajectory.trajectory_metadata(title="Setup", content="Using sliding memory... ")
+    memory = SlidingMemory(SlidingMemoryConfig(
+        size=3,
+        handlers={"removal_selector": lambda messages: messages[0]}  # Remove the oldest message
+    ))
 
-    yield trajectory.trajectory_metadata(title="Setup", content="Loading internal documents in vector store")
+    yield trajectory.trajectory_metadata(title="Setup", content="Loading internal documents in vector store... ")
 
     # Create the `internal_document_search` tool! Because the `VectorStoreSearchTool` is a built in tool wrapper, we don't need to use the `@tool` decorator or extend the custom `Tool class`.
     # Create the vector store search tool
     internal_document_search = VectorStoreSearchTool(vector_store=await get_vector_store())
 
-    yield trajectory.trajectory_metadata(title="Setup", content="Processing form input")
+    yield trajectory.trajectory_metadata(title="Setup", content="Processing form input... ")
     try:
         # Form
         parsed_form = form.parse_form_response(message=input)
-        values = parsed_form.dict()["values"]
-        style = values.get("style", {"value": ["summary"]})["value"][0]
+        values = parsed_form.model_dump(exclude_none=True)["values"]
+        styles = values.get("style", {"value": ["summary"]})["value"]
+        style = styles[0] if styles else "summary"
         task = str(values)
     except ValueError as ve:
         # Message from CLI
         task = get_message_text(input)
         style = "summary"
 
-    yield trajectory.trajectory_metadata(title="Setup", content=f"Setting style: {style}")
+    yield trajectory.trajectory_metadata(title="Setup", content=f"Setting style: {style}... ")
 
     todays_date = date.today().strftime("%B %d, %Y")
     instruct_prompt = f"""You help field marketing teams prep for conferences by answering questions on companies that they need to prepare to talk to. You produce quick and actionable briefs, doing your best to anwer the user's question.
@@ -391,7 +391,7 @@ async def agent(
     #
     #
 
-    yield trajectory.trajectory_metadata(title="Setup", content="Defining tool usage requirements for agent")
+    yield trajectory.trajectory_metadata(title="Setup", content="Defining tool usage requirements for agent... ")
     requirement_1 = ConditionalRequirement(ThinkTool, consecutive_allowed=False, force_at_step=1)
     requirement_2 = ConditionalRequirement(wikipedia_tool, only_after=ThinkTool, consecutive_allowed=True,
                                            priority=10, )
@@ -463,7 +463,7 @@ def serve():
     if PORT is None:
         server.run(
             configure_telemetry=True,
-            context_store=PlatformContextStore(),
+            # context_store=PlatformContextStore(),
         )  # Default port is 10000
     else:
         # Assign configured port
@@ -471,7 +471,7 @@ def serve():
         server.run(
             port=int(PORT),
             configure_telemetry=True,
-            context_store=PlatformContextStore(),
+            # context_store=PlatformContextStore(),
         )
 
 
