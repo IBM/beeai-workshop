@@ -1,35 +1,13 @@
 # Copyright 2025 © BeeAI a Series of LF Projects, LLC
 # SPDX-License-Identifier: Apache-2.0
 
-# # Welcome to the BeeAI Framework Workshop 🐝
+# BeeAI Platform demo based on the Intro to BeeAI Framework Workshop 🐝
 #
 # 🎯 Scenario: The Field Marketing Lead has asked you to help prepare their team for conference season. You create a Conference Prep Agent that uses 3 tools: web search to collect relevant news and search for up to date information, Wikipedia to provide company history and details, and the team's internal notes and artifacts.
 
-# 📚 What You'll Learn
-# 
-# - BeeAI Platform -
-# - BeeAI Framework - see the notebook first and then use this for platform auto-registration
-# - A2A - BeeAI SDK makes it easy to work with A2A
-# - Forms - BeeAI Platform makes it easy to create input forms for the UI
-
-# ...
-# - System Prompts - The foundation of agent behavior
-# - RequirementAgent - BeeAI's powerful agent implementation that provides control over agent behavior
-# - LLM Providers - Local and hosted model options
-# - Memory Systems - Maintaining conversation context
-# - Tools Integration - Extending agent capabilities
-# - Conditional Requirements - Enforcing business logic and rules
-# - Observability - Monitoring and debugging agents
-
-# ## 🔧 Setup
-# First, let's install the BeeAI Framework and set up our environment.
-# 
-# - setting up the observability so we can capture and log the actions our agent takes
-# - getting the "internal documents"
-
-
 # System
 import asyncio
+import re
 from datetime import date
 import logging
 import json
@@ -38,6 +16,12 @@ import sys
 from typing import Annotated
 
 # Third party
+from beeai_sdk.a2a.extensions import (
+    AgentDetailContributor,
+    AgentDetailTool,
+    CitationExtensionServer,
+    CitationExtensionSpec,
+)
 from a2a.types import AgentCapabilities
 from a2a.utils.message import get_message_text
 from dotenv import load_dotenv
@@ -46,13 +30,14 @@ from opentelemetry import trace as trace_api
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk import trace as trace_sdk
 from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+from opentelemetry.sdk.trace.export import SimpleSpanProcessor, ConsoleSpanExporter
 from openinference.semconv.resource import ResourceAttributes
 
 # BeeAI Framework imports
-from beeai_framework.agents.experimental import RequirementAgent
-from beeai_framework.agents.experimental.events import RequirementAgentSuccessEvent
-from beeai_framework.agents.experimental.requirements.conditional import ConditionalRequirement
+from beeai_framework.utils.strings import to_json_serializable
+from beeai_framework.agents.requirement import RequirementAgent
+from beeai_framework.agents.requirement.events import RequirementAgentSuccessEvent
+from beeai_framework.agents.requirement.requirements.conditional import ConditionalRequirement
 from beeai_framework.backend import ChatModel, ChatModelParameters
 from beeai_framework.backend.document_loader import DocumentLoader
 from beeai_framework.backend.embedding import EmbeddingModel
@@ -68,35 +53,29 @@ from beeai_framework.tools.search.wikipedia import WikipediaTool, WikipediaToolI
 from beeai_framework.tools.think import ThinkTool
 
 # BeeAI SDK imports
+from beeai_sdk.a2a.extensions import TrajectoryExtensionServer, TrajectoryExtensionSpec
+from beeai_sdk.a2a.extensions import Citation
 from beeai_sdk.a2a.extensions import AgentDetail, AgentDetailExtensionSpec
 from beeai_sdk.a2a.extensions import ui
 from beeai_sdk.a2a.types import Message, AgentMessage
 from beeai_sdk.server import Server
 from beeai_sdk.server.context import RunContext
 from beeai_sdk.server.store.platform_context_store import PlatformContextStore
+from beeai_sdk.a2a.extensions.services.platform import (
+    PlatformApiExtensionServer,
+    PlatformApiExtensionSpec,
+)
 
 # Constants
-AGENT_NAME = "Conference planner"
+AGENT_NAME = "Conference Prep Agent"
 
 # Read .env and set environment variables
 load_dotenv()
 
-# Logging
-
-## Hide some noise
-logging.getLogger("opentelemetry.exporter.otlp.proto.http").setLevel(logging.CRITICAL)
-logging.getLogger("opentelemetry.exporter.otlp.proto.http._log_exporter").setLevel(
-    logging.CRITICAL
-)
-logging.getLogger("opentelemetry.exporter.otlp.proto.http.metric_exporter").setLevel(
-    logging.CRITICAL
-)
-logger = logging.getLogger(__name__)
 
 #  ## 1️⃣ LLM Providers: Choose Your AI Engine
 
 # BeeAI Framework supports 10+ LLM providers including Ollama, Groq, OpenAI, Watsonx.ai, and more, giving you flexibility to choose local or hosted models based on your needs. In this workshop we'll be working Ollama, so you will be running the model locally. You can find the documentation on how to connect to other providers [here](https://framework.beeai.dev/modules/backend).
-# ### *❗* Exercise: Select your Language Model Provider
 # Change the `PROVIDER_ID` and `MODEL_ID` in your .env file. If you select a provider that requires an API key, please replace the placeholder with your `api_key`.
 # Try several models to see how your agent performs. Note that you may need to modify the system prompt for each model, as they all have their own system prompt best practice.
 
@@ -111,110 +90,52 @@ llm = ChatModel.from_name(MODEL_NAME, ChatModelParameters(temperature=1))
 # TODO: this should be configurable in the .env too
 embedding_model = EmbeddingModel.from_name("ollama:nomic-embed-text")
 
+# Temporary instrument fix
+EventMeta.model_fields["context"].exclude = True
+
+# BeeAIInstrumentor().instrument()
+logging.getLogger("opentelemetry.exporter.otlp.proto.http._log_exporter").setLevel(
+    logging.CRITICAL
+)
+logging.getLogger("opentelemetry.exporter.otlp.proto.http.metric_exporter").setLevel(
+    logging.CRITICAL
+)
+
+# logger = logging.getLogger(__name__)
+
 # Create the A2A Server
 server = Server()
 
+
 # Set up the input form
-query = ui.form.TextField(type="text", id="query", label="query", required=True, col_span=2)
-customer_name = ui.form.TextField(type="text", id="customer_name", label="Customer name", col_span=1)
-account_id = ui.form.TextField(type="text", id="account_id", label="Account ID", col_span=1)
-product = ui.form.TextField(type="text", id="product", label="Product", col_span=2)
-incident_date = ui.form.DateField(type="date", id="incident_date", label="Incident date", col_span=1)
+task = ui.form.TextField(type="text", id="task", label="Task", required=True, col_span=2,
+                         placeholder="Enter your request here")
+company_name = ui.form.TextField(type="text", id="company_name", label="Company name", col_span=1,
+                                 placeholder="optional")
+event_date = ui.form.DateField(type="date", id="event_date", label="Event date", col_span=1)
+event = ui.form.TextField(type="text", id="event", label="Event", col_span=1)
 
-severity = ui.form.MultiSelectField(
+style = ui.form.MultiSelectField(
     type="multiselect",
-    id="severity",
-    label="Severity",
-    required=False,
+    id="style",
+    label="Style",
+    required=True,
     col_span=1,
     options=[
-        ui.form.OptionItem(id="critical", label="critical"),
-        ui.form.OptionItem(id="high", label="high"),
-        ui.form.OptionItem(id="medium", label="medium"),
-        ui.form.OptionItem(id="low", label="low"),
+        ui.form.OptionItem(id="detailed", label="detailed"),
+        ui.form.OptionItem(id="summary", label="summary"),
+        ui.form.OptionItem(id="list", label="list"),
     ],
-    default_value=["medium"],
+    default_value=["summary"],
 )
-
-sentiment = ui.form.MultiSelectField(
-    type="multiselect",
-    id="sentiment",
-    label="Sentiment",
-    required=False,
-    col_span=1,
-    options=[
-        ui.form.OptionItem(id="negative", label="negative"),
-        ui.form.OptionItem(id="neutral", label="neutral"),
-        ui.form.OptionItem(id="positive", label="positive"),
-    ],
-    default_value=["neutral"],
-)
-
-category = ui.form.MultiSelectField(
-    type="multiselect",
-    id="category",
-    label="Category",
-    required=False,
-    col_span=2,
-    options=[
-        ui.form.OptionItem(id="billing", label="billing"),
-        ui.form.OptionItem(id="technical", label="technical"),
-        ui.form.OptionItem(id="complaint", label="complaint"),
-        ui.form.OptionItem(id="account", label="account"),
-        ui.form.OptionItem(id="feedback", label="feedback"),
-        ui.form.OptionItem(id="other", label="other"),
-    ],
-)
-notes = ui.form.FileField(type="file", id="notes", label="Upload notes", accept=["text/*"], required=False, col_span=2)
 
 form_render = ui.form.FormRender(
-    id="ticket_form",
-    title="Question",
+    id="conference_prep_form",
+    title="How can I help you prepare for your upcoming conference?",
     columns=2,
-    fields=[
-        query,
-        category,
-        customer_name, account_id,
-        severity, sentiment,
-        product, incident_date
-    ],
+    fields=[task, company_name, style, event, event_date],
 )
 form_extension_spec = ui.form.FormExtensionSpec(form_render)
-
-
-# ## 2️⃣ Understanding System Prompts: The Agent's Foundation
-
-# What is a System Prompt?
-# A system prompt is the foundational instruction that defines your agent's identity, role, and behavior. Think of it as the agent's "job description" and "training manual" rolled into one. Each model responds differently to the same system prompt, so experimentation is necessary.
-# 
-# Some key components of a strong system prompt:
-# 
-# - Identity: Who is the agent?
-# - Role: What is their function?
-# - Context: What environment are they operating in?
-# - Rules: What constraints and guidelines must they follow?
-# - Knowledge: What domain-specific information do they need?
-
-# ###*❗* Exercise: Customize Your System Prompt
-# Try modifying the system prompt. Customize the "basic rules" section to add your own. Note that changes to the system prompt will affect the performance of the model. Creating a great `System Prompt` is an art, not a science.
-
-todays_date = date.today().strftime("%B %d, %Y")
-instruct_prompt = f"""You help field marketing teams prep for conferences by answering questions on companies that they need to prepare to talk to. You produce quick and actionable briefs, doing your best to anwer the user's question.
-
-Today's date is {todays_date}.
-
-Tools:
-- ThinkTool: Helps you plan and reason before you act. Use this tool when you need to think.
-- DuckDuckGoSearchTool: Use this tool to collect current information on agendas, speakers, news, competitor moves. Include title + date + link to the resources you find in your answer. Do not use this tool for internal notes or artifacts.
-- wikipedia_tool: Use this tool to get company/org history (not for breaking news). Only look up company names as the input.
-- internal_document_search: past meetings, playbooks, artifacts. If you use information from this in yoour response, label it as as [Internal]. Always use this tool when internal notes or content is references.
-
-Basic Rules:
-- Be concise and practical.
-- Favor recent info (agenda/news ≤30 days; exec changes/funding ≤180 days); flag older items.
-- If you don't know, say so. Don't make things up.
-"""
-
 
 # ## 4️⃣ Tools: Enabling LLMs to Take Action
 # 
@@ -245,13 +166,13 @@ search_tool = DuckDuckGoSearchTool()
 
 
 @tool
-async def wikipedia_tool(query: str) -> str:
+async def wikipedia_tool(task: str) -> str:
     """
     Search factual and historical information, including biography, history, politics, geography, society, culture,
     science, technology, people, animal species, mathematics, and other subjects.
 
     Args:
-        query: The topic or question to search for on Wikipedia.
+        task: The topic or question to search for on Wikipedia.
 
     Returns:
         The information found via searching Wikipedia.
@@ -259,7 +180,7 @@ async def wikipedia_tool(query: str) -> str:
     full_text = False
     language = "en"
     tool = WikipediaTool(language=language)
-    response = await tool.run(input=WikipediaToolInput(query=query, full_text=full_text))
+    response = await tool.run(input=WikipediaToolInput(query=task, full_text=full_text))
     return response.get_text_content()
 
 
@@ -317,27 +238,43 @@ async def get_vector_store():
 # 
 
 # ## Explore Observability: See what is happening under the hood
+# Sets up OpenTelemetry with OTLP HTTP exporter and instruments the beeai framework.
 
-# Create the function that sets up observability using `OpenTelemetry` and [Arize's Phoenix Platform](https://arize.com/docs/phoenix/inferences/how-to-inferences/manage-the-app). There a several ways to view what is happening under the hood of your agent. View the observability documentation [here](https://framework.beeai.dev/modules/observability).
+# Temporary instrument fix
+EventMeta.model_fields["context"].exclude = True
 
-def setup_observability(endpoint: str = "http://localhost:6006/v1/traces") -> None:
-    """
-    Sets up OpenTelemetry with OTLP HTTP exporter and instruments the beeai framework.
-    """
-    # Temporary instrument fix
-    EventMeta.model_fields["context"].exclude = True
-
-
-    # resource = Resource(attributes={})
-    resource = Resource(attributes={
-        ResourceAttributes.PROJECT_NAME: 'Intro to BeeAI workshop'
-    })
-
-    BeeAIInstrumentor().instrument()
+endpoint = "http://localhost:6006/v1/traces"
+resource = Resource(attributes={
+    ResourceAttributes.PROJECT_NAME: 'Intro to BeeAI workshop'
+})
+tracer_provider = trace_sdk.TracerProvider(resource=resource)
+tracer_provider.add_span_processor(SimpleSpanProcessor(OTLPSpanExporter(endpoint)))
+# tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+trace_api.set_tracer_provider(tracer_provider)
+BeeAIInstrumentor().instrument()
 
 
-# Enable OpenTelemetry integration
-setup_observability("http://localhost:6006/v1/traces")
+def extract_citations(text: str) -> tuple[list[Citation], str]:
+    """Extract citations from markdown-style links and return cleaned text."""
+    citations, offset = [], 0
+    pattern = r"\[([^\]]+)\]\(([^)]+)\)"
+
+    for match in re.finditer(pattern, text):
+        content, url = match.groups()
+        start = match.start() - offset
+
+        citations.append(
+            Citation(
+                url=url,
+                title=url.split("/")[-1].replace("-", " ").title() or content[:50],
+                description=content[:100] + ("..." if len(content) > 100 else ""),
+                start_index=start,
+                end_index=start + len(content),
+            )
+        )
+        offset += len(match.group(0)) - len(content)
+
+    return citations, re.sub(pattern, r"\1", text)
 
 
 # ##  7️⃣ Assemble Your Reliable BeeAI Agent
@@ -347,23 +284,31 @@ setup_observability("http://localhost:6006/v1/traces")
 # Add the server decorator with the agent detail + capabilities as required by A2A
 agent_detail_extension_spec = AgentDetailExtensionSpec(
     params=AgentDetail(
-        interaction_mode="multi-turn",
+        interaction_mode="single-turn",
+        tools=[
+            AgentDetailTool(
+                name="Wikipedia Search",
+                description="Fetches summaries and information from Wikipedia articles.",
+            ),
+            AgentDetailTool(
+                name="Web Search (DuckDuckGo)",
+                description="Retrieves real-time search results from the web.",
+            ),
+            AgentDetailTool(
+                name="Custom Internal Document Search",
+                description="Searches internal documents leveraging BeeAI VectorStoreSearchTool.",
+            ),
+        ],
+        framework="BeeAI",
+        programming_language="Python",
+        author=AgentDetailContributor(name="BeeAI contributors"),
+        license="Apache 2.0",
     )
 )
-
-from typing import Annotated
-from beeai_sdk.a2a.extensions import TrajectoryExtensionServer, TrajectoryExtensionSpec
 
 
 @server.agent(
     name=AGENT_NAME,
-    detail=AgentDetail(
-        ui_type="hands-off",
-        user_greeting="Provide your triaged ticket details",
-        framework="BeeAI",
-        license="Apache 2.0",
-        language="Python",
-    ),
     capabilities=AgentCapabilities(
         streaming=True,
         push_notifications=True,
@@ -377,19 +322,61 @@ from beeai_sdk.a2a.extensions import TrajectoryExtensionServer, TrajectoryExtens
 # Create the function for the BeeAI Agent
 async def agent(
         input: Message,
+        context: RunContext,
         trajectory: Annotated[TrajectoryExtensionServer, TrajectoryExtensionSpec()],
-        form: Annotated[ui.form.FormExtensionServer, form_extension_spec]
+        citation: Annotated[CitationExtensionServer, CitationExtensionSpec()],
+        form: Annotated[ui.form.FormExtensionServer, form_extension_spec],
+        # _: Annotated[PlatformApiExtensionServer, PlatformApiExtensionSpec()],
 ):
+    """Agent with tool usage requirements and access to web search, Wikipedia, and internal documents."""
 
-    yield trajectory.trajectory_metadata(title="Setup", content="memory...")
+    # yield trajectory.trajectory_metadata(title="Setup", content="Using SummarizeMemory()")
+    # memory = SummarizeMemory(llm)
+    from beeai_framework.memory import SlidingMemory, SlidingMemoryConfig
 
-    memory = SummarizeMemory(llm)
+    yield trajectory.trajectory_metadata(title="Setup", content="Using sliding memory... ")
+    memory = SlidingMemory(SlidingMemoryConfig(
+        size=3,
+        handlers={"removal_selector": lambda messages: messages[0]}  # Remove the oldest message
+    ))
 
-    yield trajectory.trajectory_metadata(title="Setup", content="Loading internal documents...")
+    yield trajectory.trajectory_metadata(title="Setup", content="Loading internal documents in vector store... ")
 
     # Create the `internal_document_search` tool! Because the `VectorStoreSearchTool` is a built in tool wrapper, we don't need to use the `@tool` decorator or extend the custom `Tool class`.
     # Create the vector store search tool
     internal_document_search = VectorStoreSearchTool(vector_store=await get_vector_store())
+
+    yield trajectory.trajectory_metadata(title="Setup", content="Processing form input... ")
+    try:
+        # Form
+        parsed_form = form.parse_form_response(message=input)
+        values = parsed_form.model_dump(exclude_none=True)["values"]
+        styles = values.get("style", {"value": ["summary"]})["value"]
+        style = styles[0] if styles else "summary"
+        task = str(values)
+    except ValueError as ve:
+        # Message from CLI
+        task = get_message_text(input)
+        style = "summary"
+
+    yield trajectory.trajectory_metadata(title="Setup", content=f"Setting style: {style}... ")
+
+    todays_date = date.today().strftime("%B %d, %Y")
+    instruct_prompt = f"""You help field marketing teams prep for conferences by answering questions on companies that they need to prepare to talk to. You produce quick and actionable briefs, doing your best to anwer the user's question.
+
+    Today's date is {todays_date}.
+
+    Tools:
+    - ThinkTool: Helps you plan and reason before you act. Use this tool when you need to think.
+    - DuckDuckGoSearchTool: Use this tool to collect current information on agendas, speakers, news, competitor moves. Include title + date + link to the resources you find in your answer. Do not use this tool for internal notes or artifacts.
+    - wikipedia_tool: Use this tool to get company/org history (not for breaking news). Only look up company names as the input.
+    - internal_document_search: past meetings, playbooks, artifacts. If you use information from this in your response, label it as as [Internal]. Always use this tool when internal notes or content is references.
+
+    Basic Rules:
+    - Be concise and practical. Requested style for final output is: {style}.
+    - Favor recent info (agenda/news ≤30 days; exec changes/funding ≤180 days); flag older items.
+    - If you don't know, say so. Don't make things up.
+    """
 
     # What Are Conditional Requirements?
     # [Conditional requirements](https://framework.beeai.dev/experimental/requirement-agent#conditional-requirement) ensure your agents are reliable by controlling when and how tools are used. They're like business rules for agent behavior. You can make them as strict (esentially writing a static workflow) or flexible (no rules! LLM decides) as you'd like.
@@ -404,6 +391,7 @@ async def agent(
     #
     #
 
+    yield trajectory.trajectory_metadata(title="Setup", content="Defining tool usage requirements for agent... ")
     requirement_1 = ConditionalRequirement(ThinkTool, consecutive_allowed=False, force_at_step=1)
     requirement_2 = ConditionalRequirement(wikipedia_tool, only_after=ThinkTool, consecutive_allowed=True,
                                            priority=10, )
@@ -427,17 +415,11 @@ async def agent(
         middlewares=[GlobalTrajectoryMiddleware(included=[Tool])],
     )
 
-    try:
-        # Form
-        parsed_form = form.parse_form_response(message=input)
-        query = str(parsed_form.dict()["values"])  # TODO: Turn form values into query
-    except ValueError as ve:
-        # Message from CLI
-        query = get_message_text(input)
-
     final_answer = None
 
-    async for event, meta in requirement_agent.run(query, max_retries_per_step=3, total_max_retries=15):
+    yield trajectory.trajectory_metadata(title="Execution", content=f"Running agent with task: {task}")
+    async for event, meta in requirement_agent.run(task, max_retries_per_step=3, total_max_retries=15):
+
         if not isinstance(event, RequirementAgentSuccessEvent):
             continue
 
@@ -448,38 +430,23 @@ async def agent(
                 content=json.dumps(
                     {
                         "input": last_step.input,
-                        "output": last_step.output.get_text_content(),
-                        "error": last_step.error,
+                        "output": to_json_serializable(last_step.output),
+                        "error": to_json_serializable(last_step.error),
                     }
                 )
             )
 
         if event.state.answer is not None:
-            # Taking a final answer from the state directly instead of RequirementAgentRunOutput to be able to use the final answer provided by the clarification tool
             final_answer = event.state.answer
 
     if final_answer:
-        answer = final_answer.text
-        print("QUESTION: ", query)
-        print("ANSWER: ", answer)
-        yield final_answer.text
+        citations, clean_text = extract_citations(final_answer.text)
+        message = AgentMessage(
+            text=clean_text,
+            metadata=(citation.citation_metadata(citations=citations) if citations else None),
+        )
+        yield message
 
-
-# ### *❗* Exercise: Test Your Agent
-# Remember that your agent is meant to prep the field marketing team for upcoming conferences and has a limited set of "internal documents". Make up your own question or ask one of the sample ones below!
-# 
-# 
-# **Sample Questions:**
-# - Brief me for a Shopify meeting at the conference. Give me an overview of the company, some recent news about them, and anything important I need to know from our internal notes.
-# 
-# - I'm planning on meeting the Moderna rep at the next conference. Give me a one pager and remind me where we left off on previous discussions.
-# 
-# - Build a security talking sheet for Siemens Energy. How does their strategy compare to their competitors'?
-
-# Run the agent with specific execution settings.
-
-# ### *❗* Exercise: Test Your Agent
-# Change the execution settings and see what happens. Does your agent run out of iterations? Every task is different and its important to balance flexibility with control.
 
 async def cli_agent(question: str):
     """Run an async agent with a question, await and return the result"""
@@ -488,9 +455,6 @@ async def cli_agent(question: str):
                          trajectory=TrajectoryExtensionServer(TrajectoryExtensionSpec()),
                          form=ui.form.FormExtensionServer(form_extension_spec)):
         print("AGENT RESPONSE: ", x)
-    # return await agent(AgentMessage(text=question),
-                       # trajectory=TrajectoryExtensionServer(TrajectoryExtensionSpec()),
-                       # form=ui.form.FormExtensionServer(form_extension_spec))
 
 
 def serve():
@@ -499,7 +463,7 @@ def serve():
     if PORT is None:
         server.run(
             configure_telemetry=True,
-            context_store=PlatformContextStore(),
+            # context_store=PlatformContextStore(),
         )  # Default port is 10000
     else:
         # Assign configured port
@@ -507,7 +471,7 @@ def serve():
         server.run(
             port=int(PORT),
             configure_telemetry=True,
-            context_store=PlatformContextStore(),
+            # context_store=PlatformContextStore(),
         )
 
 
@@ -518,3 +482,14 @@ if __name__ == "__main__":
     else:
         print(f"SERVING '{AGENT_NAME}'")
         serve()
+
+# ### *❗* Exercise: Test Your Agent
+# Remember that your agent is meant to prep the field marketing team for upcoming conferences and has a limited set of "internal documents". Make up your own question or ask one of the sample ones below!
+#
+# **Sample Questions:**
+# - Brief me for a Shopify event at the conference. Give me an overview of the company, some recent news about them, and anything important I need to know from our internal notes.
+#
+# - I'm planning on meeting the Moderna rep at the next conference. Give me a one pager and remind me where we left off on previous discussions.
+#
+# - Build a security talking sheet for Siemens Energy. How does their strategy compare to their competitors'?
+

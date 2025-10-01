@@ -388,7 +388,7 @@ wheels = [
 
 [[package]]
 name = "beeai-framework"
-version = "0.1.49"
+version = "0.1.51"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -402,9 +402,9 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9f/01/d672e7f3a97b39a7fb7d56e199f76c9cbb8b9b5f133d90292ac7ba83d905/beeai_framework-0.1.49.tar.gz", hash = "sha256:014e1450522bc400f8315d0970c18abbc995c7ccd8a3138713f6127e0824966c", size = 144800, upload-time = "2025-09-22T15:38:34.183Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/84/4d/43381233869ceab6974889e03f1147798dda1b65f328499ad92cbfe972c1/beeai_framework-0.1.51.tar.gz", hash = "sha256:2fa53f9729bade7a2b0d293c22823bf174e4ad67fed730da78c05b210316bd2e", size = 153038, upload-time = "2025-09-30T15:06:51.624Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c7/ef/64774319a23af8ece0367c49c5a724261d014d706a6dbc1405373e24cf3b/beeai_framework-0.1.49-py3-none-any.whl", hash = "sha256:349808e41ca76e5a6d1c7bfd46166fffdc7e54af7061ae689d88408a2060151b", size = 266296, upload-time = "2025-09-22T15:38:32.928Z" },
+    { url = "https://files.pythonhosted.org/packages/90/87/51a9e9b4c1cc9dd4ac31ee951ace40d028d4aa6bd9570bd3c9c4be48dd51/beeai_framework-0.1.51-py3-none-any.whl", hash = "sha256:5870e44e9aa03bf0f1e74e6e8b9b52f1779ca813bba6f42cd353249a01ef11f9", size = 285566, upload-time = "2025-09-30T15:06:50.145Z" },
 ]
 
 [package.optional-dependencies]
@@ -812,6 +812,7 @@ wheels = [
 name = "fastuuid"
 version = "0.13.3"
 source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/22/00/5ab21d121752b4efe57b0c4ae0b84161261779631bc4c76132c77cce97bb/fastuuid-0.13.3.tar.gz", hash = "sha256:d755dc132addb369877429622535dfb52d79c8968a8a98f15a84c3da1db013c7", size = 18249, upload-time = "2025-09-26T08:50:50.782Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/73/41/9482a375d3af33e2cdb99d3fa1bbbdb95f2e698ceb29e38880f81d919ebe/fastuuid-0.13.3-cp313-cp313-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl", hash = "sha256:e5be92899120006ed44b263c02588d38632b49aa1fb2a8fcd18bb5b93a1fa7f2", size = 494635, upload-time = "2025-09-25T17:18:44.961Z" },
     { url = "https://files.pythonhosted.org/packages/46/bf/50530bb9bcc505ea74c06ac376af44c2b4e085a897b2d4fb168729267418/fastuuid-0.13.3-cp313-cp313-macosx_10_12_x86_64.whl", hash = "sha256:217c8438e4b2d727c810ff4c49123e45f2109925b04463745e382c7d808472fa", size = 253079, upload-time = "2025-09-25T17:18:19.086Z" },
@@ -1274,19 +1275,15 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "arize-phoenix" },
-    { name = "beeai-framework", specifier = "~=0.1.49" },
-    { name = "beeai-framework", extras = ["a2a"], specifier = "~=0.1.49" },
-    { name = "beeai-framework", extras = ["duckduckgo"], specifier = "~=0.1.49" },
-    { name = "beeai-framework", extras = ["llama-index"], specifier = "~=0.1.49" },
-    { name = "beeai-framework", extras = ["wikipedia"], specifier = "~=0.1.49" },
-    { name = "beeai-sdk", specifier = "~=0.3.4" },
-    { name = "langchain-community" },
-    { name = "markdown" },
-    { name = "openinference-instrumentation-beeai" },
+    { name = "arize-phoenix", specifier = "==11.37.0" },
+    { name = "beeai-framework", extras = ["a2a", "duckduckgo", "llama-index", "wikipedia"], specifier = "==0.1.51" },
+    { name = "beeai-sdk", specifier = "==0.3.4" },
+    { name = "langchain-community", specifier = "==0.3.27" },
+    { name = "markdown", specifier = "==3.9" },
+    { name = "openinference-instrumentation-beeai", specifier = "==0.1.11" },
     { name = "pydantic-ai", specifier = "~=0.7.6" },
     { name = "python-dotenv", specifier = "~=1.1.1" },
-    { name = "unstructured" },
+    { name = "unstructured", specifier = "==0.18.15" },
 ]
 
 [[package]]
@@ -1458,7 +1455,7 @@ wheels = [
 
 [[package]]
 name = "langchain-community"
-version = "0.3.29"
+version = "0.3.27"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -1474,9 +1471,9 @@ dependencies = [
     { name = "sqlalchemy" },
     { name = "tenacity" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c5/71/72ddc8802d5edcd3b31bc4f0eb62cdf85c30c9b845e34cc879dab0b45679/langchain_community-0.3.29.tar.gz", hash = "sha256:1f3d37973b10458052bb3cc02dce9773a8ffbd02961698c6d395b8c8d7f9e004", size = 33238072, upload-time = "2025-08-27T15:29:14.249Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5c/76/200494f6de488217a196c4369e665d26b94c8c3642d46e2fd62f9daf0a3a/langchain_community-0.3.27.tar.gz", hash = "sha256:e1037c3b9da0c6d10bf06e838b034eb741e016515c79ef8f3f16e53ead33d882", size = 33237737, upload-time = "2025-07-02T18:47:02.329Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2b/3c/107819dbed0be3f7a041245bce861c8dd4883ed08040ed482d278a274f22/langchain_community-0.3.29-py3-none-any.whl", hash = "sha256:c876ec7ef40b46353af164197f4e08e157650e8a02c9fb9d49351cdc16c839fe", size = 2530803, upload-time = "2025-08-27T15:29:12.52Z" },
+    { url = "https://files.pythonhosted.org/packages/c8/bc/f8c7dae8321d37ed39ac9d7896617c4203248240a4835b136e3724b3bb62/langchain_community-0.3.27-py3-none-any.whl", hash = "sha256:581f97b795f9633da738ea95da9cb78f8879b538090c9b7a68c0aed49c828f0d", size = 2530442, upload-time = "2025-07-02T18:47:00.246Z" },
 ]
 
 [[package]]

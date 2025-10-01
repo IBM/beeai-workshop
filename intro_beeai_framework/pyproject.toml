@@ -5,17 +5,13 @@ description = "Introduction to BeeAI workshop"
 readme = "README.md"
 requires-python = ">=3.13, <3.14"
 dependencies = [
-    "arize-phoenix",
-    "langchain-community",
-    "openinference-instrumentation-beeai",
-    "beeai-framework~=0.1.49",
-    "beeai-framework[a2a]~=0.1.49",
-    "beeai-framework[duckduckgo]~=0.1.49",
-    "beeai-framework[llama_index]~=0.1.49",
-    "beeai-framework[wikipedia]~=0.1.49",
-    "beeai-sdk~=0.3.4",
+    "arize-phoenix==11.37.0",
+    "langchain-community==0.3.27",
+    "openinference-instrumentation-beeai==0.1.11",
+    "beeai-framework[a2a,duckduckgo,llama_index,wikipedia]==0.1.51",
+    "beeai-sdk==0.3.4",
     "python-dotenv~=1.1.1",
     "pydantic-ai~=0.7.6",
-    "markdown",
-    "unstructured",
+    "markdown==3.9",
+    "unstructured==0.18.15",
 ]
