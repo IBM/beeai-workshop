@@ -13,7 +13,6 @@ Explore BeeAI through hands-on workshops that demonstrate how BeeAI's integrated
 | Workshop                                                                   | Description                                                                              |
 |:---------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|
 | [Introduction to the BeeAI Framework](introduction_beeai_framework/overview/README.md) | Master the fundamental components of the BeeAI Framework by building a Conference Prep Agent. |
-| [Introduction to ACP and BeeAI](Introduction_acp_beeai/pre-work/README.md) — *Update coming soon* | Walk through a practical ticket triage scenario to get started with the BeeAI ecosystem. |
 | [Company Analysis Agent with the BeeAI Framework](beeai_fw__tavily_redis/overview/README.md)                            | Build a Corporate Analysis Agent using a Tavily MCP server for internet search capabilities and Redis for RAG                                            |
 | *Additional workshops coming soon!*                                        | -                                                                                       |
 
