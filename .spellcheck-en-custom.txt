@@ -1,6 +1,7 @@
 Augumented
 acp
 ACP
+Arize
 api
 beeai
 BeeAI's
@@ -41,6 +42,7 @@ LLM
 Macbook
 MCP
 Milvus
+Moderna
 ollama
 Ollama
 OPENAI
