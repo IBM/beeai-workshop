@@ -49,18 +49,20 @@ To run models locally on your machine:
 2. Run or pull the Granite model:
 
    ```bash
-   ollama pull granite3.3
+   ollama pull granite4:tiny-h
    ```
 
    or
 
    ```bash
-   ollama run granite3.3
+   ollama run granite4:tiny-h
    ```
 
-> Ollama models: [Granite 3.3](https://ollama.com/library/granite3.3) \
-> Ollama models: [Granite 4](https://ollama.com/library/granite4) \
-> Granite docs: [Granite](https://www.ibm.com/granite/docs/models/granite)
+### Granite model links
+
+- Ollama models: [Granite 4](https://ollama.com/library/granite4)
+- Ollama models: [Granite 3.3](https://ollama.com/library/granite3.3)
+- Granite docs: [Granite](https://www.ibm.com/granite/docs/models/granite)
 
 ---
 
