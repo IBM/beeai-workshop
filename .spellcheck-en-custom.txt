@@ -20,6 +20,7 @@ dataset
 datetime
 discoverable
 discoverability
+ELv
 embeddings
 Embeddings
 env
@@ -63,6 +64,7 @@ repos
 Responder
 runtime
 scalability
+Shopify
 SDK
 summarization
 Summarization
