@@ -4,9 +4,9 @@ description: Setup the repo and environment
 logo: images/BeeAI-Logo-White.png
 ---
 
-# Workshop Setup Instructions
+# Setup Instructions
 
-## Get the Workshop Code
+## Get the Demo Code
 
 **Option A: Clone with Git (Recommended):**
 
@@ -20,20 +20,17 @@ If you're not comfortable with Git, [download the ZIP](https://github.com/IBM/be
 
 ---
 
-## Open the Workshop in VS Code
+## Navigate to the demo folder
 
-Navigate to the specific workshop folder and open it in VS Code:
+Navigate to the specific demo folder:
 
 ```bash
 cd beeai-workshop/intro_beeai_platform
-code .
 ```
 
 **Important:**  
-Make sure to open the specific `intro_beeai_platform` folder in VS Code, not the entire `beeai-workshop` directory.  
+Make sure to open the specific `intro_beeai_platform` folder, not the entire `beeai-workshop` directory.  
 This ensures proper project structure and dependencies are detected.
-
-Alternatively, you can open VS Code first and use `File > Open Folder` to navigate to and select the correct folder.
 
 ---
 
@@ -66,4 +63,4 @@ In your new .env file:
     uv sync
     ```
 
-This ensures you have the correct versions of all packages used in the workshop, installed in the correct environment.
+This ensures you have the correct versions of all packages used in the demo, installed in the correct environment.

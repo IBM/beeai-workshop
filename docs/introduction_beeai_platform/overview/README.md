@@ -48,19 +48,13 @@ Through interactive coding exercises, you'll gain hands-on experience with:
 
 <hr>
 
-## 🚀 Let's Get Started
+## Workshop Structure
 
-This demo is designed for immediate hands-on learning through interactive exercises:
+To ensure a smooth experience, follow the steps in this order:
 
-1. **Development environment**
-    - Clone the open source repository
-    - Setup your project
-    - Run an LLM provider locally or use a remote provider
-
-2. **Interactive Exercises**
-    - Install and run BeeAI Platform
-    - Build and run your Conference Prep Agent
-    - Test your agent with real conference scenarios
+1. ✅ [Prework](../pre-work/README.md) – Install dependencies and gather API keys
+2. 🔧 [Setup](../setup/README.md) – Get the code and environment ready
+4. 🤖 [Run the agent](../run/README.md) – Assemble and run your agent
 
 <hr>
 
