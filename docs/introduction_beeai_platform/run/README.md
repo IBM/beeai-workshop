@@ -34,12 +34,6 @@ To start the BeeAI Platform with Arize Phoenix, run:
 beeai platform start --set phoenix.enabled=true
 ```
 
-To start the BeeAI Platform without Arize Phoenix, run:
-
-```shell
-beeai platform start
-```
-
 ### 3. Launch the BeeAI UI
 
 In your terminal, run:
@@ -48,7 +42,7 @@ In your terminal, run:
 beeai ui
 ```
 
-You should be prompted to select a model provider and model. For running locally, Ollama and Granite 3.3 are recommended.
+You should be prompted to select a model provider and model. For running locally, Ollama and granite4:tiny-h are recommended.
 
 You should see the UI launch in your browser.
 
@@ -84,7 +78,7 @@ uv run src/agent.py
 
 ### 8. Run the agent
 
-1. Navigate to the menu bar on the left hand side and select the Conference Prep Agent
+1. Navigate to the menu bar on the left hand side of the BeeAI UI and select the Conference Prep Agent. You might need to refresh the page.
 
 2. Notice that we build a form UI.
 
@@ -107,10 +101,14 @@ uv run src/agent.py
 
     * the trajectory steps (look in "How did I get this answer?")
     * the captured details in Arize Phoenix
+        * browse to `http://localhost:6006/`
+        * open project "default"
+        * Select "All" (not Root Spans)
+        * Most details show up after the run
         * Look under "All" and not "Root"
     * source citations (not always present)
 
-### 8. Clean Up
+### 9. Clean Up
 
 1. Stop the 3 agent servers using `Ctrl + C` or exiting the terminal where it is running.
 2. Clean up the platform by running this command in your terminal:
