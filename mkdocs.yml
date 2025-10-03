@@ -22,6 +22,13 @@ nav:
       - Create Tools: beeai_fw__tavily_redis/tools/README.md
       - Build the Agent: beeai_fw__tavily_redis/agent/README.md
       - Clean up: beeai_fw__tavily_redis/cleanup/README.md
+  - Demos:
+    - Introduction to BeeAI Platform:
+      - Overview: introduction_beeai_platform/overview/README.md
+      - Pre-work: introduction_beeai_platform/pre-work/README.md
+      - Workshop Setup: introduction_beeai_platform/setup/README.md
+      - Build and run the agent: introduction_beeai_platform/run/README.md
+      - Uninstall & Troubleshooting: introduction_beeai_platform/uninstall_troubleshooting/README.md
 
   - References:
     - BeeAI Community: https://github.com/i-am-bee
