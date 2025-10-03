@@ -50,14 +50,14 @@ Through interactive coding exercises, you'll gain hands-on experience with:
 This workshop is designed for immediate hands-on learning through interactive exercises:
 
 1. **Development environment**
-   - Clone the open source repository
-   - Setup your project
-   - Run an LLM provider locally or use a remote provider
+    - Clone the open source repository
+    - Setup your project
+    - Run an LLM provider locally or use a remote provider
 
 2. **Interactive Exercises**
-   - Install and run BeeAI Platform
-   - Build and run your Conference Prep Agent
-   - Test your agent with real conference scenarios
+    - Install and run BeeAI Platform
+    - Build and run your Conference Prep Agent
+    - Test your agent with real conference scenarios
 
 <hr>
 
