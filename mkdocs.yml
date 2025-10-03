@@ -15,6 +15,19 @@ nav:
   - Workshops:
     - Introduction to BeeAI Framework:
       - Get Started: introduction_beeai_framework/overview/README.md
+    - Introduction to BeeAI Platform:
+      - Overview: introduction_beeai_platform/overview/README.md
+      - Pre-work: introduction_beeai_platform/pre-work/README.md
+      - Workshop Setup: introduction_beeai_platform/setup/README.md
+      - Build and run the agent: introduction_beeai_platform/run/README.md
+      - Uninstall & Troubleshooting: introduction_beeai_platform/uninstall_troubleshooting/README.md
+    - Company Analysis Agent with the BeeAI Framework:
+      - Overview: beeai_fw__tavily_redis/overview/README.md
+      - Pre-Work: beeai_fw__tavily_redis/pre-work/README.md
+      - Workshop Setup: beeai_fw__tavily_redis/setup/README.md
+      - Create Tools: beeai_fw__tavily_redis/tools/README.md
+      - Build the Agent: beeai_fw__tavily_redis/agent/README.md
+      - Clean up: beeai_fw__tavily_redis/cleanup/README.md
     - Overview of BeeAI (UPDATE COMING SOON):
       - Overview: overview_of_beeai/overview/README.md
       - Pre-work: overview_of_beeai/pre-work/README.md
@@ -23,13 +36,6 @@ nav:
       - Lab 2. A multi-agent workflow: overview_of_beeai/lab-2/README.md
       - Lab 3. Use the BeeAI Platform: overview_of_beeai/lab-3/README.md
       - Uninstall & Troubleshooting: overview_of_beeai/uninstall_troubleshooting/README.md
-    - Company Analysis Agent with the BeeAI Framework:
-      - Overview: beeai_fw__tavily_redis/overview/README.md
-      - Pre-Work: beeai_fw__tavily_redis/pre-work/README.md
-      - Workshop Setup: beeai_fw__tavily_redis/setup/README.md
-      - Create Tools: beeai_fw__tavily_redis/tools/README.md
-      - Build the Agent: beeai_fw__tavily_redis/agent/README.md
-      - Clean up: beeai_fw__tavily_redis/cleanup/README.md
 
   - References:
     - BeeAI Community: https://github.com/i-am-bee
