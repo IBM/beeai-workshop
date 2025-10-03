@@ -14,6 +14,12 @@ In this lab, we'll run our agent in the BeeAI platform. The BeeAI platform creat
 
 Install BeeAI platform using the [installation instructions in the documentation](https://docs.beeai.dev/introduction/installation).
 
+To install a specific version of BeeAI Platform, set the BEEAI_VERSION environment variable before running the install script.  For example:
+
+```bash
+sh -c "$(BEEAI_VERSION=0.3.4 curl -LsSf https://raw.githubusercontent.com/i-am-bee/beeai-platform/HEAD/install.sh)"
+```
+
 Already installed BeeAI in the past? Be sure to update it to the latest version according to the instructions in the documentation.
 
 ### 2. Start the BeeAI Platform (optionally with Phoenix enabled)
@@ -113,4 +119,4 @@ uv run src/agent.py
     beeai platform delete
     ```
 
-## Congratulations! You've completed the Introduction to BeeAI Platform workshop.
+## Congratulations! You've completed the Introduction to BeeAI Platform demo.

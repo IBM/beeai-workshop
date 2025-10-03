@@ -1,27 +1,13 @@
 ---
 title: Prework
-description: Workshop Prework Instructions
+description: Demo Prework Instructions
 logo: images/BeeAI-Logo-White.png
 ---
 
-# BeeAI Platform Workshop: Prework Instructions
+# BeeAI Platform Demo: Prework Instructions
 
-Welcome to the Introduction to BeeAI Platform workshop.  
-Please complete the following setup steps **before** the workshop.
-
----
-
-## Development Environment
-
-### Visual Studio Code (Recommended)
-
-You may use any IDE, but this workshop assumes you're using **Visual Studio Code (VS Code)**.
-
-- [Download Visual Studio Code (VS Code)](https://code.visualstudio.com/)
-- Install the VS Code **Python extension** from the Extensions Marketplace:
-
-    1. Open the Extensions view in VS Code (`Ctrl+Shift+X` or `Cmd+Shift+X`)
-    2. Search for “Python” by Microsoft and install it
+Welcome to the Introduction to BeeAI Platform demo.  
+Please complete the following setup steps **before** the demo.
 
 ---
 
@@ -68,4 +54,4 @@ To run models locally on your machine:
 
 ## You're Ready
 
-Once you've completed these steps, you're ready for the workshop.
+Once you've completed these steps, you're ready to setup the project.
