@@ -1,23 +1,18 @@
-# Intro to BeeAI Framework
+# Intro to BeeAI Platform demo
 
-Temporary notes for stuff here. We'll use the workshop web pages for most instructions, but this is a quick and handy way to describe what is here.
+This is the source for the demo.
 
 ## Overview
 
-This is the source for the workshop.
-Put links to docs here.
+This is a BeeAI Platform demo based on the Intro to BeeAI Framework workshop. For instructions on how to run it from source go to [demos page](https://ibm.github.io/beeai-workshop/introduction_beeai_platform/overview/)
 
-## Files
+---
 
-* ipynb is for running workshop in colab or Jupyter environments
+Old notes are here and should probably be removed in favor of the docs page (if nobody is relying on these).
 
 ## Setup
 
 * Ollama/granite
-
-* For the colab/jupyter setup:
-    * Colab is easy see the doc page
-    * TODO: jupyter install notes here for running locally
 
 ### Demo BeeAI Platform
 
