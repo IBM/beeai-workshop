@@ -26,7 +26,7 @@ nav:
     - Introduction to BeeAI Platform:
       - Overview: introduction_beeai_platform/overview/README.md
       - Pre-work: introduction_beeai_platform/pre-work/README.md
-      - Workshop Setup: introduction_beeai_platform/setup/README.md
+      - Setup: introduction_beeai_platform/setup/README.md
       - Build and run the agent: introduction_beeai_platform/run/README.md
       - Uninstall & Troubleshooting: introduction_beeai_platform/uninstall_troubleshooting/README.md
 
