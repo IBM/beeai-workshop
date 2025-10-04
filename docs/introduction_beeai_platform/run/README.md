@@ -17,7 +17,7 @@ Install BeeAI platform using the [installation instructions in the documentation
 To install a specific version of BeeAI Platform, set the BEEAI_VERSION environment variable before running the install script.  For example:
 
 ```bash
-sh -c "$(BEEAI_VERSION=0.3.4 curl -LsSf https://raw.githubusercontent.com/i-am-bee/beeai-platform/HEAD/install.sh)"
+sh -c "$(BEEAI_VERSION=0.3.5 curl -LsSf https://raw.githubusercontent.com/i-am-bee/beeai-platform/HEAD/install.sh)"
 ```
 
 Already installed BeeAI in the past? Be sure to update it to the latest version according to the instructions in the documentation.
