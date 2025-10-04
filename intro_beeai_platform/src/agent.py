@@ -7,7 +7,6 @@
 
 # System
 import asyncio
-import re
 from datetime import date
 import logging
 import json
@@ -232,27 +231,24 @@ async def get_vector_store():
 # ## 6️⃣ Conditional Requirements: Guiding Agent Behavior
 # 
 
-def extract_citations(text: str) -> tuple[list[Citation], str]:
+def extract_citations(output) -> list[Citation]:
     """Extract citations from markdown-style links and return cleaned text."""
-    citations, offset = [], 0
-    pattern = r"\[([^\]]+)\]\(([^)]+)\)"
 
-    for match in re.finditer(pattern, text):
-        content, url = match.groups()
-        start = match.start() - offset
+    citations = []
 
-        citations.append(
-            Citation(
-                url=url,
-                title=url.split("/")[-1].replace("-", " ").title() or content[:50],
-                description=content[:100] + ("..." if len(content) > 100 else ""),
-                start_index=start,
-                end_index=start + len(content),
-            )
-        )
-        offset += len(match.group(0)) - len(content)
+    try:
+        for o in output:
+            output = o
+            url = output.get("url")
+            title = output.get("title")
+            description = output.get("description")
 
-    return citations, re.sub(pattern, r"\1", text)
+            if url and title and description:
+                citations.append(Citation(url=url, title=title, description=description, start_index=-1, end_index=-1))
+    except Exception:
+        pass
+
+    return citations
 
 
 # ##  7️⃣ Assemble Your Reliable BeeAI Agent
@@ -300,13 +296,21 @@ agent_detail_extension_spec = AgentDetailExtensionSpec(
 # Create the function for the BeeAI Agent
 async def agent(
         input: Message,
-        context: RunContext,
         trajectory: Annotated[TrajectoryExtensionServer, TrajectoryExtensionSpec()],
         citation: Annotated[CitationExtensionServer, CitationExtensionSpec()],
         form: Annotated[ui.form.FormExtensionServer, form_extension_spec],
         # _: Annotated[PlatformApiExtensionServer, PlatformApiExtensionSpec()],
 ):
-    """Agent with tool usage requirements and access to web search, Wikipedia, and internal documents."""
+    """
+    Conference Prep Agent intelligently combines multiple information sources to provide comprehensive conference preparation materials.
+
+    The agent will integrate three powerful tools:
+
+    * Web Search – Collect relevant news and up-to-date information about attendees, speakers, and industry trends
+    * Wikipedia Tool – Provide company history and background details on organizations and key people
+    * Internal Knowledge Base – Access the team's internal notes and artifacts for context-specific information
+    """
+
 
     # yield trajectory.trajectory_metadata(title="Setup", content="Using SummarizeMemory()")
     # memory = SummarizeMemory(llm)
@@ -396,6 +400,7 @@ async def agent(
     final_answer = None
 
     yield trajectory.trajectory_metadata(title="Execution", content=f"Running agent with task: {task}")
+    citations = []
     async for event, meta in requirement_agent.run(task, max_retries_per_step=3, total_max_retries=15):
 
         if not isinstance(event, RequirementAgentSuccessEvent):
@@ -403,12 +408,16 @@ async def agent(
 
         last_step = event.state.steps[-1] if event.state.steps else None
         if last_step and last_step.tool is not None:
+
+            output = to_json_serializable(last_step.output)
+            citations.extend(extract_citations(output))
+
             yield trajectory.trajectory_metadata(
                 title=last_step.tool.name,
                 content=json.dumps(
                     {
                         "input": last_step.input,
-                        "output": to_json_serializable(last_step.output),
+                        "output": output,
                         "error": to_json_serializable(last_step.error),
                     }
                 )
@@ -418,9 +427,13 @@ async def agent(
             final_answer = event.state.answer
 
     if final_answer:
-        citations, clean_text = extract_citations(final_answer.text)
+        text = final_answer.text
+        if citations:
+            # Add separator because we will cite them all at the end instead of inline
+            # because these are just searched docs and not annotated inline references.
+            text = text + "\n\n---\n\n### Search sources:  "
         message = AgentMessage(
-            text=clean_text,
+            text=text,
             metadata=(citation.citation_metadata(citations=citations) if citations else None),
         )
         yield message
@@ -431,6 +444,7 @@ async def cli_agent(question: str):
 
     async for x in agent(AgentMessage(text=question),
                          trajectory=TrajectoryExtensionServer(TrajectoryExtensionSpec()),
+                         citation=CitationExtensionServer(CitationExtensionSpec()),
                          form=ui.form.FormExtensionServer(form_extension_spec)):
         print("AGENT RESPONSE: ", x)
 
