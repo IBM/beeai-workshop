@@ -89,6 +89,8 @@ Each tool is implemented interactively. You’ll fill in missing logic and test 
 
 ### Step 3: Run the Tool
 
+This ensures the tool works as expected before integrating it into your BeeAI Agent!
+
 - Run or debug your Redis retriever tool independently:
 
     ```bash
@@ -96,5 +98,3 @@ Each tool is implemented interactively. You’ll fill in missing logic and test 
     ```
 
 > Remember to save the file with your changes before running it!
-
-    This ensures the tool works as expected before integrating it into your BeeAI Agent!
