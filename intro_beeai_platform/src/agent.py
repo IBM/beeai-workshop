@@ -21,7 +21,7 @@ from beeai_sdk.a2a.extensions import (
     CitationExtensionServer,
     CitationExtensionSpec,
 )
-from a2a.types import AgentCapabilities
+from a2a.types import AgentCapabilities, AgentSkill
 from a2a.utils.message import get_message_text
 from dotenv import load_dotenv
 from openinference.instrumentation.beeai import BeeAIInstrumentor
@@ -48,15 +48,26 @@ from beeai_framework.tools.think import ThinkTool
 # BeeAI SDK imports
 from beeai_sdk.a2a.extensions import TrajectoryExtensionServer, TrajectoryExtensionSpec
 from beeai_sdk.a2a.extensions import Citation
-from beeai_sdk.a2a.extensions import AgentDetail, AgentDetailExtensionSpec
-from beeai_sdk.a2a.extensions import ui
-from beeai_sdk.a2a.types import Message, AgentMessage
+from beeai_sdk.a2a.types import AgentMessage
+
+from a2a.types import (
+    Message,
+)
+
 from beeai_sdk.server import Server
 from beeai_sdk.server.context import RunContext
-from beeai_sdk.server.store.platform_context_store import PlatformContextStore
-from beeai_sdk.a2a.extensions.services.platform import (
-    PlatformApiExtensionServer,
-    PlatformApiExtensionSpec,
+
+import beeai_sdk.a2a.extensions
+from beeai_sdk.a2a.extensions.ui.form import (
+    DateField,
+    TextField,
+    FileField,
+    CheckboxField,
+    MultiSelectField,
+    OptionItem,
+    FormExtensionServer,
+    FormExtensionSpec,
+    FormRender,
 )
 
 # Constants
@@ -102,34 +113,32 @@ server = Server()
 
 
 # Set up the input form
-task = ui.form.TextField(type="text", id="task", label="Task", required=True, col_span=2,
-                         placeholder="Enter your request here")
-company_name = ui.form.TextField(type="text", id="company_name", label="Company name", col_span=1,
-                                 placeholder="optional")
-event_date = ui.form.DateField(type="date", id="event_date", label="Event date", col_span=1)
-event = ui.form.TextField(type="text", id="event", label="Event", col_span=1)
+task = TextField(type="text", id="task", label="Task", required=True, col_span=2, placeholder="Enter your request here")
+company_name = TextField(type="text", id="company_name", label="Company name", col_span=1, placeholder="optional")
+event_date = DateField(type="date", id="event_date", label="Event date", col_span=1)
+event = TextField(type="text", id="event", label="Event", col_span=1)
 
-style = ui.form.MultiSelectField(
+style = MultiSelectField(
     type="multiselect",
     id="style",
     label="Style",
     required=True,
     col_span=1,
     options=[
-        ui.form.OptionItem(id="detailed", label="detailed"),
-        ui.form.OptionItem(id="summary", label="summary"),
-        ui.form.OptionItem(id="list", label="list"),
+        OptionItem(id="detailed", label="detailed"),
+        OptionItem(id="summary", label="summary"),
+        OptionItem(id="list", label="list"),
     ],
     default_value=["summary"],
 )
 
-form_render = ui.form.FormRender(
+form_render = FormRender(
     id="conference_prep_form",
     title="How can I help you prepare for your upcoming conference?",
     columns=2,
     fields=[task, company_name, style, event, event_date],
 )
-form_extension_spec = ui.form.FormExtensionSpec(form_render)
+form_extension_spec = FormExtensionSpec(form_render)
 
 # ## 4️⃣ Tools: Enabling LLMs to Take Action
 # 
@@ -256,9 +265,9 @@ def extract_citations(output) -> list[Citation]:
 # This is the part we've been working towards! Let's assemble the agent with all the parts we created.
 
 # Add the server decorator with the agent detail + capabilities as required by A2A
-agent_detail_extension_spec = AgentDetailExtensionSpec(
-    params=AgentDetail(
-        interaction_mode="single-turn",
+agent_detail_extension_spec = beeai_sdk.a2a.extensions.AgentDetailExtensionSpec(
+    params=beeai_sdk.a2a.extensions.AgentDetail(
+        interaction_mode="multi-turn",
         tools=[
             AgentDetailTool(
                 name="Wikipedia Search",
@@ -295,11 +304,13 @@ agent_detail_extension_spec = AgentDetailExtensionSpec(
 )
 # Create the function for the BeeAI Agent
 async def agent(
-        input: Message,
-        trajectory: Annotated[TrajectoryExtensionServer, TrajectoryExtensionSpec()],
-        citation: Annotated[CitationExtensionServer, CitationExtensionSpec()],
-        form: Annotated[ui.form.FormExtensionServer, form_extension_spec],
-        # _: Annotated[PlatformApiExtensionServer, PlatformApiExtensionSpec()],
+    input: Message,
+    trajectory: Annotated[TrajectoryExtensionServer, TrajectoryExtensionSpec()],
+    citation: Annotated[CitationExtensionServer, CitationExtensionSpec()],
+    form: Annotated[
+        FormExtensionServer,
+        form_extension_spec,
+    ],
 ):
     """
     Conference Prep Agent intelligently combines multiple information sources to provide comprehensive conference preparation materials.
@@ -336,7 +347,7 @@ async def agent(
         styles = values.get("style", {"value": ["summary"]})["value"]
         style = styles[0] if styles else "summary"
         task = str(values)
-    except ValueError as ve:
+    except Exception:
         # Message from CLI
         task = get_message_text(input)
         style = "summary"
@@ -445,7 +456,7 @@ async def cli_agent(question: str):
     async for x in agent(AgentMessage(text=question),
                          trajectory=TrajectoryExtensionServer(TrajectoryExtensionSpec()),
                          citation=CitationExtensionServer(CitationExtensionSpec()),
-                         form=ui.form.FormExtensionServer(form_extension_spec)):
+                         form=FormExtensionServer(form_extension_spec)):
         print("AGENT RESPONSE: ", x)
 
 
