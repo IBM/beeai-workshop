@@ -389,7 +389,7 @@ wheels = [
 
 [[package]]
 name = "beeai-framework"
-version = "0.1.53"
+version = "0.1.59"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -403,9 +403,9 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/43/18/3fcf9495ed7a4d3f236d5e2ac9526c633ec5b6eb02652f44663a8d4dd5d7/beeai_framework-0.1.53.tar.gz", hash = "sha256:da582fdf1746fd75f33de16ac4b600b07230dd00c450276d92038d3822e23462", size = 154470, upload-time = "2025-10-03T14:27:50.086Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2a/73/6a1041913157e0a9757b32465b49437a7f30ae5a16a441b59f9f3e0fd70a/beeai_framework-0.1.59.tar.gz", hash = "sha256:ad98c6cabea970040e9cdfabb019d019728449d89e002a68f11255aa3b107baa", size = 170551, upload-time = "2025-10-27T17:28:13.721Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3d/ab/8dd537bfdd4c1b7544c214d508a4237e04566f4192cecad2ac942e43d5b8/beeai_framework-0.1.53-py3-none-any.whl", hash = "sha256:12a5a9915f8b719b020bf969546bec121d67d3223b2ee7ebacf8eb43dc096646", size = 288035, upload-time = "2025-10-03T14:27:48.426Z" },
+    { url = "https://files.pythonhosted.org/packages/66/fd/d24bbb454c5171b876a684853e5010f13dc889a21846bf665931ef962fb9/beeai_framework-0.1.59-py3-none-any.whl", hash = "sha256:7f48c157bf23e598fb375e2fd22c8a8aaa94959f953a8c8f40b4df94d77aff62", size = 312484, upload-time = "2025-10-27T17:28:12.289Z" },
 ]
 
 [package.optional-dependencies]
@@ -427,7 +427,7 @@ wikipedia = [
 
 [[package]]
 name = "beeai-sdk"
-version = "0.3.5"
+version = "0.3.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "a2a-sdk" },
@@ -447,9 +447,9 @@ dependencies = [
     { name = "tenacity" },
     { name = "uvicorn" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/b0/53d8d681041be89d4f1fa7a640cc83b341f77a7b73502dc84f20b42aed60/beeai_sdk-0.3.5.tar.gz", hash = "sha256:0a631e71d4d9d025225162a54abb1b3080dff42e01e7dd65cfc13e51a2448cb3", size = 35543, upload-time = "2025-10-02T13:52:09.38Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/62/e1/833ee891cd28e2adee3627726a99dee3ff081122cab99a6705191a9932bb/beeai_sdk-0.3.7.tar.gz", hash = "sha256:9c58bd2504e3a94f235b5e740c526a4eb54f9ebea9ec5a1ea74a5dd4a6d61798", size = 36718, upload-time = "2025-10-14T14:12:19.863Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/da/8b6e049ac9762d471b90e85ce1b2c075b124ca0d9b44e63768b4668e4582/beeai_sdk-0.3.5-py3-none-any.whl", hash = "sha256:b84c47c66187448866f19b450c07041ff56f41d19812fddb5854f0ecb9899f37", size = 63473, upload-time = "2025-10-02T13:52:08.188Z" },
+    { url = "https://files.pythonhosted.org/packages/dd/a8/154f4c151016e857e5a0e3fa714a8ac5ce5bf7978fde340710fe43fc91ef/beeai_sdk-0.3.7-py3-none-any.whl", hash = "sha256:1e9da0df5ef59263b01fc64fedffae06dbef63e99200b5410c5b2ed094c3e037", size = 65244, upload-time = "2025-10-14T14:12:18.487Z" },
 ]
 
 [[package]]
@@ -1269,6 +1269,8 @@ dependencies = [
     { name = "langchain-community" },
     { name = "markdown" },
     { name = "openinference-instrumentation-beeai" },
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-sdk" },
     { name = "pydantic-ai" },
     { name = "python-dotenv" },
     { name = "unstructured" },
@@ -1277,11 +1279,13 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "arize-phoenix", specifier = "==11.37.0" },
-    { name = "beeai-framework", extras = ["a2a", "duckduckgo", "llama-index", "wikipedia"], specifier = "==0.1.53" },
-    { name = "beeai-sdk", specifier = "==0.3.5" },
+    { name = "beeai-framework", extras = ["a2a", "duckduckgo", "llama-index", "wikipedia"], specifier = "==0.1.59" },
+    { name = "beeai-sdk", specifier = "==0.3.7" },
     { name = "langchain-community", specifier = "==0.3.27" },
     { name = "markdown", specifier = "==3.9" },
-    { name = "openinference-instrumentation-beeai", specifier = "==0.1.11" },
+    { name = "openinference-instrumentation-beeai", specifier = "==0.1.13" },
+    { name = "opentelemetry-api", specifier = "==1.37.0" },
+    { name = "opentelemetry-sdk", specifier = "==1.37.0" },
     { name = "pydantic-ai", specifier = "~=0.7.6" },
     { name = "python-dotenv", specifier = "~=1.1.1" },
     { name = "unstructured", specifier = "==0.18.15" },
@@ -1360,11 +1364,11 @@ wheels = [
 
 [[package]]
 name = "json-repair"
-version = "0.39.1"
+version = "0.52.3"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/95/60/6d1599bc01070d9fe3840d245ae80fd24b981c732d962842825ce7a9fde6/json_repair-0.39.1.tar.gz", hash = "sha256:e90a489f247e1a8fc86612a5c719872a3dbf9cbaffd6d55f238ec571a77740fa", size = 30040, upload-time = "2025-02-23T11:26:13.834Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7e/f4/30c46f60c2f87d02ae0ab40347cfb30dc4906b6c8aa8157730fe7d959041/json_repair-0.52.3.tar.gz", hash = "sha256:5e6a6e4df41eb4ad2d316312940095964964f98c5f754583a0ae6efa4d6a613d", size = 35572, upload-time = "2025-10-22T04:37:33.879Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ff/b9/2e445481555422b907dab468b53574bc1e995099ca1a1201d0d876ca05e9/json_repair-0.39.1-py3-none-any.whl", hash = "sha256:3001409a2f319249f13e13d6c622117a5b70ea7e0c6f43864a0233cdffc3a599", size = 20686, upload-time = "2025-02-23T11:26:12.582Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/cd/20e2aa73c9b937fbad7fe42624e1bc2552a2d589be9f0adbd7d98d06ef2a/json_repair-0.52.3-py3-none-any.whl", hash = "sha256:cf8affd088ccd7a3c196dad7f6152c005f126f63a614b9ea5d0c1dfa7f5d7186", size = 26522, upload-time = "2025-10-22T04:37:32.44Z" },
 ]
 
 [[package]]
@@ -2168,7 +2172,7 @@ wheels = [
 
 [[package]]
 name = "openinference-instrumentation-beeai"
-version = "0.1.11"
+version = "0.1.13"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beeai-framework" },
@@ -2179,9 +2183,9 @@ dependencies = [
     { name = "opentelemetry-semantic-conventions" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/33/40/5053eec966721ffe9183c049db4af244bb2084ff03b271ce963aed73465c/openinference_instrumentation_beeai-0.1.11.tar.gz", hash = "sha256:01734d468d5d6b56b4010e4190a795670f72a8f047056c45247c71513444c855", size = 11488, upload-time = "2025-09-25T03:23:55.603Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/28/ab3ad77a3c927bd929d882b987e862b37bad459f034a83877169d95d306b/openinference_instrumentation_beeai-0.1.13.tar.gz", hash = "sha256:101efe2872e16cf360a2903b6d16f7f6b11f0c9b0b86878238956b8c92dc4b72", size = 11482, upload-time = "2025-10-10T03:49:13.399Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/45/2f/51032a0f41a0eb9836ded296da06feaf4373c49414eb339fbfd8037a0f12/openinference_instrumentation_beeai-0.1.11-py3-none-any.whl", hash = "sha256:8ae0c1c8f779a621999d0eefe5ed04bf4f46fc8a1cbf71f19dfaf5246140ae9a", size = 20814, upload-time = "2025-09-25T03:23:54.37Z" },
+    { url = "https://files.pythonhosted.org/packages/2b/8e/f271e09bd583290dabfffb2d0cc75f3fc0bab8181644e259edc8bf69acbf/openinference_instrumentation_beeai-0.1.13-py3-none-any.whl", hash = "sha256:c667df19b1ce44be531b25f66bb8b3eb4dfd6ea467c3ef62833234b1c32a588d", size = 20802, upload-time = "2025-10-10T03:48:51.304Z" },
 ]
 
 [[package]]
@@ -3556,15 +3560,15 @@ wheels = [
 
 [[package]]
 name = "uvicorn"
-version = "0.35.0"
+version = "0.37.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
     { name = "h11" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5e/42/e0e305207bb88c6b8d3061399c6a961ffe5fbb7e2aa63c9234df7259e9cd/uvicorn-0.35.0.tar.gz", hash = "sha256:bc662f087f7cf2ce11a1d7fd70b90c9f98ef2e2831556dd078d131b96cc94a01", size = 78473, upload-time = "2025-06-28T16:15:46.058Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/71/57/1616c8274c3442d802621abf5deb230771c7a0fec9414cb6763900eb3868/uvicorn-0.37.0.tar.gz", hash = "sha256:4115c8add6d3fd536c8ee77f0e14a7fd2ebba939fed9b02583a97f80648f9e13", size = 80367, upload-time = "2025-09-23T13:33:47.486Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d2/e2/dc81b1bd1dcfe91735810265e9d26bc8ec5da45b4c0f6237e286819194c3/uvicorn-0.35.0-py3-none-any.whl", hash = "sha256:197535216b25ff9b785e29a0b79199f55222193d47f820816e7da751e9bc8d4a", size = 66406, upload-time = "2025-06-28T16:15:44.816Z" },
+    { url = "https://files.pythonhosted.org/packages/85/cd/584a2ceb5532af99dd09e50919e3615ba99aa127e9850eafe5f31ddfdb9a/uvicorn-0.37.0-py3-none-any.whl", hash = "sha256:913b2b88672343739927ce381ff9e2ad62541f9f8289664fa1d1d3803fa2ce6c", size = 67976, upload-time = "2025-09-23T13:33:45.842Z" },
 ]
 
 [[package]]
