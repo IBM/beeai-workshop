@@ -24,7 +24,7 @@ from beeai_sdk.a2a.extensions import (
 from a2a.types import AgentCapabilities, AgentSkill
 from a2a.utils.message import get_message_text
 from dotenv import load_dotenv
-# from openinference.instrumentation.beeai import BeeAIInstrumentor
+from openinference.instrumentation.beeai import BeeAIInstrumentor
 
 # BeeAI Framework imports
 from beeai_framework.utils.strings import to_json_serializable
@@ -105,7 +105,7 @@ logging.getLogger("opentelemetry.exporter.otlp.proto.http.metric_exporter").setL
 # To run beeai platform with phoenex enabled (review the license and) start it like this:
 #     beeai platform start --set phoenix.enabled=true
 EventMeta.model_fields["context"].exclude = True  # Temp fix?
-# BeeAIInstrumentor().instrument()
+BeeAIInstrumentor().instrument()
 
 
 # Create the A2A Server
