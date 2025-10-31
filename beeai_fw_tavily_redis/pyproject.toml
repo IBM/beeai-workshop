@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
 dependencies = [
-    "beeai-framework==0.1.39",
+    "beeai-framework==0.1.61",
     "langchain-huggingface==0.3.1",
     "langchain-redis==0.2.3",
     "langchain-text-splitters==0.3.9",
