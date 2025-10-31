@@ -84,20 +84,20 @@ async def main():
     # question_for_search = "How many stores are there in Florida?"
     # print("QUESTION: ", question_for_search)
     # response = await company_analysis_agent.run(
-        # question_for_search,
-        # execution=AgentExecutionConfig(max_iterations=8),
-        # expected_output=expected_output,
+    #     question_for_search,
+    #     execution=AgentExecutionConfig(max_iterations=8),
+    #     expected_output=expected_output,
     # )  # .middleware(GlobalTrajectoryMiddleware())
-    # print("ANSWER: ", response.answer.text)
-
+    # print("ANSWER: ", response.output_structured.response)
+    #
     # question_for_docs = "what is our target market for the pilot?"
     # print("QUESTION: ", question_for_docs)
     # response = await company_analysis_agent.run(
-        # question_for_docs,
-        # execution=AgentExecutionConfig(max_retries_per_step=1, total_max_retries=1, max_iterations=4),
-        # expected_output=expected_output,
+    #     question_for_docs,
+    #     execution=AgentExecutionConfig(max_retries_per_step=1, total_max_retries=1, max_iterations=4),
+    #     expected_output=expected_output,
     # )  # middleware(GlobalTrajectoryMiddleware())
-    # print("ANSWER: ", response.answer.text)
+    # print("ANSWER: ", response.output_structured.response)
 
     # =============================================================================
     # INTERACTIVE QUESTION-ANSWER LOOP
@@ -132,7 +132,7 @@ async def main():
             )  # .middleware(GlobalTrajectoryMiddleware())
             
             # Display the answer
-            print(f"\nAnswer: {response.answer.text}\n")
+            print(f"\nAnswer: {response.output_structured.response}\n")
             
         except KeyboardInterrupt:
             print("\nGoodbye!")

@@ -53,7 +53,7 @@ def parse_search_results(text_content: str, query: str) -> Dict[str, Any]:
     title_sections = text_content.split("Title:")
     
     for section in title_sections[1:]:  # Skip first empty section
-        lines = section.strip().split('\n')
+        lines = section.strip().split('\\n')
         title = lines[0].strip() if lines else ""
         
         url = ""
