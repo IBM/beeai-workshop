@@ -111,13 +111,13 @@ Once uv is installed, use `uvx` to run Open WebUI with Python 3.11 (recommend fo
 ### macOS/Linux
 
 ```shell
-DATA_DIR=~/.open-webui uvx --python 3.11 open-webui@latest serve
+DATA_DIR=~/.open-webui uvx --python 3.11.11 open-webui@0.6.36 serve
 ```
 
 ### Windows
 
 ```shell
-$env:DATA_DIR="C:\open-webui\data"; uvx --python 3.11 open-webui@latest serve
+$env:DATA_DIR="C:\open-webui\data"; uvx --python 3.11.11 open-webui@0.6.36 serve
 ```
 
 Once the downloads, install, and start are complete, you will have a fancy Open WebUI "get started" page at localhost:8080.  You can now kill the server with control-C back in the terminal. We'll do the setup during the workshop.
