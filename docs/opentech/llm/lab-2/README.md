@@ -8,7 +8,7 @@ It's time for the fun exploration part your Prompt Engineering (PE) journey. In 
 
 ## Chatting with the Model
 
-Open a *brand-new* Workspace in AnythingLLM (or Open-WebUI) called "Learning Prompt Engineering".
+Open a *brand-new* Workspace in Open-WebUI called "Learning Prompt Engineering".
 
 You can pretty much write whatever you want to, give it a shot. Treat it like a good friend, be polite,
 and guide it to an answer you are looking for.
@@ -36,13 +36,13 @@ And you'll see a list similar to the following:
 ```text
 ollama list
 NAME                         ID              SIZE      MODIFIED           
-granite4:micro               4235724a127c    2.1 GB    23 hours ago 
+granite4:micro-h             ba791654cc27    1.9 GB    23 hours ago
 ```
 
 Next, use Ollama to run one of the models:
 
 ```shell
-ollama run granite4:micro
+ollama run granite4:micro-h
 ```
 
 And ask it questions, like this:
@@ -130,8 +130,3 @@ in Batman's extensive history.
 ## Conclusion
 
 Spend as much time as you want asking your LLM about anything about any topic and exploring how you can alter its output to provide you with more interesting or satisfying responses.
-
-When you are acquainted with your model, move on to [Lab 3](https://ibm.github.io/opensource-ai-workshop/lab-3/) to learn about Prompt Engineering.
-
-<script data-goatcounter="https://tracker.asgharlabs.io/count"
-        async src="//tracker.asgharlabs.io/count.js"></script>

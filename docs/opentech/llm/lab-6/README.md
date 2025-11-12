@@ -22,14 +22,14 @@ Open up [Open-WebUI](http://localhost:8080/), and you should see something like 
 If you see this that means Open-WebUI is installed correctly, and we can continue configuration, if not, please find a workshop TA or
 raise your hand we'll be there to help you ASAP.
 
-Next as a sanity check, run the following command to confirm you have the [granite4:micro](https://ollama.com/library/granite4:micro)
+Next as a sanity check, run the following command to confirm you have the [granite4:micro-h](https://ollama.com/library/granite4:micro-h)
 model downloaded in `ollama`. This may take a bit, but we should have a way to copy it directly on your laptop.
 
-```bash
-ollama pull granite4:micro
+```shell
+ollama pull granite4:micro-h
 ```
 
-If you didn't know, the supported languages with `granite4:micro` now include:
+If you didn't know, the supported languages with `granite4:micro-h` now include:
 
 - English, German, Spanish, French, Japanese, Portuguese, Arabic, Czech, Italian, Korean, Dutch, and Chinese. However, users may fine-tune this Granite model for languages beyond these 12 languages.
 
@@ -45,13 +45,13 @@ And the Capabilities also include:
 - Multilingual dialog use cases
 - Fill-In-the-Middle (FIM) code completions
 
-Next click on the down arrow at the top and select the "granite4:micro" if it's not already selected.
+Next click on the down arrow at the top and select the "granite4:micro-h" if it's not already selected.
 
 ![model selection](../images/openwebui_model_selection.png)
 
 Click on the "New Chat" icon to clear the context. Then, ask the model for:
 
-```shell
+```text
 List all the past and current CEOs of the IBM corporation in order of their term as CEO
 ```
 
@@ -74,7 +74,7 @@ Select the `IBM.txt` file that you just downloaded in your Downloads folder and 
 
 Now ask it our question about the CEOs of IBM:
 
-```shell
+```text
 List all the past and current CEOs of the IBM corporation in order of their term as CEO
 ```
 
@@ -95,13 +95,10 @@ Then use this History_of_IBM.pdf as a RAG by clicking on the + and select "Histo
 
 Next, use the Open-WebUI to ask more questions about IBM, or have it summarize the document itself.  For example:
 
-```shell
+```text
 Write a short 150 word summary of the History_of_IBM.pdf
 ```
 
 ![Summary of IBM History](../images/History_of_IBM_summary.png)
 
 Congratulations, you've completed the Open-WebUI RAG example.
-
-<script data-goatcounter="https://tracker.asgharlabs.io/count"
-        async src="//tracker.asgharlabs.io/count.js"></script>
