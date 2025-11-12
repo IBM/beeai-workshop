@@ -12,11 +12,11 @@ Open up AnythingLLM, and you should see something like the following:
 If you see this that means AnythingLLM is installed correctly, and we can continue configuration. If not, please find a workshop TA or
 raise your hand we'll be there to help you ASAP.
 
-Next as a sanity check, run the following command to confirm you have the [granite4:micro](https://ollama.com/library/granite4)
+Next as a sanity check, run the following command to confirm you have the [granite4:micro-h](https://ollama.com/library/granite4)
 model downloaded in `ollama`. This may take a bit, but we should have a way to copy it directly on your laptop.
 
 ```bash
-ollama pull granite4:micro
+ollama pull granite4:micro-h
 ```
 
 If you didn't know, the supported languages with `granite4` now include:
@@ -42,7 +42,7 @@ but you may want to change it in the future.
 
 ![wrench icon](../images/anythingllm_wrench_icon.png)
 
-Click on the "LLM" section, and select **Ollama** as the LLM Provider. Also select the `granite4:micro` model. (You should be able to
+Click on the "LLM" section, and select **Ollama** as the LLM Provider. Also select the `granite4:micro-h` model. (You should be able to
 see all the models you have access to through `ollama` there.)
 
 ![llm configuration](../images/anythingllm_llm_config.png)
@@ -64,7 +64,7 @@ it knows _something_.
 Now you may notice that the answer is slightly different than the screen shot above. That's expected and nothing to worry about. If
 you have more questions about it raise your hand and one of the helpers would love to talk you about it.
 
-Congratulations! You have AnythingLLM running now, configured to work with `granite4:micro` and `ollama`!
+Congratulations! You have AnythingLLM running now, configured to work with `granite4:micro-h` and `ollama`!
 
 ## Creating your own local RAG
 

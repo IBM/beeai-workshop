@@ -107,7 +107,4 @@ So much better! By providing more context and more insight into what you are exp
 
 ## Conclusion
 
-Now that you know the basics of prompt engineering and simple techniques you can use to level-up your prompts, let's move on to [Lab 4](https://ibm.github.io/opensource-ai-workshop/lab-4/) and apply what you've learned with some exercises.
-
-<script data-goatcounter="https://tracker.asgharlabs.io/count"
-        async src="//tracker.asgharlabs.io/count.js"></script>
+Now you know the basics of prompt engineering and simple techniques you can use to level-up your prompts.
