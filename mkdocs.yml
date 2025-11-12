@@ -22,6 +22,23 @@ nav:
       - Create Tools: beeai_fw__tavily_redis/tools/README.md
       - Build the Agent: beeai_fw__tavily_redis/agent/README.md
       - Clean up: beeai_fw__tavily_redis/cleanup/README.md
+    - Coming Soon...:
+      - Building Production-Ready AI Agents in the Open Source Ecosystem:
+        - Overview: opentech/overview/README.md
+        - Prework: opentech/prework/README.md
+        - Document Processing Labs:
+          - Overview: opentech/docling/overview/README.md
+          - Setup: opentech/docling/setup/README.md
+        - Open Source AI Labs:
+          - Overview: opentech/llm/overview/README.md
+          - Setup: opentech/llm/setup/README.md
+          - Lab 2: opentech/llm/lab-2/README.md
+          - Lab 3: opentech/llm/lab-3/README.md
+          - Lab 4: opentech/llm/lab-4/README.md
+          - Lab 5: opentech/llm/lab-5/README.md
+        - Agentic AI Labs:
+          - BeeAI Framework: opentech/beeaiframework/README.md
+          - Agent Stack: opentech/agentstack/README.md
   - Demos:
     - Introduction to BeeAI Platform:
       - Overview: introduction_beeai_platform/overview/README.md
