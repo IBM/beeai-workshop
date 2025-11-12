@@ -55,34 +55,24 @@ and brittle prompts with structured, maintainable, robust, and efficient AI work
 
 ## Let's setup Mellea to work locally
 
-Open up a terminal, and run the following commands:
+Open up a terminal and run the following uv command from the `beeai-workshop/opentech` directory of your cloned repo.
 
-```shell
-python3.11 -m venv venv
-source venv/bin/activate
-pip install mellea
-```
-
-!!! note
-    If you see something about the Rust compiler, please confirm you are using python3.11, or python3.12 anything above that has a Rust dependency.
-
-1. Start python:
+1. Start an interactive Python session:
 
     ```shell
-    python
+    uv run --directory mellea python
     ```
 
 1. Run a simple Mellea session:
 
+    Run the example code in your Python session.
+
     ```python
     import mellea
 
-    m = mellea.start_session()
+    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
     print(m.chat("tell me some fun trivia about IBM and the early history of AI.").content)
     ```
-
-    You can either add this to a file like `main.py` or run it in the python REPL, if you get output
-    you are set up to dig deeper with Mellea.
 
 ## Simple email examples
 
@@ -93,7 +83,7 @@ pip install mellea
 
     ```python
     import mellea
-    m = mellea.start_session()
+    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
 
     email = m.instruct("Write an email inviting interns to an office party at 3:30pm.")
     print(str(email))
@@ -103,7 +93,7 @@ pip install mellea
 
     ```python
     import mellea
-    m = mellea.start_session()
+    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
 
     def write_email(m: mellea.MelleaSession, name: str, notes: str) -> str:
         email = m.instruct(
@@ -133,7 +123,7 @@ pip install mellea
 
     ```python
     import mellea
-    m = mellea.start_session()
+    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
 
     def write_email_with_requirements(
         m: mellea.MelleaSession, name: str, notes: str
