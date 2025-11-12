@@ -55,7 +55,7 @@ and brittle prompts with structured, maintainable, robust, and efficient AI work
 
 ## Let's setup Mellea to work locally
 
-Open up a terminal and run the following uv command from the beeai-workshop/opentech directory of your cloned repo.
+Open up a terminal and run the following uv command from the `beeai-workshop/opentech` directory of your cloned repo.
 
 1. Start an interactive Python session:
 
