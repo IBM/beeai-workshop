@@ -26,7 +26,7 @@ To run models locally on your machine:
     Please pull the models before the workshop!
 
     ```shell
-    ollama pull ibm/granite4:micro
+    ollama pull ibm/granite4:micro-h
     ollama pull ibm/granite-embedding:30m
     ollama pull ibm/granite-docling
     ```
