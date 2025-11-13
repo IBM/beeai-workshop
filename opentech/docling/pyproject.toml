@@ -1,0 +1,16 @@
+[project]
+name = "beeai_workshops_opentech_docling"
+version = "0.1.0"
+description = "BeeAI OpenTech workshop - Docling"
+readme = "README.md"
+requires-python = ">=3.11, <3.12"
+dependencies = [
+    "docling[vlm]",
+    "ipykernel",
+    "ipywidgets",
+    "jupyter",
+    "matplotlib",
+    "pandas",
+    "pillow",
+    "python-dotenv",
+]
