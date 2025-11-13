@@ -61,6 +61,8 @@ Mellea's
 mify
 Milvus
 Moderna
+multimodal
+Multimodal
 ollama
 Ollama
 OPENAI
@@ -118,5 +120,6 @@ verifiers
 virtualenv
 workspaces
 WSL
+Vectorization
 venv
 Zhao
