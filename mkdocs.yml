@@ -39,7 +39,7 @@ nav:
           - Lab 5: opentech/llm/lab-5/README.md
           - Lab 7: opentech/llm/lab-7/README.md
         - Agentic AI Labs:
-          - BeeAI Framework: opentech/beeaiframework/README.md
+          - BeeAI Framework: opentech/beeaiframework/overview/README.md
           - Agent Stack: opentech/agentstack/README.md
   - Demos:
     - Introduction to BeeAI Platform:
