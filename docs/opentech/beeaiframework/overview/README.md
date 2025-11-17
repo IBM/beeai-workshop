@@ -6,7 +6,7 @@ logo: images/BeeAI-Logo-White.png
 
 # Workshop Overview: Introduction to the BeeAI Framework
 
-In this workshop, you'll master the fundamental components of the **BeeAI Framework** by building a Conference Prep Agent that helps field marketing teams prepare for conference season. Through hands-on exercises in `Google Colab`, you'll learn how to create intelligent agents with real-world applications.
+In this workshop, you'll master the fundamental components of the **BeeAI Framework** by building a Conference Prep Agent that helps field marketing teams prepare for conference season. Through hands-on exercises, you'll learn how to create intelligent agents with real-world applications.
 
 <hr>
 

@@ -128,4 +128,18 @@ Once the downloads, install, and start are complete, you will have a fancy Open 
 
 Ideally, everyone will get hands-on experience wrapping all the pieces together with Agent Stack. If you cannot run Agent Stack on your laptop, come to the workshop anyway!  We will demonstrate.
 
-- Agent Stack quickstart: [https://agentstack.beeai.dev/introduction/quickstart](https://agentstack.beeai.dev/introduction/quickstart)
+Follow the Agent Stack quickstart instructions. When prompted to configure your LLM provider, use the Ollama models we downloaded earlier.
+
+- Agent Stack quickstart: [https://agentstack.beeai.dev/introduction/quickstart](https://agentstack.beeai.dev/introduction/quickstart#installation)
+
+    - Select llm provider: `Ollama (local)`
+    - Type `n` when prompted to use the recommended default model
+    - Select: `ollama:granite4:micro-h`
+    - Type `n` when prompted to use the recommended embedding model
+    - Select: `ollama:ibm/granite-embedding:30m`
+
+- Restart Agent Stack with Docling and Phoenix enabled:
+
+    ```shell
+    agentstack platform start --set docling.enabled=true --set phoenix.enabled=true
+    ```
