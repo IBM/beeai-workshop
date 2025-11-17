@@ -29,18 +29,27 @@ nav:
         - Document Processing Labs:
           - Overview: opentech/docling/overview/README.md
           - Setup: opentech/docling/setup/README.md
+          - Lab 1: opentech/docling/lab-1/README.md
+          - Lab 2: opentech/docling/lab-2/README.md
+          - Lab 3: opentech/docling/lab-3/README.md
         - Open Source AI Labs:
           - Overview: opentech/llm/overview/README.md
           - Setup: opentech/llm/setup/README.md
-          - Lab 1: opentech/llm/lab-1.5/README.md
+          - Lab 1: opentech/llm/lab-1/README.md
           - Lab 2: opentech/llm/lab-2/README.md
           - Lab 3: opentech/llm/lab-3/README.md
           - Lab 4: opentech/llm/lab-4/README.md
           - Lab 5: opentech/llm/lab-5/README.md
           - Lab 7: opentech/llm/lab-7/README.md
         - Agentic AI Labs:
-          - BeeAI Framework: opentech/beeaiframework/overview/README.md
-          - Agent Stack: opentech/agentstack/README.md
+          - BeeAI Framework:
+            - Overview: opentech/beeaiframework/overview/README.md
+            - Lab: opentech/beeaiframework/lab-1/README.md
+          - Agent Stack:
+            - Overview: opentech/agentstack/overview/README.md
+            - Prework: opentech/agentstack/pre-work/README.md
+            - Setup: opentech/agentstack/setup/README.md
+            - Lab: opentech/agentstack/run/README.md
   - Demos:
     - Introduction to BeeAI Platform:
       - Overview: introduction_beeai_platform/overview/README.md

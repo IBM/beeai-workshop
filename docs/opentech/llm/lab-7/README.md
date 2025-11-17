@@ -70,7 +70,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
     ```python
     import mellea
 
-    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
     print(m.chat("tell me some fun trivia about IBM and the early history of AI.").content)
     ```
 
@@ -83,7 +83,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
 
     ```python
     import mellea
-    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
 
     email = m.instruct("Write an email inviting interns to an office party at 3:30pm.")
     print(str(email))
@@ -93,7 +93,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
 
     ```python
     import mellea
-    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
 
     def write_email(m: mellea.MelleaSession, name: str, notes: str) -> str:
         email = m.instruct(
@@ -123,7 +123,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
 
     ```python
     import mellea
-    m = mellea.start_session(backend_name="ollama", model_id="granite4:micro-h")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
 
     def write_email_with_requirements(
         m: mellea.MelleaSession, name: str, notes: str
@@ -165,6 +165,40 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
 ## Instruct Validate Repair
 
 The first `instruct-validate-repair` pattern is as follows:
+    ```python
+    import mellea
+    from mellea.stdlib.requirement import req, check, simple_validate
+    from mellea.stdlib.sampling import RejectionSamplingStrategy
+    
+    def write_email(m: mellea.MelleaSession, name: str, notes: str) -> str:
+        email_candidate = m.instruct(
+            f"Write an email to {name} using the notes following: {notes}.",
+            requirements=[
+                req("The email should have a salutation"),  # == r1
+                req(
+                    "Use only lower-case letters",
+                    validation_fn=simple_validate(lambda x: x.lower() == x),
+                ),  # == r2
+                check("Do not mention purple elephants."),  # == r3
+            ],
+            strategy=RejectionSamplingStrategy(loop_budget=5),
+            user_variables={"name": name, "notes": notes},
+            return_sampling_results=True,
+        )
+        if email_candidate.success:
+            return str(email_candidate.result)
+        else:
+            return email_candidate.sample_generations[0].value
+            
+    m = mellea.start_session()
+    print(
+        write_email(
+            m,
+            "Olivia",
+            "Olivia helped the lab over the last few weeks by organizing intern events, advertising the speaker series, and handling issues with snack delivery.",
+        )
+    )
+    ```
 
 Most of this should look familiar by now, but the `validation_fn` and `check` should be new.
 

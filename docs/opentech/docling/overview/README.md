@@ -18,7 +18,7 @@ By the end of this workshop, you will be able to use Docling to:
 
 |                                                                      |                                                       |
 |:---------------------------------------------------------------------|:------------------------------------------------------|
-| [Lab 0: Prework](../prework/README.md)                               | Review the prework for the workshop                   |
+| [Prework](../prework/README.md)                                      | Review the prework for the workshop                   |
 | [Lab 1: Document Conversion with Docling](../lab-1/README.md)        | Learn how to use Docling to convert complex documents |
 | [Lab 2: Chunking and Vectorization with Docling](../lab-2/README.md) | Learn how Docling enables advanced chunking           |
 | [Lab 3: Multimodal RAG with Docling](../lab-3/README.md)             | Build a verifiable multimodal RAG system              |
