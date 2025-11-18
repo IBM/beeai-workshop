@@ -35,7 +35,7 @@ nav:
         - Open Source AI Labs:
           - Overview: opentech/llm/overview/README.md
           - Setup: opentech/llm/setup/README.md
-          - Lab 1: opentech/llm/lab-1.5/README.md
+          - Lab 1: opentech/llm/lab-1/README.md
           - Lab 2: opentech/llm/lab-2/README.md
           - Lab 3: opentech/llm/lab-3/README.md
           - Lab 4: opentech/llm/lab-4/README.md
