@@ -190,7 +190,7 @@ The first `instruct-validate-repair` pattern is as follows:
         else:
             return email_candidate.sample_generations[0].value
             
-    m = mellea.start_session()
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
     print(
         write_email(
             m,
