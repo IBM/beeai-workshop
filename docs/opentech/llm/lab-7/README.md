@@ -169,7 +169,7 @@ The first `instruct-validate-repair` pattern is as follows:
     import mellea
     from mellea.stdlib.requirement import req, check, simple_validate
     from mellea.stdlib.sampling import RejectionSamplingStrategy
-    
+
     def write_email(m: mellea.MelleaSession, name: str, notes: str) -> str:
         email_candidate = m.instruct(
             f"Write an email to {name} using the notes following: {notes}.",
