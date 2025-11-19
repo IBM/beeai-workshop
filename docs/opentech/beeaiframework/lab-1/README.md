@@ -17,13 +17,13 @@ Launch Jupyter Lab by running the following commands from the `opentech` directo
 1. Create `beekernel` which will have the dependencies preinstalled in your virtual environment.
 
     ```shell
-    uv run --directory docling ipython kernel install --user --env VIRTUAL_ENV .venv --name=beekernel
+    uv run --directory beeaiframework ipython kernel install --user --env VIRTUAL_ENV .venv --name=beekernel
     ```
 
 2. Use `uv` to run Jupyter Lab. The directory and allow_hidden gives us access to `.venv` modules.
 
     ```shell
-    uv run --directory docling jupyter lab --ContentsManager.allow_hidden=True
+    uv run --directory beeaiframework jupyter lab --ContentsManager.allow_hidden=True
     ```
 
 3. In Jupyter Lab in your browser, walk through the notebook:
