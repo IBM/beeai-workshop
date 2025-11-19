@@ -46,6 +46,7 @@ nav:
         - Agentic AI Labs:
           - BeeAI Framework:
             - Overview: opentech/beeaiframework/overview/README.md
+            - Prework: opentech/beeaiframework/prework/README.md
             - Lab: opentech/beeaiframework/lab-1/README.md
           - Agent Stack:
             - Overview: opentech/agentstack/overview/README.md

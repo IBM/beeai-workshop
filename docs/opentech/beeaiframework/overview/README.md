@@ -1,12 +1,12 @@
 ---
-title: Overview
-description: Workshop Goals and Learning Objectives
+title: BeeAI Framework Workshop Overview
+description: Overview
 logo: images/BeeAI-Logo-White.png
 ---
 
-# Workshop Overview: Introduction to the BeeAI Framework
+# Introduction to the BeeAI Framework
 
-In this workshop, you'll master the fundamental components of the **BeeAI Framework** by building a Conference Prep Agent that helps field marketing teams prepare for conference season. Through hands-on exercises, you'll learn how to create intelligent agents with real-world applications.
+In this workshop, you'll master the fundamental components of the **BeeAI Framework** by building a Conference Prep Agent that helps field marketing teams prepare for conference season. Through hands-on exercises in `Jupyter Lab`, you'll learn how to create intelligent agents with real-world applications.
 
 <hr>
 
@@ -45,15 +45,9 @@ Through interactive coding exercises, you'll gain hands-on experience with:
 
 This workshop is designed for immediate hands-on learning through interactive exercises:
 
-1. **Quick Setup**
-    - Google Account – Required for accessing Google Colab
-    - Workshop Notebook – Open the notebook <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/IBM/beeai-workshop/blob/main/intro_beeai_framework/beeai_framework_workshop_conference_agent.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-    - Personal Copy – If you'd like to save your changes, please copy this notebook and create your own version
-
-2. **Interactive Exercises**
-    - Build your Conference Prep Agent step-by-step
-    - Complete fill-in-the-blank coding challenges
-    - Test your agent with real conference scenarios
+- Build your Conference Prep Agent step-by-step
+- Complete fill-in-the-blank coding challenges
+- Test your agent with real conference scenarios
 
 <hr>
 
