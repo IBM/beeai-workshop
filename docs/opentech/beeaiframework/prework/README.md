@@ -1,10 +1,10 @@
 ---
-title: Docling Workshop Prework
-description: Preparation for the Docling Workshop
-logo: images/DoclingDuck.png
+title: BeeAI Framework Workshop Prework
+description: Preparation for the lab
+logo: images/BeeAI-Logo-White.png
 ---
 
-These are the required applications and general installation notes for these labs.
+These are the required applications and general installation notes for this lab.
 
 ## Required Software and Models
 
@@ -21,7 +21,15 @@ Most users can simply download from the Ollama [website](https://ollama.com/down
 Please pull the models to be used in the workshop before arriving at the workshop!
 
 ```shell
-ollama pull ibm/granite-docling
+ollama pull granite4:micro-h
+```
+
+## Chat with the model
+
+For a quick test, you can use the ollama CLI to ask the model a question.
+
+```shell
+ollama run granite4:micro-h "what model am I chatting with and and who created you?"  
 ```
 
 ## Install `uv`
@@ -53,5 +61,5 @@ Preinstall all the packages used in the demo, installed in the correct virtual e
 2. Install all required python dependencies for the project:
 
     ```bash
-    uv sync --directory docling
+    uv sync --directory beeaiframework
     ```
