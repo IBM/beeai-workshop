@@ -39,7 +39,7 @@ If you see something similar, Open-WebUI is installed correctly! Continue on, if
 
 Click *Getting Started*. Fill out the next screen and click the *Create Admin Account*. This will be your login for your local machine. Remember that this because it will be your Open-WebUI configuration login information if want to dig deeper into it after this workshop.
 
-You should see the Open-WebUI main page now, with `granite4:micro-h` right there in the center!
+You should see the Open-WebUI main page now, with `ibm/granite4:micro-h` right there in the center!
 
 ![main screen](../images/openwebui_main_screen.png)
 

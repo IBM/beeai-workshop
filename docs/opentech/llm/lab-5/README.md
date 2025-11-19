@@ -22,14 +22,14 @@ Open up [Open-WebUI](http://localhost:8080/), and you should see something like 
 If you see this that means Open-WebUI is installed correctly, and we can continue configuration, if not, please find a workshop TA or
 raise your hand we'll be there to help you ASAP.
 
-Next as a sanity check, run the following command to confirm you have the [granite4:micro-h](https://ollama.com/library/granite4:micro-h)
+Next as a sanity check, run the following command to confirm you have the [ibm/granite4:micro-h](https://ollama.com/ibm/granite4:micro-h)
 model downloaded in `ollama`. This may take a bit, but we should have a way to copy it directly on your laptop.
 
 ```shell
-ollama pull granite4:micro-h
+ollama pull ibm/granite4:micro-h
 ```
 
-If you didn't know, the supported languages with `granite4:micro-h` now include:
+If you didn't know, the supported languages with `ibm/granite4:micro-h` now include:
 
 - English, German, Spanish, French, Japanese, Portuguese, Arabic, Czech, Italian, Korean, Dutch, and Chinese. However, users may fine-tune this Granite model for languages beyond these 12 languages.
 
@@ -45,7 +45,7 @@ And the Capabilities also include:
 - Multilingual dialog use cases
 - Fill-In-the-Middle (FIM) code completions
 
-Next click on the down arrow at the top and select the "granite4:micro-h" if it's not already selected.
+Next click on the down arrow at the top and select the "ibm/granite4:micro-h" if it's not already selected.
 
 ![model selection](../images/openwebui_model_selection.png)
 

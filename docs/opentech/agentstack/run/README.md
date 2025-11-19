@@ -62,7 +62,7 @@ agentstack ui
 ```
 
 You should be prompted to select a model provider and model if you did not already set these.
-For this lab, use Ollama and granite4:micro-h. for the language model.
+For this lab, use Ollama and `ibm/granite4:micro-h` for the language model.
 
 You should see the UI launch in your browser.
 

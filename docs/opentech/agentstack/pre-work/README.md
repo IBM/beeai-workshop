@@ -35,13 +35,13 @@ To run models locally on your machine:
 2. Run or pull the Granite model:
 
    ```bash
-   ollama pull granite4:micro-h
+   ollama pull ibm/granite4:micro-h
    ```
 
    or
 
    ```bash
-   ollama run granite4:micro-h
+   ollama run ibm/granite4:micro-h
    ```
 
 ### Granite model links
