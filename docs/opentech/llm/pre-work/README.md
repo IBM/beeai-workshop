@@ -65,4 +65,4 @@ DATA_DIR=~/.open-webui uvx --python 3.11 open-webui@latest serve
 $env:DATA_DIR="C:\open-webui\data"; uvx --python 3.11 open-webui@latest serve
 ```
 
-Once the downloads, install, and start are complete, you will have a fancy Open WebUI "get started" page at localhost:8080.  You can now kill the server with Control-C back in the terminal. We'll do the setup during the workshop.
+Once the downloads, install, and start are complete, you will have a fancy Open WebUI "get started" page at [http://localhost:8080/](http://localhost:8080/).  You can now kill the server with Control-C back in the terminal. We'll do the setup during the workshop.

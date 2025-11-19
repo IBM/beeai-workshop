@@ -11,6 +11,7 @@ These are the required applications and general installation notes for this work
 - [uv](#install-uv) - Provides Python, packages, and virtual environments.
 - [Ollama](#install-ollama) - Allows you to locally host LLM models on your computer.
 - [Models](#pull-models-with-ollama) - Pull models to run with Ollama.
+- [Workshop Code](#get-the-workshop-code) - Git clone the workshop
 
 ## Install `uv`
 
@@ -46,4 +47,22 @@ For a quick test, you can use the ollama CLI to ask the model a question.
 
 ```shell
 ollama run ibm/granite4:micro-h "what model am I chatting with and and who created you?"  
+```
+
+## Get the workshop code
+
+**Option A: Clone with Git (recommended):**
+
+```bash
+git clone https://github.com/IBM/beeai-workshop.git
+```
+
+**Option B: Download ZIP:**
+
+If you're not comfortable with Git, [download the ZIP](https://github.com/IBM/beeai-workshop/archive/refs/heads/main.zip) file and extract it to your desired location.
+
+Then:
+
+```bash
+cd beeai-workshop/opentech
 ```

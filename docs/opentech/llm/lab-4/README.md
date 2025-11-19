@@ -183,10 +183,9 @@ hire me for a role with both my current skill set
 and previous experience.
 ```
 
-![](../images/anythingllm_resume.png)
-
-The response I received has room for improvement, but gives me something to work with!
+The response I received below has room for improvement, but gives me something to work with!
 </details>
+![resume](../images/anythingllm_resume.png)
 
 Try to build and modify this blurb using the principles of prompt engineering you learned until you're happy with the quality of the response you receive. Think outside of the box!
 

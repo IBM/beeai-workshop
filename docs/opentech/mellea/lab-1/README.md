@@ -70,7 +70,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
     ```python
     import mellea
 
-    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro-h")
     print(m.chat("tell me some fun trivia about IBM and the early history of AI.").content)
     ```
 
@@ -83,7 +83,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
 
     ```python
     import mellea
-    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro-h")
 
     email = m.instruct("Write an email inviting interns to an office party at 3:30pm.")
     print(str(email))
@@ -93,7 +93,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
 
     ```python
     import mellea
-    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro-h")
 
     def write_email(m: mellea.MelleaSession, name: str, notes: str) -> str:
         email = m.instruct(
@@ -123,7 +123,7 @@ Open up a terminal and run the following uv command from the `beeai-workshop/ope
 
     ```python
     import mellea
-    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro-h")
 
     def write_email_with_requirements(
         m: mellea.MelleaSession, name: str, notes: str
@@ -190,7 +190,7 @@ The first `instruct-validate-repair` pattern is as follows:
         else:
             return email_candidate.sample_generations[0].value
             
-    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro")
+    m = mellea.start_session(backend_name="ollama", model_id="ibm/granite4:micro-h")
     print(
         write_email(
             m,
