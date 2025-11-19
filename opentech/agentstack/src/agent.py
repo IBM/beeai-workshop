@@ -15,7 +15,7 @@ import sys
 from typing import Annotated
 
 # Third party
-from beeai_sdk.a2a.extensions import (
+from agentstack_sdk.a2a.extensions import (
     AgentDetailContributor,
     AgentDetailTool,
     CitationExtensionServer,
@@ -46,19 +46,19 @@ from beeai_framework.tools.search.wikipedia import WikipediaTool, WikipediaToolI
 from beeai_framework.tools.think import ThinkTool
 
 # BeeAI SDK imports
-from beeai_sdk.a2a.extensions import TrajectoryExtensionServer, TrajectoryExtensionSpec
-from beeai_sdk.a2a.extensions import Citation
-from beeai_sdk.a2a.types import AgentMessage
+from agentstack_sdk.a2a.extensions import TrajectoryExtensionServer, TrajectoryExtensionSpec
+from agentstack_sdk.a2a.extensions import Citation
+from agentstack_sdk.a2a.types import AgentMessage
 
 from a2a.types import (
     Message,
 )
 
-from beeai_sdk.server import Server
-from beeai_sdk.server.context import RunContext
+from agentstack_sdk.server import Server
+from agentstack_sdk.server.context import RunContext
 
-import beeai_sdk.a2a.extensions
-from beeai_sdk.a2a.extensions.ui.form import (
+import agentstack_sdk.a2a.extensions
+from agentstack_sdk.a2a.extensions.ui.form import (
     DateField,
     TextField,
     FileField,
@@ -83,8 +83,8 @@ load_dotenv()
 # Change the `PROVIDER_ID` and `MODEL_ID` in your .env file. If you select a provider that requires an API key, please replace the placeholder with your `api_key`.
 # Try several models to see how your agent performs. Note that you may need to modify the system prompt for each model, as they all have their own system prompt best practice.
 
-PROVIDER_ID = os.getenv("PROVIDER_ID")
-MODEL_ID = os.getenv("MODEL_ID")
+PROVIDER_ID = os.getenv("PROVIDER_ID", "ollama")
+MODEL_ID = os.getenv("MODEL_ID", "granite4:micro-h")
 MODEL_NAME = ":".join([PROVIDER_ID, MODEL_ID]) if PROVIDER_ID and MODEL_ID else None
 
 # Load the chat model
@@ -265,8 +265,8 @@ def extract_citations(output) -> list[Citation]:
 # This is the part we've been working towards! Let's assemble the agent with all the parts we created.
 
 # Add the server decorator with the agent detail + capabilities as required by A2A
-agent_detail_extension_spec = beeai_sdk.a2a.extensions.AgentDetailExtensionSpec(
-    params=beeai_sdk.a2a.extensions.AgentDetail(
+agent_detail_extension_spec = agentstack_sdk.a2a.extensions.AgentDetailExtensionSpec(
+    params=agentstack_sdk.a2a.extensions.AgentDetail(
         interaction_mode="multi-turn",
         tools=[
             AgentDetailTool(
@@ -457,7 +457,8 @@ async def cli_agent(question: str):
                          trajectory=TrajectoryExtensionServer(TrajectoryExtensionSpec()),
                          citation=CitationExtensionServer(CitationExtensionSpec()),
                          form=FormExtensionServer(form_extension_spec)):
-        print("AGENT RESPONSE: ", x)
+        if isinstance(x, AgentMessage):
+            print("AGENT RESPONSE: ", x.text)
 
 
 def serve():
