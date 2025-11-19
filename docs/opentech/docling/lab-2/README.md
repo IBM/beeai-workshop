@@ -12,22 +12,29 @@ In this lab we will explore the importance of chunking and the capabilities Docl
 
 ## Prerequisites
 
-This lab is a [Jupyter notebook](https://jupyter.org/). Please follow the instructions in [prework](../prework/README.md) to run the lab.
+This lab is a [Jupyter notebook](https://jupyter.org/). Please follow the instructions in [prework](../prework/README.md) for the prerequisites to run the lab.
 
 ## Lab
 
-The path of the notebooks directory is relative to the `opentech/docling` folder from the git clone in the [prework](../prework/README.md).
+Launch Jupyter Lab by running the following commands from the `opentech` directory of your `beeai-workshop` cloned repo.
 
-1. (SKIP IF STILL RUNNING FROM LAB 1) Run the following commands to create `doclingkernel` which has the dependencies from our `pyproject.toml` venv and launch Jupyter Lab.
+1. Create `doclingkernel` which will have the dependencies preinstalled in our virtual environment.
 
     ```shell
     uv run --directory docling ipython kernel install --user --env VIRTUAL_ENV .venv --name=doclingkernel
-    uv run --directory docling jupyter lab
     ```
 
-1. In Jupyter Lab in your browser, walk through the notebook:
+2. Use `uv` to run Jupyter Lab. The directory and allow_hidden gives us access to `.venv` modules.
+
+    ```shell
+    uv run --directory docling jupyter lab --ContentsManager.allow_hidden=True
+    ```
+
+3. In Jupyter Lab in your browser, walk through the notebook:
 
     1. Navigate to the `notebooks` folder
     1. Open `Chunking.ipynb`
     1. Use the play button to walk through the notebook
     1. Be sure to read the text, the code, and the output
+    1. Exit your browser tab
+    1. Exit your Jupyter Lab server by entering CTRL-C, CTRL-C in your the terminal where it is running
