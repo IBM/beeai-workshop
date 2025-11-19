@@ -36,7 +36,7 @@ To run models locally on your machine:
     Test by chatting with a model (e.g., ask what model it is):
 
     ```shell
-    ollama run granite4:micro "what model are you and who created you?"
+    ollama run granite4:micro-h "what model are you and who created you?"
     ```
 
     !!! note
@@ -66,8 +66,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ```shell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
-
----
 
 ## Get the workshop code
 
