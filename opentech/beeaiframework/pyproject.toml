@@ -16,7 +16,7 @@ dependencies = [
     "opentelemetry-api==1.37.0",
     "opentelemetry-sdk==1.37.0",
     "openinference-instrumentation-beeai==0.1.13",
-    "beeai-framework[duckduckgo,llama_index,wikipedia]==0.1.59",
+    "beeai-framework[duckduckgo,llama_index,wikipedia]==0.1.67",
     "langchain",
     "langchain-community==0.3.27",
     "python-dotenv~=1.1.1",
