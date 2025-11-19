@@ -33,16 +33,16 @@ ollama list
 
 And you'll see a list similar to the following:
 
-```text
-ollama list
+```console
+$ ollama list
 NAME                         ID              SIZE      MODIFIED           
-granite4:micro-h             ba791654cc27    1.9 GB    23 hours ago
+ibm/granite4:micro-h         076afb3855dc    1.9 GB    About a minute ago
 ```
 
 Next, use Ollama to run one of the models:
 
 ```shell
-ollama run granite4:micro-h
+ollama run ibm/granite4:micro-h
 ```
 
 And ask it questions, like this:

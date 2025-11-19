@@ -21,7 +21,7 @@ Most users can simply download from the Ollama [website](https://ollama.com/down
 Please pull the models to be used in the workshop before arriving at the workshop!
 
 ```shell
-ollama pull granite4:micro-h
+ollama pull ibm/granite4:micro-h
 ```
 
 ## Chat with the model
@@ -29,7 +29,7 @@ ollama pull granite4:micro-h
 For a quick test, you can use the ollama CLI to ask the model a question.
 
 ```shell
-ollama run granite4:micro-h "what model am I chatting with and and who created you?"  
+ollama run ibm/granite4:micro-h "what model am I chatting with and and who created you?"  
 ```
 
 ## Install `uv`

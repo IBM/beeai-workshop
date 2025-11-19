@@ -84,7 +84,7 @@ load_dotenv()
 # Try several models to see how your agent performs. Note that you may need to modify the system prompt for each model, as they all have their own system prompt best practice.
 
 PROVIDER_ID = os.getenv("PROVIDER_ID", "ollama")
-MODEL_ID = os.getenv("MODEL_ID", "granite4:micro-h")
+MODEL_ID = os.getenv("MODEL_ID", "ibm/granite4:micro-h")
 MODEL_NAME = ":".join([PROVIDER_ID, MODEL_ID]) if PROVIDER_ID and MODEL_ID else None
 
 # Load the chat model
