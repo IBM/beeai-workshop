@@ -40,7 +40,10 @@ nav:
           - Lab 3: opentech/llm/lab-3/README.md
           - Lab 4: opentech/llm/lab-4/README.md
           - Lab 5: opentech/llm/lab-5/README.md
-          - Lab 7: opentech/llm/lab-7/README.md
+        - Generative Computing:
+          - Overview: opentech/mellea/overview/README.md
+          - Prework: opentech/mellea/pre-work/README.md
+          - Lab 1: opentech/mellea/lab-1/README.md
         - Agentic AI Labs:
           - BeeAI Framework:
             - Overview: opentech/beeaiframework/overview/README.md
