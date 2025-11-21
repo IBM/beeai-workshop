@@ -74,7 +74,7 @@ You should see the UI launch in your browser.
 In your terminal, run the agent:
 
 ```shell
-uv run src/agent.py --directory agentstack
+uv --directory agentstack run src/agent.py
 ```
 
 !!! insight
