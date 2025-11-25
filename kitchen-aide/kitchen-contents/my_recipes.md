@@ -7,6 +7,7 @@
 **Tags:** Italian, Dinner, Quick
 
 ### Ingredients
+
 - 12 oz frozen ravioli
 - 1 lb Italian sausage, sliced
 - 2 cups spinach
@@ -14,34 +15,40 @@
 - Salt & pepper, to taste
 
 ### Instructions
+
 1. Brown the sausage in a skillet.
 2. Add ravioli and a splash of water; cover until cooked.
 3. Stir in spinach and cream until combined.
 4. Season and serve warm.
 
-
 ## Neapolitan Margherita Pizza
 
-**Servings:** 2 (two 10–12\" pies)
-**Total Time: 9 hours
-**Tags:** Italian, Pizza", Neapolitan, DInner
+**Servings:** 2 (two 10–12" pies)  
+**Total Time:** 9 hours  
+**Tags:** Italian, Pizza, Neapolitan, Dinner
 
 ### Ingredients
 
 #### Dough
+
 - 300 g Tipo 00 flour (Caputo preferred)
 - 195 g water (65% hydration)
 - 6 g salt
 - 0.2–1 g fresh yeast (or 1/8 tsp active dry yeast)
+
 #### Sauce
+
 - 200 g canned San Marzano tomatoes (crushed by hand)
 - Pinch of salt
+
 #### Toppings
+
 - 150 g fresh mozzarella (fior di latte or bufala), torn into pieces
 - Fresh basil leaves
 - Extra virgin olive oil
 
 ### Instructions
+
 1. **Make dough**: Mix flour and salt. Dissolve yeast in water, then combine. Mix until dough forms.
 2. **Knead**: Knead 8–10 minutes until smooth and elastic.
 3. **Bulk rise**: Cover and proof 2 hours at room temp.

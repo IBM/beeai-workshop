@@ -1,21 +1,21 @@
 # Freezer Contents
 
 ## Food Item
-**Item** Blueberries
+**Item** Blueberries  
 **Expiration Date** None
 
 ## Food Item
-**Item** Spinich
+**Item** Spinach  
 **Expiration Date** None
 
 ## Food Item
-**Item** Ravioli
+**Item** Ravioli  
 **Expiration Date** None
 
 ## Food Item
-**Item** Italian Sauseage
+**Item** Italian Sausage  
 **Expiration Date** None
 
 ## Food Item
-**Item** Pesto
+**Item** Pesto  
 **Expiration Date** None

@@ -26,3 +26,5 @@ ignores:
   - "tests/**"
   - "venv/**"
   - ".github/ISSUE_TEMPLATE/**"
+  - "kitchen-aide/kitchen-contents/*.md"
+
