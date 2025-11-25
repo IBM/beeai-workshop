@@ -12,15 +12,13 @@ Ready to dive into BeeAI? We've got you covered! Visit our comprehensive worksho
 
 Each workshop comes with its own presentation materials to guide you through the learning process. Select the workshop you're interested in from the table below:
 
-| Workshop                                                             |
+| Workshops                                                             |
 |----------------------------------------------------------------------|
 | Introduction to the BeeAI Framework                                  |
 | Company Analysis Agent with the BeeAI Framework + Tavily + Redis     |
 | Middelware for content safety, llm as judge, and more on emmitted events  |
 | Kitchen-Aide - A fun example!                                        |
 | Exploring Reasoning Patterns                                         |
-
-
 
 ## Need Help? 🆘
 

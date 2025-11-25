@@ -18,7 +18,6 @@ Explore BeeAI through hands-on workshops that demonstrate how BeeAI's integrated
 | [Kitchen-Aide - A fun example!](kitchen-aide/README.md) | Want to figure out how to effective use what's in your kitchen? Kitchen-Aide can help you find the best combinations with your recipes or new recipes! |
 | [Exploring Reasoning Patterns](reasoning-patterns/README.md) | Understand how to enable reasoning patterns like re-act, planning, etc. |
 
-
 ## The BeeAI Ecosystem
 
 BeeAI Framework and Agent Stack platform are a series of Linux Foundation projects advancing AI agents. In the BeeAI Framework you can build reliable, intelligent agents with our lightweight framework that goes beyond prompting and enforces rules. The Agent Stack Platform allows you to deploy and share agents with open infrastructure, free from framework or vendor lock-in. Both projects are complimentary, but not dependent.
@@ -33,7 +32,6 @@ Build multi-agent systems leveraging agents from any framework that meet your re
 - Preserve your agent's reasoning abilities while enforcing deterministic rules instead of suggesting behavior.
 - Integrate with your existing stack in minutes with native OpenTelemetry support for auditing and monitoring.
 - Build MCP-compatible components, equip agents with MCP tools, and interoperate with any MCP or A2A agent.
-
 
 ### 2. **Configure, Deploy, Run, Share, and Govern** in the Agent Stack Platform
 
