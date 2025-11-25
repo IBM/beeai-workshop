@@ -6,7 +6,7 @@ matrix:
     camel-case: true
     mode: markdown
   sources:
-  - "**/*.md|!REVIEWERS.md|!build/**|!.tox/**|!venv/**|!beeai_fw_tavily_redis/example_docs/**|!docs/resources/**"
+  - "**/*.md|!kitchen-aide/**|!REVIEWERS.md|!build/**|!.tox/**|!venv/**|!beeai_fw_tavily_redis/example_docs/**|!docs/resources/**"
   dictionary:
     wordlists:
     - .spellcheck-en-custom.txt
