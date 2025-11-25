@@ -52,6 +52,13 @@ nav:
           - Prework: opentech/agentstack/pre-work/README.md
           - Setup: opentech/agentstack/setup/README.md
           - Lab: opentech/agentstack/run/README.md
+      - Kitchen-Aide:
+        - Get Started: kitchen-aide/README.md
+      - BeeAI Middleware:
+        - Get Started: middleware/README.md
+      - Reasoning Patterns:
+        - Get Started: reasoning-patterns/README.md
+
   - Demos:
     - Introduction to BeeAI Platform:
       - Overview: introduction_beeai_platform/overview/README.md
