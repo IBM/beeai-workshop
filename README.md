@@ -15,9 +15,12 @@ Each workshop comes with its own presentation materials to guide you through the
 | Workshop                                                             |
 |----------------------------------------------------------------------|
 | Introduction to the BeeAI Framework                                  |
-| Introduction to ACP and BeeAI — *Update coming soon*                 |
 | Company Analysis Agent with the BeeAI Framework + Tavily + Redis     |
-| *Additional workshops coming soon!*                                  |
+| Middelware for content safety, llm as judge, and more on emmitted events  |
+| Kitchen-Aide - A fun example!                                        |
+| Exploring Reasoning Patterns                                         |
+
+
 
 ## Need Help? 🆘
 
