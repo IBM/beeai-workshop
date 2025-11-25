@@ -14,7 +14,7 @@ Explore BeeAI through hands-on workshops that demonstrate how BeeAI's integrated
 |:---------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|
 | [Introduction to the BeeAI Framework](introduction_beeai_framework/overview/README.md) | Master the fundamental components of the BeeAI Framework by building a Conference Prep Agent. |
 | [Company Analysis Agent with the BeeAI Framework](beeai_fw__tavily_redis/overview/README.md) | Build a Corporate Analysis Agent using a Tavily MCP server for internet search capabilities and Redis for RAG |
-| [Middleware for content safety, llm as judge, and more on emitted events](middleware/README.md) | Hook into agent emmitted events to run prompt injection checks, content safety, and more. |
+| [Middleware for content safety, llm as judge, and more on emitted events](middleware/README.md) | Hook into agent emitted events to run prompt injection checks, content safety, and more. |
 | [Kitchen-Aide - A fun example!](kitchen-aide/README.md) | Want to figure out how to effective use what's in your kitchen? Kitchen-Aide can help you find the best combinations with your recipes or new recipes! |
 | [Exploring Reasoning Patterns](reasoning-patterns/README.md) | Understand how to enable reasoning patterns like re-act, planning, etc. |
 

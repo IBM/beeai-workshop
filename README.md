@@ -16,7 +16,7 @@ Each workshop comes with its own presentation materials to guide you through the
 |----------------------------------------------------------------------|
 | Introduction to the BeeAI Framework                                  |
 | Company Analysis Agent with the BeeAI Framework + Tavily + Redis     |
-| Middelware for content safety, llm as judge, and more on emmitted events  |
+| Middleware for content safety, llm as judge, and more on emitted events  |
 | Kitchen-Aide - A fun example!                                        |
 | Exploring Reasoning Patterns                                         |
 
