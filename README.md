@@ -12,12 +12,13 @@ Ready to dive into BeeAI? We've got you covered! Visit our comprehensive worksho
 
 Each workshop comes with its own presentation materials to guide you through the learning process. Select the workshop you're interested in from the table below:
 
-| Workshop                                                             |
+| Workshops                                                             |
 |----------------------------------------------------------------------|
 | Introduction to the BeeAI Framework                                  |
-| Introduction to ACP and BeeAI — *Update coming soon*                 |
 | Company Analysis Agent with the BeeAI Framework + Tavily + Redis     |
-| *Additional workshops coming soon!*                                  |
+| Middleware for content safety, llm as judge, and more on emitted events  |
+| Kitchen-Aide - A fun example!                                        |
+| Exploring Reasoning Patterns                                         |
 
 ## Need Help? 🆘
 
