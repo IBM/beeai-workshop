@@ -52,6 +52,7 @@ tools** based on developer-defined conditions.
 ## 🚀 Getting Started
 
 **Quick Setup**
+
 - Google Account – Required for accessing Google Colab
 - Workshop Notebook – Open the notebook <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/IBM/beeai-workshop/blob/main/kitchen-aide/beeai_kitchen_aide.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 - Personal Copy – If you'd like to save your changes, please copy this notebook and create your own version
