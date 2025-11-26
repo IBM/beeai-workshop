@@ -18,15 +18,15 @@ restrict, allow, or sequence tool access.
 
 Your Kitchen-Aide Agent helps you make cooking decisions using:
 
--   Your **fridge**, **freezer**, and **pantry** inventory tools\
--   Your **personal recipe search**\
--   An optional **internet recipe tool**
+- Your **fridge**, **freezer**, and **pantry** inventory tools
+- Your **personal recipe search**
+- An optional **internet recipe tool**
 
 You'll ask questions like:
 
--   *"What can I make with what I already have?"*\
--   *"What ingredients am I missing for this recipe?"*\
--   *"Is there a web recipe that fits my ingredients?"*
+- "What can I make with what I already have?"
+- "What ingredients am I missing for this recipe?"
+- "Is there a web recipe that fits my ingredients?"
 
 The key lesson: **conditional requirements decide which of these tools
 the LLM is even allowed to call on each turn.**
@@ -39,10 +39,10 @@ the LLM is even allowed to call on each turn.**
 
 You'll implement rules such as:
 
--   A tool can be used only once (e.g., `get_fridge`)\
--   Certain tools are hidden until another tool has been used\
--   A tool may require a specific argument before the LLM can call it\
--   A tool may be temporarily unavailable depending on state
+- A tool can be used only once (e.g., `get_fridge`)\
+- Certain tools are hidden until another tool has been used\
+- A tool may require a specific argument before the LLM can call it\
+- A tool may be temporarily unavailable depending on state
 
 These rules can either force a workflow or simply **expose or hide
 tools** based on developer-defined conditions.
@@ -57,9 +57,10 @@ tools** based on developer-defined conditions.
     - Personal Copy – If you'd like to save your changes, please copy this notebook and create your own version
 
 Then:
--   Configure your agent and tools
--   Add Conditional Requirements
--   Test how the agent's accessible tools change as you interact
+
+- Configure your agent and tools
+- Add Conditional Requirements
+- Test how the agent's accessible tools change as you interact
 
 <hr>
 
