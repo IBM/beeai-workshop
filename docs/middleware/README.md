@@ -7,8 +7,7 @@ logo: images/BeeAI-Logo-White.png
 
 # BeeAI Middleware Demo ⚙️
 
-This demo introduces **BeeAI Middleware**, showing how you can
-intercept, modify, validate, or route agent requests to safegaurd against prompt injection attacks, invisible text, and secrets detection. 
+This demo introduces **BeeAI Middleware**, showing how you can intercept, modify, validate, or route agent requests to safegaurd against prompt injection attacks, invisible text, and secrets detection. 
 
 <hr>
 
@@ -37,5 +36,7 @@ request/response flow.
 
 ## Learn More About BeeAI
 
--   📚 Docs: https://framework.beeai.dev/introduction/welcome\
--   🧠 GitHub: https://github.com/i-am-bee/beeai-framework
+## Learn More About BeeAI
+
+- 📚 **Framework Documentation**: [https://framework.beeai.dev/introduction/welcome](https://framework.beeai.dev/introduction/welcome)
+- 🧠 **GitHub Repository**: [https://github.com/i-am-bee/beeai-framework](https://github.com/i-am-bee/beeai-framework)
