@@ -1,33 +1,57 @@
 # Fridge Contents
 
 ## Food Item
-**Item** Eggs  
+**item** Eggs
+**expiration date** None
+
+## Food Item
+**item** Milk
+**expiration date** None
+
+## Food Item
+**item** Bacon
+**expiration date** None
+
+## Food Item
+**item** Carrots
+**expiration date** None
+
+## Food Item
+**item** Mozzarella Cheese
+**expiration date** None
+
+## Food Item
+**item** Cream Cheese
+**expiration date** None
+
+# Food Item
+**item** Ground Beef
+**expiration date** None
+
+# Food Item
+**item** Onions
+**expiration date** None
+
+## Food Item
+**Item** Smoked Salmon
 **Expiration Date** None
 
 ## Food Item
-**Item** Milk  
+**Item** Parmesen Cheese
 **Expiration Date** None
 
 ## Food Item
-**Item** Bacon  
+**Item** Yeast
 **Expiration Date** None
 
 ## Food Item
-**Item** Carrots  
+**Item** Pie Crusts
 **Expiration Date** None
 
 ## Food Item
-**Item** Mozzarella Cheese  
+**Item** Minced Garlic
 **Expiration Date** None
 
 ## Food Item
-**Item** Cream Cheese  
-**Expiration Date** None
-
-## Food Item
-**Item** Ground Beef  
-**Expiration Date** None
-
-## Food Item
-**Item** Onions  
+**Item** Celery
 **Expiration Date** None
