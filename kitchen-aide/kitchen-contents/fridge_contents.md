@@ -37,7 +37,7 @@
 **Expiration Date** None
 
 ## Food Item
-**Item** Parmesen Cheese
+**Item** Parmesan Cheese
 **Expiration Date** None
 
 ## Food Item
